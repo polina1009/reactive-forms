@@ -1,0 +1,32 @@
+<div>
+  <form [formGroup]="inputGroup">
+    <label>
+      <input formControlName="name">
+    </label>
+    <div formGroupName="address">
+      <div>
+        <label>
+          <input formControlName="street">
+        </label>
+      </div>
+      <div>
+        <label>
+          <input formControlName="city">
+        </label>
+      </div>
+      <div>
+        <label>
+          <select formControlName="state">
+            <option *ngFor="let state of states" [value]="state">{{state}}</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <label class="center-block"><input type="radio" formControlName="power" value="flight">Flight</label>
+    <label class="center-block"><input type="radio" formControlName="power" value="x-ray vision">X-ray vision</label>
+    <label class="center-block"><input type="radio" formControlName="power" value="strength">Strength</label>
+  </form>
+  <p>Form value: {{ inputGroup.value | json }}</p>
+  <p>Name value: {{ inputGroup.get('name').value }}</p>
+  <p>Street value: {{ inputGroup.get('address.street').value}}</p>
+</div>
