@@ -8,7 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormsPageComponent implements OnInit {
   inputGroup: FormGroup;
-  states = states;
 
   constructor(private fb: FormBuilder) {
     this.createForm();
@@ -16,13 +15,28 @@ export class FormsPageComponent implements OnInit {
 
   createForm() {
     this.inputGroup = this.fb.group({
-      name: ['', Validators.required ],
-      address: this.fb.group({
-        street: '',
-        city: '',
-        state: ''
-      }),
-      power: ''
+      title: ['', Validators.required ],
+      firstName: '',
+      lastName: '',
+      cellPhone: '',
+      home: '',
+      work: '',
+      email: '',
+      preferredContact: '',
+      address: '',
+      address2: '',
+      zip: '',
+      city: '',
+      state: '',
+      dateOfBirth: '',
+      ssn: '',
+      referralSource: '',
+      language: '',
+      workStatus: '',
+      employer: '',
+      race: '',
+      ethnicity: '',
+      gender: ''
     });
   }
 
@@ -31,6 +45,4 @@ export class FormsPageComponent implements OnInit {
   }
 
 }
-
-const states = ['Ivan', 'Max', 'John', 'Petya'];
 

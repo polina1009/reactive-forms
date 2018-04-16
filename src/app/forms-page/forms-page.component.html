@@ -1,32 +1,105 @@
 <div>
-  <form [formGroup]="inputGroup">
+  <form [formGroup]="inputGroup" fxLayout="row" fxLayoutAlign="center center">
     <label>
-      <input formControlName="name">
+      <input placeholder="title" type="text" formControlName="title">
     </label>
-    <div formGroupName="address">
-      <div>
-        <label>
-          <input formControlName="street">
-        </label>
-      </div>
-      <div>
-        <label>
-          <input formControlName="city">
-        </label>
-      </div>
-      <div>
-        <label>
-          <select formControlName="state">
-            <option *ngFor="let state of states" [value]="state">{{state}}</option>
-          </select>
-        </label>
-      </div>
-    </div>
-    <label class="center-block"><input type="radio" formControlName="power" value="flight">Flight</label>
-    <label class="center-block"><input type="radio" formControlName="power" value="x-ray vision">X-ray vision</label>
-    <label class="center-block"><input type="radio" formControlName="power" value="strength">Strength</label>
+    <label>
+      <input placeholder="firstName" type="text" formControlName="firstName" >
+    </label>
+    <label>
+      <input placeholder="lastName" type="text" formControlName="lastName" >
+    </label>
+    <label>
+      <input placeholder="cellPhone" type="tel" formControlName="cellPhone" >
+    </label>
+    <label>
+      <input placeholder="home" type="tel" formControlName="home">
+    </label>
+    <label>
+      <input placeholder="work" type="tel" formControlName="work">
+    </label>
+    <label>
+      <input placeholder="email" type="email"  formControlName="email">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="preferredContact" formControlName="preferredContact">
+    </label>
+    <label>
+      <input placeholder="address" type="text" formControlName="address">
+    </label>
+    <label>
+      <input placeholder="address2" type="text" formControlName="address2">
+    </label>
+    <label>
+      <input placeholder="zip" type="text" formControlName="zip">
+    </label>
+    <label>
+      <input placeholder="city" type="text" formControlName="city">
+    </label>
+    <label>
+      <input placeholder="state" type="text" formControlName="state">
+    </label>
+    <label>
+      <input placeholder="dateOfBirth" type="date" formControlName="dateOfBirth">
+    </label>
+    <label>
+      <input placeholder="ssn" type="text" formControlName="ssn">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="referralSource" formControlName="referralSource">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="language" formControlName="language">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="workStatus" formControlName="workStatus">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="employer" formControlName="employer">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="race" formControlName="race">
+    </label>
+    <!--selection-->
+    <label>
+      <input placeholder="ethnicity" formControlName="ethnicity">
+    </label>
+    <!--radio-->
+    <label><input placeholder="gender" type="radio" value="male" formControlName="gender">Male</label>
+    <label><input placeholder="gender" type="radio" value="woman" formControlName="gender">Woman</label>
+
+
+
+    <!--<div formGroupName="address">-->
+      <!--<div>-->
+        <!--<label>-->
+          <!--<input formControlName="street">-->
+        <!--</label>-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<label>-->
+          <!--<input formControlName="city">-->
+        <!--</label>-->
+      <!--</div>-->
+      <!--<div>-->
+        <!--<label>-->
+          <!--<select formControlName="state">-->
+            <!--<option *ngFor="let state of states" [value]="state">{{state}}</option>-->
+          <!--</select>-->
+        <!--</label>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<label class="center-block"><input type="radio" formControlName="power" value="flight">Flight</label>-->
+    <!--<label class="center-block"><input type="radio" formControlName="power" value="x-ray vision">X-ray vision</label>-->
+    <!--<label class="center-block"><input type="radio" formControlName="power" value="strength">Strength</label>-->
   </form>
-  <p>Form value: {{ inputGroup.value | json }}</p>
-  <p>Name value: {{ inputGroup.get('name').value }}</p>
-  <p>Street value: {{ inputGroup.get('address.street').value}}</p>
+  <!--<p>Form value: {{ inputGroup.value | json }}</p>-->
+  <!--<p>Name value: {{ inputGroup.get('firstName').value }}</p>-->
+  <!--<p>Street value: {{ inputGroup.get('address.street').value}}</p>-->
 </div>
