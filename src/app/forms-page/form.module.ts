@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatInputModule} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { FormsPageComponent } from './forms-page.component';
 
@@ -16,7 +17,8 @@ import { FormsPageComponent } from './forms-page.component';
     BrowserModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MatInputModule
+    MatInputModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   exports: [

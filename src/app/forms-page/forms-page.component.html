@@ -1,78 +1,80 @@
 <div>
-  <form [formGroup]="inputGroup" fxLayout="row" fxLayoutAlign="center center">
-    <label>
-      <input placeholder="title" type="text" formControlName="title">
+  <form [formGroup]="inputGroup" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px">
+    <label >
+      <mat-form-field>
+        <input matInput placeholder="title" type="text" formControlName="title" fxFlex="30">
+      </mat-form-field>
+    </label>
+    <label >
+      <input placeholder="firstName" type="text" formControlName="firstName" fxFlex="30">
+    </label>
+    <label >
+      <input placeholder="lastName" type="text" formControlName="lastName" fxFlex="30">
+    </label>
+    <label >
+      <input placeholder="cellPhone" type="tel" formControlName="cellPhone" fxFlex="30">
+    </label>
+    <label >
+      <input placeholder="home" type="tel" formControlName="home" fxFlex="30">
+    </label>
+    <label >
+      <input placeholder="work" type="tel" formControlName="work" fxFlex="30">
+    </label>
+    <label >
+      <input placeholder="email" type="email"  formControlName="email" fxFlex="60">
+    </label>
+    <!--selection-->
+    <label >
+      <input placeholder="preferredContact" formControlName="preferredContact" fxFlex="30">
     </label>
     <label>
-      <input placeholder="firstName" type="text" formControlName="firstName" >
+      <input placeholder="address" type="text" formControlName="address" fxFlex="60">
     </label>
     <label>
-      <input placeholder="lastName" type="text" formControlName="lastName" >
+      <input placeholder="address2" type="text" formControlName="address2" fxFlex="30">
     </label>
     <label>
-      <input placeholder="cellPhone" type="tel" formControlName="cellPhone" >
+      <input placeholder="zip" type="text" formControlName="zip" fxFlex="30">
     </label>
     <label>
-      <input placeholder="home" type="tel" formControlName="home">
+      <input placeholder="city" type="text" formControlName="city" fxFlex="30">
     </label>
     <label>
-      <input placeholder="work" type="tel" formControlName="work">
+      <input placeholder="state" type="text" formControlName="state" fxFlex="30">
     </label>
     <label>
-      <input placeholder="email" type="email"  formControlName="email">
+      <input placeholder="dateOfBirth" type="date" formControlName="dateOfBirth" fxFlex="30">
+    </label>
+    <label>
+      <input placeholder="ssn" type="text" formControlName="ssn" fxFlex="30">
     </label>
     <!--selection-->
     <label>
-      <input placeholder="preferredContact" formControlName="preferredContact">
-    </label>
-    <label>
-      <input placeholder="address" type="text" formControlName="address">
-    </label>
-    <label>
-      <input placeholder="address2" type="text" formControlName="address2">
-    </label>
-    <label>
-      <input placeholder="zip" type="text" formControlName="zip">
-    </label>
-    <label>
-      <input placeholder="city" type="text" formControlName="city">
-    </label>
-    <label>
-      <input placeholder="state" type="text" formControlName="state">
-    </label>
-    <label>
-      <input placeholder="dateOfBirth" type="date" formControlName="dateOfBirth">
-    </label>
-    <label>
-      <input placeholder="ssn" type="text" formControlName="ssn">
+      <input placeholder="referralSource" formControlName="referralSource" fxFlex="30">
     </label>
     <!--selection-->
     <label>
-      <input placeholder="referralSource" formControlName="referralSource">
+      <input placeholder="language" formControlName="language" fxFlex="30">
     </label>
     <!--selection-->
     <label>
-      <input placeholder="language" formControlName="language">
+      <input placeholder="workStatus" formControlName="workStatus" fxFlex="30">
     </label>
     <!--selection-->
     <label>
-      <input placeholder="workStatus" formControlName="workStatus">
+      <input placeholder="employer" formControlName="employer" fxFlex="30">
     </label>
     <!--selection-->
     <label>
-      <input placeholder="employer" formControlName="employer">
+      <input placeholder="race" formControlName="race" fxFlex="30">
     </label>
     <!--selection-->
     <label>
-      <input placeholder="race" formControlName="race">
-    </label>
-    <!--selection-->
-    <label>
-      <input placeholder="ethnicity" formControlName="ethnicity">
+      <input placeholder="ethnicity" formControlName="ethnicity" fxFlex="30">
     </label>
     <!--radio-->
-    <label><input placeholder="gender" type="radio" value="male" formControlName="gender">Male</label>
-    <label><input placeholder="gender" type="radio" value="woman" formControlName="gender">Woman</label>
+    <label><input placeholder="gender" type="radio" value="male" formControlName="gender" fxFlex="30">Male</label>
+    <label><input placeholder="gender" type="radio" value="woman" formControlName="gender" fxFlex="30">Woman</label>
 
 
 
