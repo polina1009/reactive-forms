@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-forms-page',
   templateUrl: './forms-page.component.html',
-  styleUrls: ['./forms-page.component.css']
+  styleUrls: ['./forms-page.component.css'],
 })
-export class FormsPageComponent implements OnInit {
+export class FormsPageComponent implements  OnInit {
   inputGroup: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -15,7 +15,7 @@ export class FormsPageComponent implements OnInit {
 
   createForm() {
     this.inputGroup = this.fb.group({
-      title: ['', Validators.required ],
+      title: '',
       firstName: '',
       lastName: '',
       cellPhone: '',

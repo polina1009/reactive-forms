@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {CdkTableModule} from '@angular/cdk/table';
 import {
   MatAutocompleteModule,
   MatButtonModule,
@@ -34,7 +35,7 @@ import {
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule,
+  MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -55,6 +56,7 @@ import { FormsPageComponent } from './forms-page.component';
   ],
   providers: [],
   exports: [
+    CdkTableModule,
     FormsPageComponent,
     MatAutocompleteModule,
     MatButtonModule,
