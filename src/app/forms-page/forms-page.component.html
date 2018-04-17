@@ -1,107 +1,81 @@
-<div>
+<div style="margin: 200px;">
   <form [formGroup]="inputGroup" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="8px">
-    <label >
-      <mat-form-field>
-        <input matInput placeholder="title" type="text" formControlName="title" fxFlex="30">
-      </mat-form-field>
-    </label>
-    <label >
-      <input placeholder="firstName" type="text" formControlName="firstName" fxFlex="30">
-    </label>
-    <label >
-      <input placeholder="lastName" type="text" formControlName="lastName" fxFlex="30">
-    </label>
-    <label >
-      <input placeholder="cellPhone" type="tel" formControlName="cellPhone" fxFlex="30">
-    </label>
-    <label >
-      <input placeholder="home" type="tel" formControlName="home" fxFlex="30">
-    </label>
-    <label >
-      <input placeholder="work" type="tel" formControlName="work" fxFlex="30">
-    </label>
-    <label >
-      <input placeholder="email" type="email"  formControlName="email" fxFlex="60">
-    </label>
+    <mat-form-field class="example-form-field" style="width: 200px;">
+      <input matInput placeholder="title" type="text" formControlName="title" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="firstName" type="text" formControlName="firstName" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="lastName" type="text" formControlName="lastName" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="cellPhone" type="tel" formControlName="cellPhone" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="home" type="tel" formControlName="home" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="work" type="tel" formControlName="work" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="email" type="email"  formControlName="email" fxFlex="60">
+    </mat-form-field>
     <!--selection-->
-    <label >
-      <input placeholder="preferredContact" formControlName="preferredContact" fxFlex="30">
-    </label>
-    <label>
-      <input placeholder="address" type="text" formControlName="address" fxFlex="60">
-    </label>
-    <label>
-      <input placeholder="address2" type="text" formControlName="address2" fxFlex="30">
-    </label>
-    <label>
-      <input placeholder="zip" type="text" formControlName="zip" fxFlex="30">
-    </label>
-    <label>
-      <input placeholder="city" type="text" formControlName="city" fxFlex="30">
-    </label>
-    <label>
-      <input placeholder="state" type="text" formControlName="state" fxFlex="30">
-    </label>
-    <label>
-      <input placeholder="dateOfBirth" type="date" formControlName="dateOfBirth" fxFlex="30">
-    </label>
-    <label>
-      <input placeholder="ssn" type="text" formControlName="ssn" fxFlex="30">
-    </label>
+    <mat-form-field >
+      <input matInput placeholder="preferredContact" formControlName="preferredContact" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="address" type="text" formControlName="address" fxFlex="60">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="address2" type="text" formControlName="address2" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="zip" type="text" formControlName="zip" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="city" type="text" formControlName="city" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="state" type="text" formControlName="state" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="dateOfBirth" type="date" formControlName="dateOfBirth" fxFlex="30">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="ssn" type="text" formControlName="ssn" fxFlex="30">
+    </mat-form-field>
     <!--selection-->
-    <label>
-      <input placeholder="referralSource" formControlName="referralSource" fxFlex="30">
-    </label>
+    <mat-form-field>
+      <input matInput placeholder="referralSource" formControlName="referralSource" fxFlex="30">
+    </mat-form-field>
     <!--selection-->
-    <label>
-      <input placeholder="language" formControlName="language" fxFlex="30">
-    </label>
+    <mat-form-field>
+      <input matInput placeholder="language" formControlName="language" fxFlex="30">
+    </mat-form-field>
     <!--selection-->
-    <label>
-      <input placeholder="workStatus" formControlName="workStatus" fxFlex="30">
-    </label>
+    <mat-form-field>
+      <input matInput placeholder="workStatus" formControlName="workStatus" fxFlex="30">
+    </mat-form-field>
     <!--selection-->
-    <label>
-      <input placeholder="employer" formControlName="employer" fxFlex="30">
-    </label>
+    <mat-form-field>
+      <input matInput placeholder="employer" formControlName="employer" fxFlex="30">
+    </mat-form-field>
     <!--selection-->
-    <label>
-      <input placeholder="race" formControlName="race" fxFlex="30">
-    </label>
+    <mat-form-field>
+      <input matInput placeholder="race" formControlName="race" fxFlex="30">
+    </mat-form-field>
     <!--selection-->
-    <label>
-      <input placeholder="ethnicity" formControlName="ethnicity" fxFlex="30">
-    </label>
+    <mat-form-field>
+      <input matInput placeholder="ethnicity" formControlName="ethnicity" fxFlex="30">
+    </mat-form-field>
     <!--radio-->
-    <label><input placeholder="gender" type="radio" value="male" formControlName="gender" fxFlex="30">Male</label>
-    <label><input placeholder="gender" type="radio" value="woman" formControlName="gender" fxFlex="30">Woman</label>
-
-
-
-    <!--<div formGroupName="address">-->
-      <!--<div>-->
-        <!--<label>-->
-          <!--<input formControlName="street">-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<label>-->
-          <!--<input formControlName="city">-->
-        <!--</label>-->
-      <!--</div>-->
-      <!--<div>-->
-        <!--<label>-->
-          <!--<select formControlName="state">-->
-            <!--<option *ngFor="let state of states" [value]="state">{{state}}</option>-->
-          <!--</select>-->
-        <!--</label>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<label class="center-block"><input type="radio" formControlName="power" value="flight">Flight</label>-->
-    <!--<label class="center-block"><input type="radio" formControlName="power" value="x-ray vision">X-ray vision</label>-->
-    <!--<label class="center-block"><input type="radio" formControlName="power" value="strength">Strength</label>-->
+    <mat-form-field>
+      <input placeholder="gender" type="radio" value="male" formControlName="gender" fxFlex="30">Male
+    </mat-form-field>
+    <mat-form-field>
+      <input placeholder="gender" type="radio" value="woman" formControlName="gender" fxFlex="30">Woman
+    </mat-form-field>
   </form>
-  <!--<p>Form value: {{ inputGroup.value | json }}</p>-->
-  <!--<p>Name value: {{ inputGroup.get('firstName').value }}</p>-->
-  <!--<p>Street value: {{ inputGroup.get('address.street').value}}</p>-->
 </div>
