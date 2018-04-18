@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { PatientService } from './patient.service';
 
 @Component({
   selector: 'app-forms-page',

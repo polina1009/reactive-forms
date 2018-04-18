@@ -43,7 +43,7 @@ import {PatientService} from './patient.service';
   ],
   providers: [PatientService],
   exports: [
-    FormsPageComponent
+    FormsPageComponent,
   ],
 })
 export class FormModule { }
