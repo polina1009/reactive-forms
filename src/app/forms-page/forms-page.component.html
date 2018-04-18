@@ -11,14 +11,14 @@
       <input matInput placeholder="Last Name" type="text" formControlName="lastName">
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Cell Phone" formControlName="cellPhone"  [textMask]="{mask: mask}" [(ngModel)]="cellPhone" type="text" >
+      <input matInput placeholder="Cell Phone" formControlName="cellPhone"  [textMask]="maskPhone"  type="text" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" >
-      <input matInput placeholder="Home" formControlName="home" [textMask]="{mask: mask}" [(ngModel)]="homePhone" type="text" >
+      <input matInput placeholder="Home" formControlName="home" [textMask]="maskPhone" type="text" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
 
-      <input matInput placeholder="Work" formControlName="work" [textMask]="{mask: mask}" [(ngModel)]="workPhone" type="text" >
+      <input matInput placeholder="Work" formControlName="work" [textMask]="maskPhone" type="text" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Email" type="email"  formControlName="email" >
@@ -56,8 +56,8 @@
       </mat-option>
     </mat-autocomplete>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input [matDatepicker]="picker" class="hidden-input">
-      <input matInput placeholder="Date Of Birth" type="text" #picker formControlName="dateOfBirth" [textMask]="{mask: maskDate}" [(ngModel)]="dateOfBirth">
+      <input [matDatepicker]="picker" class="hidden-input"  type="text">
+      <input matInput type="text" formControlName="dateOfBirth" placeholder="Date Of Birth" [textMask]="maskDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
