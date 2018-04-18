@@ -15,3 +15,9 @@
   font-weight: 400;
   line-height: 1.125;
 }
+
+
+.hidden-input {
+  display: none;
+  overflow: hidden !important;
+}
