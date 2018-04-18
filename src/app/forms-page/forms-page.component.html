@@ -1,6 +1,6 @@
 
 <div style="margin: 20px;">
-  <form [formGroup]="inputGroup" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <form [formGroup]="inputGroup" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="15px">
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Title" type="text" formControlName="title">
     </mat-form-field>
@@ -8,19 +8,20 @@
       <input matInput placeholder="First Name" type="text" formControlName="firstName">
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Last Name" type="text" formControlName="lastName" fxFlex="30">
+      <input matInput placeholder="Last Name" type="text" formControlName="lastName">
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Cell Phone" type="tel" formControlName="cellPhone" fxFlex="30">
+      <input matInput placeholder="Cell Phone" formControlName="cellPhone"  [textMask]="{mask: mask}" [(ngModel)]="cellPhone" type="text" >
+    </mat-form-field>
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" >
+      <input matInput placeholder="Home" formControlName="home" [textMask]="{mask: mask}" [(ngModel)]="homePhone" type="text" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Home" type="tel" formControlName="home" fxFlex="30">
-    </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Work" type="tel" formControlName="work" fxFlex="30">
+
+      <input matInput placeholder="Work" formControlName="work" [textMask]="{mask: mask}" [(ngModel)]="workPhone" type="text" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Email" type="email"  formControlName="email" fxFlex="60">
+      <input matInput placeholder="Email" type="email"  formControlName="email" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Preferred Contact" formControlName="referralSource">
@@ -30,27 +31,37 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Address" type="text" formControlName="address" fxFlex="60">
+      <input matInput placeholder="Address" type="text" formControlName="address" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Address2" type="text" formControlName="address2" fxFlex="30">
+      <input matInput placeholder="Address2" type="text" formControlName="address2" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Zip" type="text" formControlName="zip" fxFlex="30">
+      <input matInput placeholder="Zip" type="number" formControlName="zip" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="City" type="text" formControlName="city" fxFlex="30">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" >
+      <input matInput placeholder="City" type="text" formControlName="city" [matAutocomplete]="auto" >
     </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete" >
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="State" type="text" formControlName="state" fxFlex="30">
+      <input matInput placeholder="State" type="text" formControlName="state" [matAutocomplete]="auto">
     </mat-form-field >
+    <mat-autocomplete #auto="matAutocomplete" >
+      <mat-option *ngFor="let option of options" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput [matDatepicker]="picker" placeholder="Date Of Birth">
+      <input matInput [matDatepicker]="picker" placeholder="Date Of Birth" type="text" [textMask]="{maskDate: maskDate}" [(ngModel)]="dateOfBirth">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="SSN" type="text" formControlName="ssn" fxFlex="30">
+      <input matInput placeholder="SSN" type="text" formControlName="ssn" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Referral Source" formControlName="referralSource">
@@ -98,7 +109,7 @@
       <p class="mat-typography gender-placeholder">Gender</p>
       <mat-radio-group fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
         <mat-radio-button value="male">Male</mat-radio-button>
-        <mat-radio-button value="women">Women</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
       </mat-radio-group>
     </div>
   </form>

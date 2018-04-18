@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatDatepickerModule,
@@ -10,15 +12,18 @@ import {
   MatRadioModule,
   MatSelectModule,
 } from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { FormsPageComponent } from './forms-page.component';
+import { TextMaskModule } from 'angular2-text-mask';
+import {PatientService} from './patient.service';
+
 
 
 
 @NgModule({
   declarations: [
-    FormsPageComponent
+    FormsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,9 +36,12 @@ import { FormsPageComponent } from './forms-page.component';
     MatIconModule,
     MatRadioModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule,
+    TextMaskModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [PatientService],
   exports: [
     FormsPageComponent
   ],

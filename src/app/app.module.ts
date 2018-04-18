@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {FormModule} from './forms-page';
+import {ApiService} from './api.service';
 
 
 @NgModule({
@@ -13,7 +14,7 @@ import {FormModule} from './forms-page';
     BrowserModule,
     FormModule,
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

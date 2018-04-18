@@ -6,8 +6,17 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './forms-page.component.html',
   styleUrls: ['./forms-page.component.css'],
 })
+
 export class FormsPageComponent implements  OnInit {
+  public options = [1, 2, 3];
   inputGroup: FormGroup;
+
+  public cellPhone = '';
+  public homePhone = '';
+  public workPhone = '';
+  public dateOfBirth = '';
+  public mask: any[]  = ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  public maskDate: any[] = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private fb: FormBuilder) {
     this.createForm();
