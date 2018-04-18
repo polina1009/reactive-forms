@@ -56,8 +56,22 @@
       </mat-option>
     </mat-autocomplete>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input [matDatepicker]="picker" class="hidden-input"  type="text">
-      <input matInput type="text" formControlName="dateOfBirth" placeholder="Date Of Birth" [textMask]="maskDate">
+      <input
+        [matDatepicker]="picker"
+        class="hidden-input111"
+        type="text"
+        #birtday_picker
+        (change)="birtday_mask.value = birtday_picker.value"
+      >
+      <input
+        matInput
+        type="text"
+        formControlName="dateOfBirth"
+        placeholder="Date Of Birth"
+        [textMask]="maskDate"
+        #birtday_mask
+        (change)="birtday_picker.value = birtday_mask.value"
+      >
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
