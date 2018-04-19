@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PatientService } from './patient.service';
-import {SelectOptionInterface} from '../form.interface';
+import {SelectOptionInterface, PatientInterface} from '../form.interface';
 
 @Component({
   selector: 'app-forms-page',
@@ -19,7 +19,6 @@ export class FormsPageComponent implements  OnInit {
   public ethnicityList: SelectOptionInterface[];
 
   inputGroup: FormGroup;
-  public patient
 
   public maskPhone = {
     guide: true,
@@ -47,10 +46,10 @@ export class FormsPageComponent implements  OnInit {
   ngOnInit() {
     this.createForm();
     this.getSelectOptions();
+    console.log(this.inputGroup.value);
   }
 
-
-  private createForm() {
+  public createForm() {
     this.inputGroup = this.fb.group({
       title: '',
       firstName: '',
@@ -60,7 +59,7 @@ export class FormsPageComponent implements  OnInit {
       work: '',
       email: '',
       preferredContact: '',
-      address: '',
+      address1: '',
       address2: '',
       zip: '',
       city: '',
@@ -75,6 +74,7 @@ export class FormsPageComponent implements  OnInit {
       ethnicity: '',
       gender: ''
     });
+    console.log(this.inputGroup.get('title').value);
   }
 
   private getSelectOptions() {

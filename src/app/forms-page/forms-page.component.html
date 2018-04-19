@@ -1,8 +1,13 @@
 
 <div style="margin: 20px;">
-  <form [formGroup]="inputGroup" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="15px">
+  <form [formGroup]="inputGroup"
+        fxLayout="row wrap"
+        fxLayoutAlign="center center"
+        fxLayoutGap="15px"
+        (ngSubmit)="onSubmit()"
+  >
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Title" type="text" formControlName="title">
+      <input matInput placeholder="Title" type="text" formControlName="title" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="First Name" type="text" formControlName="firstName">
@@ -10,6 +15,7 @@
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Last Name" type="text" formControlName="lastName">
     </mat-form-field>
+
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Cell Phone" formControlName="cellPhone"  [textMask]="maskPhone"  type="text" >
     </mat-form-field>
@@ -24,14 +30,15 @@
       <input matInput placeholder="Email" type="email"  formControlName="email" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <mat-select placeholder="Preferred Contact" formControlName="referralSource">
+      <mat-select placeholder="Preferred Contact" formControlName="preferredContact">
         <mat-option *ngFor="let contact of preferredContactList" value="contact">
           {{contact.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+
     <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="Address" type="text" formControlName="address" >
+      <input matInput placeholder="Address" type="text" formControlName="address1" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Address2" type="text" formControlName="address2" >
@@ -45,6 +52,7 @@
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="State" type="text" formControlName="state">
     </mat-form-field >
+
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input
         [matDatepicker]="picker"

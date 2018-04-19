@@ -4,7 +4,7 @@ import {ApiSelectInterface, SelectOptionInterface} from '../form.interface';
 import {Observable} from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
-import {ethnicity} from '../mock-data';
+
 
 @Injectable()
 export class PatientService {
