@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
-import { formData } from './mock-data';
-import { FormSelectInterface } from './form.interface';
+import { formData, preferredContact } from './mock-data';
+import { ApiSelectInterface, SelectOptionInterface} from './form.interface';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { map, filter } from 'rxjs/operators';
+import { pipe } from 'rxjs/util/pipe';
+import 'rxjs/add/operator/delay';
+
 
 @Injectable()
+
+// const dataSelect = Observable.of(formData);
+//
+// const squareValues = pipe(
+//   map((val: FormSelectInterface[]) => val),
+// );
+// const squaredSelect = squareValues(dataSelect);
+//
+// squaredSelect.subscribe(x => console.log(x));
 
 
 
 export class ApiService {
 
-  SelectList: FormSelectInterface[] = formData;
   constructor() {
-    // this.getSelectList();
   }
-  // getSelectList(): void {
-  //   this.SelectList.forEach((el) => console.log(el));
-  // }
+
+  public getPreferredContactList(): Observable<ApiSelectInterface[]> {
+    return Observable.of(JSON.stringify(preferredContact))
+      .pipe(
+        map((contactList) => JSON.parse(contactList))
+      )
+      .delay(500);
+  }
+
 }
 
-
-// const myObservable = Observable.of(formData);
-// const myObserver = {
-//   next: x => console.log('Observer got a next value: ' + x),
-//   error: err => console.error('Observer got an error: ' + err),
-//   complete: () => console.log('Observer got a complete notification'),
-// };
-//
-// myObservable.subscribe(myObserver);

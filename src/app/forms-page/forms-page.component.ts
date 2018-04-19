@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PatientService } from './patient.service';
+import {SelectOptionInterface} from '../form.interface';
 
 @Component({
   selector: 'app-forms-page',
   templateUrl: './forms-page.component.html',
   styleUrls: ['./forms-page.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class FormsPageComponent implements  OnInit {
-  public options = [1, 2, 3];
+  public preferredContactList: SelectOptionInterface[];
   inputGroup: FormGroup;
+  public patient
 
   public maskPhone = {
     guide: true,
@@ -22,11 +25,21 @@ export class FormsPageComponent implements  OnInit {
     showMask : false,
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
-  constructor(private fb: FormBuilder) {
-    this.createForm();
+  constructor(
+    private fb: FormBuilder,
+    private patientService: PatientService,
+    private ref: ChangeDetectorRef
+  ) {
+    this.preferredContactList = [];
   }
 
-  createForm() {
+  ngOnInit() {
+    this.createForm();
+    this.getSelectOptions();
+  }
+
+
+  private createForm() {
     this.inputGroup = this.fb.group({
       title: '',
       firstName: '',
@@ -53,8 +66,12 @@ export class FormsPageComponent implements  OnInit {
     });
   }
 
+  private getSelectOptions() {
 
-  ngOnInit() {
+    this.patientService.getPreferredContactList().subscribe(optionList => {
+      this.ref.markForCheck();
+      this.preferredContactList = optionList;
+    });
   }
 
 }
