@@ -25,8 +25,8 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Preferred Contact" formControlName="referralSource">
-        <mat-option>
-          some text
+        <mat-option *ngFor="let contact of preferredContactList" value="contact">
+          {{contact.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -40,21 +40,11 @@
       <input matInput placeholder="Zip" type="number" formControlName="zip" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" >
-      <input matInput placeholder="City" type="text" formControlName="city" [matAutocomplete]="auto" >
+      <input matInput placeholder="City" type="text" formControlName="city" >
     </mat-form-field>
-    <mat-autocomplete #auto="matAutocomplete" >
-      <mat-option *ngFor="let option of options" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <input matInput placeholder="State" type="text" formControlName="state" [matAutocomplete]="auto">
+      <input matInput placeholder="State" type="text" formControlName="state">
     </mat-form-field >
-    <mat-autocomplete #auto="matAutocomplete" >
-      <mat-option *ngFor="let option of options" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input
         [matDatepicker]="picker"
@@ -82,43 +72,43 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Referral Source" formControlName="referralSource">
-        <mat-option>
+        <mat-option *ngFor="let sources of referrelSourceList" value="sources">
+          {{sources.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+      <mat-select placeholder="Language" formControlName="language">
+        <mat-option *ngFor="let lang of languageList" value="lang">
+          {{lang.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+      <mat-select placeholder="Work Status" formControlName="workStatus">
+        <mat-option *ngFor="let workStatus of workStatusList" value="workStatus">
+          {{workStatus.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+      <mat-select placeholder="Employer" formControlName="employer">
+        <mat-option >
           some text
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <mat-select placeholder="Language" formControlName="referralSource">
-        <mat-option>
-          some text
+      <mat-select placeholder="Race" formControlName="race">
+        <mat-option *ngFor="let race of raceList" value="race">
+          {{race.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <mat-select placeholder="Work Status" formControlName="referralSource">
-        <mat-option>
-          some text
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <mat-select placeholder="Employer" formControlName="referralSource">
-        <mat-option>
-          some text
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <mat-select placeholder="Race" formControlName="referralSource">
-        <mat-option>
-          some text
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
-      <mat-select placeholder="Ethnicity" formControlName="referralSource">
-        <mat-option>
-          some text
+      <mat-select placeholder="Ethnicity" formControlName="ethnicity">
+        <mat-option *ngFor="let eth of ethnicityList" value="eth">
+          {{eth.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>

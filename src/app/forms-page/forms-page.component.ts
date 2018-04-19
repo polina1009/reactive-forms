@@ -12,6 +12,12 @@ import {SelectOptionInterface} from '../form.interface';
 
 export class FormsPageComponent implements  OnInit {
   public preferredContactList: SelectOptionInterface[];
+  public referrelSourceList: SelectOptionInterface[];
+  public languageList: SelectOptionInterface[];
+  public workStatusList: SelectOptionInterface[];
+  public raceList: SelectOptionInterface[];
+  public ethnicityList: SelectOptionInterface[];
+
   inputGroup: FormGroup;
   public patient
 
@@ -31,6 +37,11 @@ export class FormsPageComponent implements  OnInit {
     private ref: ChangeDetectorRef
   ) {
     this.preferredContactList = [];
+    this.referrelSourceList = [];
+    this.languageList = [];
+    this.workStatusList = [];
+    this.raceList = [];
+    this.ethnicityList = [];
   }
 
   ngOnInit() {
@@ -71,6 +82,31 @@ export class FormsPageComponent implements  OnInit {
     this.patientService.getPreferredContactList().subscribe(optionList => {
       this.ref.markForCheck();
       this.preferredContactList = optionList;
+    });
+
+    this.patientService.getReferralSourcesList().subscribe(optionList => {
+      this.ref.markForCheck();
+      this.referrelSourceList = optionList;
+    });
+
+    this.patientService.getLanguageList().subscribe(optionList => {
+      this.ref.markForCheck();
+      this.languageList = optionList;
+    });
+
+    this.patientService.getWorkStatusList().subscribe(optionList => {
+      this.ref.markForCheck();
+      this.workStatusList = optionList;
+    });
+
+    this.patientService.getRaceList().subscribe(optionList => {
+      this.ref.markForCheck();
+      this.raceList = optionList;
+    });
+
+    this.patientService.getEthnicityList().subscribe(optionList => {
+      this.ref.markForCheck();
+      this.ethnicityList = optionList;
     });
   }
 

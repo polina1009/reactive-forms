@@ -1,5 +1,3 @@
-
-
 export interface ApiSelectInterface {
   name: string;
   id: string;
