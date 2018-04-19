@@ -58,14 +58,16 @@
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input
         [matDatepicker]="picker"
-        class="hidden-input111"
-        type="text"
+        class="hidden-input"
+        type="hidden"
+        name="birtday_picker"
         #birtday_picker
         (change)="birtday_mask.value = birtday_picker.value"
       >
       <input
         matInput
         type="text"
+        name="birtday_mask"
         formControlName="dateOfBirth"
         placeholder="Date Of Birth"
         [textMask]="maskDate"
