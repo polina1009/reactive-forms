@@ -9,6 +9,7 @@ export interface SelectOptionInterface {
 }
 
 export interface PatientInterface {
+  // id: string;
   title: string;
   firstName: string;
   lastName: string;

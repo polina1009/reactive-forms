@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { preferredContact, referralSource, language, workStatus, ethnicity, race } from './mock-data';
-import { ApiSelectInterface} from './form.interface';
+import { preferredContact, referralSource, language, workStatus, ethnicity, race, patient } from './mock-data';
+import {ApiSelectInterface, PatientInterface} from './form.interface';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
@@ -61,6 +61,14 @@ export class ApiService {
         map((ethnicityList) => JSON.parse(ethnicityList))
       )
       .delay(500);
+  }
+
+  public getPatient(): Observable<PatientInterface> {
+    return Observable.of(JSON.stringify(patient))
+      .pipe(
+        map((p) => JSON.parse(p))
+      )
+      .delay(100);
   }
 
 }

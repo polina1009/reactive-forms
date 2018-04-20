@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
-import {ApiSelectInterface, SelectOptionInterface} from '../form.interface';
+import {ApiSelectInterface, PatientInterface, SelectOptionInterface} from '../form.interface';
 import {Observable} from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { map, filter} from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
+import 'rxjs/add/operator/finally';
+
 
 
 @Injectable()
 export class PatientService {
+
+  // patients: Observable<PatientInterface>;
 
   constructor(private apiService: ApiService) {
   }
@@ -95,5 +99,15 @@ export class PatientService {
         })
       );
   }
+
+  getPatients(): Observable<PatientInterface> {
+    return this.apiService.getPatient();
+  }
+  //
+  // updatePatient(patientt: PatientInterface): Observable<PatientInterface>  {
+  //   const oldPatient = this.patients
+  //   const newPatient = Object.assign(oldPatient, patientt);
+  //   return Observable.of(newPatient).delay(500);
+  // }
 
 }

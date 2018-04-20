@@ -4,7 +4,7 @@
         fxLayout="row wrap"
         fxLayoutAlign="center center"
         fxLayoutGap="15px"
-        (ngSubmit)="onSubmit()"
+        (change)="onChange()"
   >
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Title" type="text" formControlName="title" >
@@ -31,7 +31,7 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Preferred Contact" formControlName="preferredContact">
-        <mat-option *ngFor="let contact of preferredContactList" value="contact">
+        <mat-option *ngFor="let contact of preferredContactList" [value]="contact.value">
           {{contact.viewValue}}
         </mat-option>
       </mat-select>
@@ -80,21 +80,21 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Referral Source" formControlName="referralSource">
-        <mat-option *ngFor="let sources of referrelSourceList" value="sources">
+        <mat-option *ngFor="let sources of referrelSourceList" [value]="sources.value">
           {{sources.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Language" formControlName="language">
-        <mat-option *ngFor="let lang of languageList" value="lang">
+        <mat-option *ngFor="let lang of languageList" [value]="lang.value">
           {{lang.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Work Status" formControlName="workStatus">
-        <mat-option *ngFor="let workStatus of workStatusList" value="workStatus">
+        <mat-option *ngFor="let workStatus of workStatusList" [value]="workStatus.value">
           {{workStatus.viewValue}}
         </mat-option>
       </mat-select>
@@ -108,14 +108,14 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Race" formControlName="race">
-        <mat-option *ngFor="let race of raceList" value="race">
+        <mat-option *ngFor="let race of raceList" [value]="race.value">
           {{race.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Ethnicity" formControlName="ethnicity">
-        <mat-option *ngFor="let eth of ethnicityList" value="eth">
+        <mat-option *ngFor="let eth of ethnicityList" [value]="eth.value">
           {{eth.viewValue}}
         </mat-option>
       </mat-select>
@@ -123,9 +123,13 @@
     <div fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" class="gender-container">
       <p class="mat-typography gender-placeholder">Gender</p>
       <mat-radio-group fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
-        <mat-radio-button value="male">Male</mat-radio-button>
-        <mat-radio-button value="female">Female</mat-radio-button>
+        <mat-radio-button [value]="male">Male</mat-radio-button>
+        <mat-radio-button [value]="female">Female</mat-radio-button>
       </mat-radio-group>
     </div>
   </form>
 </div>
+
+<div *ngFor="let title of titleChangeLog">{{title}}</div>
+
+<p>heroForm value: {{ inputGroup.value}}</p>
