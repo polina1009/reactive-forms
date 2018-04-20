@@ -19,7 +19,7 @@ export class FormsPageComponent implements  OnInit {
   public ethnicityList: SelectOptionInterface[];
   public patient: PatientInterface;
 
-  inputGroup: FormGroup;
+  patientGroup: FormGroup;
 
   public maskPhone = {
     guide: true,
@@ -46,7 +46,7 @@ export class FormsPageComponent implements  OnInit {
   }
 
   get controls() {
-    return this.inputGroup.controls;
+    return this.patientGroup.controls;
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class FormsPageComponent implements  OnInit {
   }
 
   public createForm() {
-    this.inputGroup = this.fb.group({
+    this.patientGroup = this.fb.group({
       title: this.fb.control(''),
       firstName: this.fb.control(''),
       lastName: this.fb.control(''),
@@ -81,8 +81,6 @@ export class FormsPageComponent implements  OnInit {
       ethnicity: this.fb.control(''),
       gender: this.fb.control(''),
     });
-
-    console.log(this.inputGroup.value);
   }
 
   getPatient() {
@@ -92,13 +90,13 @@ export class FormsPageComponent implements  OnInit {
         this.patient = patient;
 
         this.updateForm();
-        console.log(this.patient);
-        this.setPatient();
+        console.log(this.setPatient());
+
       });
   }
 
   setPatient() {
-    return JSON.stringify(this.inputGroup.value);
+    return JSON.stringify(this.patientGroup.value);
   }
   private updateForm() {
     this.controls.title.setValue(this.patient.title);
