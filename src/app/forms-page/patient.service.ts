@@ -103,11 +103,10 @@ export class PatientService {
   getPatients(): Observable<PatientInterface> {
     return this.apiService.getPatient();
   }
-  //
-  // updatePatient(patientt: PatientInterface): Observable<PatientInterface>  {
-  //   const oldPatient = this.patients
-  //   const newPatient = Object.assign(oldPatient, patientt);
-  //   return Observable.of(newPatient).delay(500);
-  // }
+
+  setPatient(patient: PatientInterface) {
+    return Observable.of(JSON.stringify(patient));
+  }
+
 
 }

@@ -70,6 +70,5 @@ export class ApiService {
       )
       .delay(100);
   }
-
 }
 

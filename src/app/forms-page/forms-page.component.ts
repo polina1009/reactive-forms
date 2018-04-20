@@ -84,61 +84,6 @@ export class FormsPageComponent implements  OnInit {
     });
   }
 
-  // prepareSavePatient(): PatientInterface {
-  //   const savePatient = this.inputGroup.setValue({
-  //     title: this.patient.title,
-  //     firstName: this.patient.firstName,
-  //     lastName: this.patient.lastName,
-  //     cellPhone: this.patient.cellPhone,
-  //     home: this.patient.home,
-  //     work: this.patient.work,
-  //     email: this.patient.email,
-  //     preferredContact: this.patient.preferredContact,
-  //     address1: this.patient.address1,
-  //     address2: this.patient.address2,
-  //     zip: this.patient.zip,
-  //     city: this.patient.city,
-  //     state: this.patient.state,
-  //     dateOfBirth: this.patient.dateOfBirth,
-  //     ssn: this.patient.ssn,
-  //     referralSource: this.patient.referralSource,
-  //     language: this.patient.language,
-  //     workStatus: this.patient.workStatus,
-  //     employer: this.patient.employer,
-  //     race: this.patient.race,
-  //     ethnicity: this.patient.ethnicity,
-  //     gender: this.patient.gender
-  //   });
-  //   console.log(savePatient);
-  //   // const formModel = this.inputGroup.value;
-  //   // const savePatient: PatientInterface = {
-  //   //   id: this.patient.id,
-  //   //   title: this.patient.title,
-  //   //   firstName: formModel.firstName as string,
-  //   //   lastName: this.patient.lastName,
-  //   //   cellPhone: this.patient.cellPhone,
-  //   //   home: this.patient.home,
-  //   //   work: this.patient.work,
-  //   //   email: this.patient.email,
-  //   //   preferredContact: this.patient.preferredContact,
-  //   //   address1: this.patient.address1,
-  //   //   address2: this.patient.address2,
-  //   //   zip: this.patient.zip,
-  //   //   city: this.patient.city,
-  //   //   state: this.patient.state,
-  //   //   dateOfBirth: this.patient.dateOfBirth,
-  //   //   ssn: this.patient.ssn,
-  //   //   referralSource: this.patient.referralSource,
-  //   //   language: this.patient.language,
-  //   //   workStatus: this.patient.workStatus,
-  //   //   employer: this.patient.employer,
-  //   //   race: this.patient.race,
-  //   //   ethnicity: this.patient.ethnicity,
-  //   //   gender: this.patient.gender
-  //   // };
-  //   // return savePatient;
-  // }
-
   getPatient() {
     this.patientService.getPatients()
       .subscribe(patient => {
@@ -146,7 +91,13 @@ export class FormsPageComponent implements  OnInit {
         this.patient = patient;
 
         this.updateForm();
+        console.log(this.patient);
+        this.setPatient();
       });
+  }
+
+  setPatient() {
+    console.log(this.patientService.setPatient(this.patient);)
   }
 
   private updateForm() {

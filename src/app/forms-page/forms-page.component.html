@@ -2,34 +2,33 @@
 <div style="margin: 20px;">
   <form [formGroup]="inputGroup"
         fxLayout="row wrap"
-        fxLayoutAlign="center center"
-        fxLayoutGap="15px"
-        (change)="onChange()"
+        fxLayoutAlign="start center"
+        fxLayoutGap="20px"
   >
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="31" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Title" type="text" formControlName="title" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="31" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="First Name" type="text" formControlName="firstName">
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="31" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Last Name" type="text" formControlName="lastName">
     </mat-form-field>
 
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="31" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Cell Phone" formControlName="cellPhone"  [textMask]="maskPhone"  type="text" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" >
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="31" fxFlex.sm="45" fxFlex.xs="100" >
       <input matInput placeholder="Home" formControlName="home" [textMask]="maskPhone" type="text" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="31" fxFlex.sm="45" fxFlex.xs="100">
 
       <input matInput placeholder="Work" formControlName="work" [textMask]="maskPhone" type="text" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="63" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Email" type="email"  formControlName="email" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="33" fxFlex.sm="45" fxFlex.xs="100">
       <mat-select placeholder="Preferred Contact" formControlName="preferredContact">
         <mat-option *ngFor="let contact of preferredContactList" [value]="contact.value">
           {{contact.viewValue}}
@@ -37,10 +36,10 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="40" fxFlex.lg="60" fxFlex.md="48" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Address" type="text" formControlName="address1" >
     </mat-form-field>
-    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
+    <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="48" fxFlex.sm="45" fxFlex.xs="100">
       <input matInput placeholder="Address2" type="text" formControlName="address2" >
     </mat-form-field>
     <mat-form-field fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100">
@@ -123,13 +122,9 @@
     <div fxFlex.xl="20" fxFlex.lg="30" fxFlex.md="30" fxFlex.sm="45" fxFlex.xs="100" class="gender-container">
       <p class="mat-typography gender-placeholder">Gender</p>
       <mat-radio-group fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
-        <mat-radio-button [value]="male">Male</mat-radio-button>
-        <mat-radio-button [value]="female">Female</mat-radio-button>
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
       </mat-radio-group>
     </div>
   </form>
 </div>
-
-<div *ngFor="let title of titleChangeLog">{{title}}</div>
-
-<p>heroForm value: {{ inputGroup.value}}</p>
