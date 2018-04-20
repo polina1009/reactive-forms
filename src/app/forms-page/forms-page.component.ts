@@ -32,8 +32,6 @@ export class FormsPageComponent implements  OnInit {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
 
-  // titleChangeLog: string[] = [];
-
   constructor(
     private fb: FormBuilder,
     private patientService: PatientService,
@@ -46,7 +44,6 @@ export class FormsPageComponent implements  OnInit {
     this.raceList = [];
     this.ethnicityList = [];
     this.createForm();
-    // this.logTitleChange();
   }
 
   get controls() {
@@ -57,7 +54,6 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    // this.rebuildForm();
 
   }
 
@@ -84,15 +80,9 @@ export class FormsPageComponent implements  OnInit {
       employer: this.fb.control(''),
       race: this.fb.control(''),
       ethnicity: this.fb.control(''),
-      gender: this.fb.control('')
+      gender: this.fb.control(''),
     });
   }
-
-  // rebuildForm() {
-  //   this.inputGroup.reset({
-  //     name: this.patient.title
-  //   });
-  // }
 
   // prepareSavePatient(): PatientInterface {
   //   const savePatient = this.inputGroup.setValue({
@@ -153,24 +143,44 @@ export class FormsPageComponent implements  OnInit {
     this.patientService.getPatients()
       .subscribe(patient => {
         this.ref.markForCheck();
-
         this.patient = patient;
+
+        this.updateForm();
       });
   }
 
-  // logTitleChange() {
-  //   const nameControl = this.inputGroup.get('title');
-  //   nameControl.valueChanges.forEach(
-  //     (value: string) => this.titleChangeLog.push(value)
-  //   );
-  // }
+  private updateForm() {
+    this.controls.title.setValue(this.patient.title);
+    this.controls.firstName.setValue(this.patient.firstName);
+    this.controls.lastName.setValue(this.patient.lastName);
+    this.controls.cellPhone.setValue(this.patient.cellPhone);
+    this.controls.home.setValue(this.patient.home);
+    this.controls.work.setValue(this.patient.work);
+    this.controls.email.setValue(this.patient.email);
+    this.controls.preferredContact.setValue(this.patient.preferredContact);
+    this.controls.address1.setValue(this.patient.address1);
+    this.controls.address2.setValue(this.patient.address2);
+    this.controls.zip.setValue(this.patient.zip);
+    this.controls.city.setValue(this.patient.city);
+    this.controls.state.setValue(this.patient.state);
+    this.controls.dateOfBirth.setValue(this.patient.dateOfBirth);
+    this.controls.ssn.setValue(this.patient.ssn);
+    this.controls.referralSource.setValue(this.patient.referralSource);
+    this.controls.language.setValue(this.patient.language);
+    this.controls.workStatus.setValue(this.patient.workStatus);
+    this.controls.employer.setValue(this.patient.employer);
+    this.controls.race.setValue(this.patient.race);
+    this.controls.ethnicity.setValue(this.patient.ethnicity);
+    this.controls.gender.setValue(this.patient.gender);
+  }
 
   private getSelectOptions() {
 
-    this.patientService.getPreferredContactList().subscribe(optionList => {
-      this.ref.markForCheck();
-      this.preferredContactList = optionList;
-      this.controls.preferredContact.setValue(this.patient.preferredContact);
+    this.patientService.getPreferredContactList()
+      .subscribe(optionList => {
+        this.ref.markForCheck();
+        this.preferredContactList = optionList;
+        this.controls.preferredContact.setValue(this.patient.preferredContact);
     });
 
     this.patientService.getReferralSourcesList()
@@ -183,30 +193,29 @@ export class FormsPageComponent implements  OnInit {
     this.patientService.getLanguageList()
       .subscribe(optionList => {
         this.ref.markForCheck();
-
         this.languageList = optionList;
-
-          // console.log(this.patient.language);
-        // console.log(this.controls);
         this.controls.language.setValue(this.patient.language);
       });
 
-    this.patientService.getWorkStatusList().subscribe(optionList => {
-      this.ref.markForCheck();
-      this.workStatusList = optionList;
-      this.controls.workStatus.setValue(this.patient.workStatus);
+    this.patientService.getWorkStatusList()
+      .subscribe(optionList => {
+        this.ref.markForCheck();
+        this.workStatusList = optionList;
+        this.controls.workStatus.setValue(this.patient.workStatus);
     });
 
-    this.patientService.getRaceList().subscribe(optionList => {
-      this.ref.markForCheck();
-      this.raceList = optionList;
-      this.controls.race.setValue(this.patient.race);
+    this.patientService.getRaceList()
+      .subscribe(optionList => {
+        this.ref.markForCheck();
+        this.raceList = optionList;
+        this.controls.race.setValue(this.patient.race);
     });
 
-    this.patientService.getEthnicityList().subscribe(optionList => {
-      this.ref.markForCheck();
-      this.ethnicityList = optionList;
-      this.controls.ethnicity.setValue(this.patient.ethnicity);
+    this.patientService.getEthnicityList()
+      .subscribe(optionList => {
+        this.ref.markForCheck();
+        this.ethnicityList = optionList;
+        this.controls.ethnicity.setValue(this.patient.ethnicity);
     });
   }
 
