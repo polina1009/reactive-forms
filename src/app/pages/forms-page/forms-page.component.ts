@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Input, OnChanges} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PatientService } from './patient.service';
-import {SelectOptionInterface, PatientInterface} from '../form.interface';
+import {SelectOptionInterface, PatientInterface} from '../../form.interface';
 
 @Component({
   selector: 'app-forms-page',

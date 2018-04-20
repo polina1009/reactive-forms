@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../api.service';
-import {ApiSelectInterface, PatientInterface, SelectOptionInterface} from '../form.interface';
+import { ApiService } from '../../api.service';
+import {ApiSelectInterface, PatientInterface, SelectOptionInterface} from '../../form.interface';
 import {Observable} from 'rxjs/Observable';
 import { map, filter} from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
