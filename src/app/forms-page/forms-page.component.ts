@@ -43,7 +43,6 @@ export class FormsPageComponent implements  OnInit {
     this.workStatusList = [];
     this.raceList = [];
     this.ethnicityList = [];
-    this.createForm();
   }
 
   get controls() {
@@ -82,6 +81,8 @@ export class FormsPageComponent implements  OnInit {
       ethnicity: this.fb.control(''),
       gender: this.fb.control(''),
     });
+
+    console.log(this.inputGroup.value);
   }
 
   getPatient() {
@@ -97,9 +98,8 @@ export class FormsPageComponent implements  OnInit {
   }
 
   setPatient() {
-    console.log(this.patientService.setPatient(this.patient))
+    return JSON.stringify(this.inputGroup.value);
   }
-
   private updateForm() {
     this.controls.title.setValue(this.patient.title);
     this.controls.firstName.setValue(this.patient.firstName);

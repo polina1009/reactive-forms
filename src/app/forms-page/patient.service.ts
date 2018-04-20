@@ -104,9 +104,5 @@ export class PatientService {
     return this.apiService.getPatient();
   }
 
-  setPatient(patient: PatientInterface) {
-    return Observable.of(JSON.stringify(patient));
-  }
-
 
 }
