@@ -97,7 +97,7 @@ export class FormsPageComponent implements  OnInit {
   }
 
   setPatient() {
-    console.log(this.patientService.setPatient(this.patient);)
+    console.log(this.patientService.setPatient(this.patient))
   }
 
   private updateForm() {
