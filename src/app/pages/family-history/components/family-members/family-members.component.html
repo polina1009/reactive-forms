@@ -1,3 +1,17 @@
-<p>
-  family-members works!
-</p>
+<h2 mat-dialog-title>{{description}}</h2>
+<mat-dialog-content>
+  <mat-slide-toggle>Mother</mat-slide-toggle>
+  <mat-slide-toggle>Father</mat-slide-toggle>
+  <mat-slide-toggle>Sister</mat-slide-toggle>
+  <mat-slide-toggle>Brother</mat-slide-toggle>
+  <mat-slide-toggle>Child</mat-slide-toggle>
+  <mat-slide-toggle>Grandmother</mat-slide-toggle>
+  <mat-slide-toggle>Grandfather</mat-slide-toggle>
+  <mat-slide-toggle>Uncle</mat-slide-toggle>
+  <mat-slide-toggle>Aunt</mat-slide-toggle>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button (click)="save()">Done</button>
+</mat-dialog-actions>
+

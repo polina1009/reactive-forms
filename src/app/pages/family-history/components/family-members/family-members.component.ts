@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-family-members',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FamilyMembersComponent implements OnInit {
 
-  constructor() { }
+  description: string;
+
+  constructor(
+    public dialogRef: MatDialogRef<FamilyMembersComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    this.description = data.description;
+  }
+
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
+
 
   ngOnInit() {
+  }
+
+  save() {
+    this.dialogRef.close();
   }
 
 }

@@ -1,27 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {FamilyHistoryRoutingModule} from './family-history-routing.module';
 
 import { FamilyHistoryComponent } from './family-history.component';
+import { FamilyMembersComponent } from './components';
 import {FamilyHistoryService} from './family-history.service';
-import { PageNotFoundComponent } from './components/page-not-found';
+
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+
+
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
-    FamilyHistoryRoutingModule
+    MatSlideToggleModule,
+    MatDialogModule
   ],
   declarations: [
     FamilyHistoryComponent,
-    PageNotFoundComponent
+    FamilyMembersComponent,
   ],
-  providers: [
-    FamilyHistoryService
+  entryComponents: [
+    FamilyMembersComponent
   ],
+  providers: [FamilyHistoryService],
   exports: [
-    FamilyHistoryComponent
+    FamilyHistoryComponent,
+    FamilyMembersComponent
   ]
 })
 export class FamilyHistoryModule { }
