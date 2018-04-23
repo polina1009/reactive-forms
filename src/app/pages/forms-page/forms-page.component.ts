@@ -1,7 +1,18 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Input, OnChanges} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { PatientService } from './patient.service';
+import { PatientService } from '../../services/patient.service';
 import {SelectOptionInterface, PatientInterface} from '../../form.interface';
+import {
+  GET_PREFERRED_CONTACT_LIST,
+  GET_REFERRAL_SOURCE,
+  GET_LANGUAGE,
+  GET_WORK_STATUS,
+  GET_EMPLOYER,
+  GET_RACE,
+  GET_ETHNICITY,
+  GET_PATIENT
+} from '../../services/api.constants';
+import {map} from 'rxjs/operator/map';
 
 @Component({
   selector: 'app-forms-page',
@@ -15,6 +26,7 @@ export class FormsPageComponent implements  OnInit {
   public referrelSourceList: SelectOptionInterface[];
   public languageList: SelectOptionInterface[];
   public workStatusList: SelectOptionInterface[];
+  public employer: SelectOptionInterface[];
   public raceList: SelectOptionInterface[];
   public ethnicityList: SelectOptionInterface[];
   public patient: PatientInterface;
@@ -43,6 +55,7 @@ export class FormsPageComponent implements  OnInit {
     this.workStatusList = [];
     this.raceList = [];
     this.ethnicityList = [];
+    this.patient = this.patientService.defaultPatient;
   }
 
   get controls() {
@@ -84,7 +97,7 @@ export class FormsPageComponent implements  OnInit {
   }
 
   getPatient() {
-    this.patientService.getPatients()
+    this.patientService.getPatients(GET_PATIENT)
       .subscribe(patient => {
         this.ref.markForCheck();
         this.patient = patient;
@@ -96,6 +109,8 @@ export class FormsPageComponent implements  OnInit {
   }
 
   setPatient() {
+    console.log(this.patientGroup);
+    console.log('#####', this.patient);
     return JSON.stringify(this.patientGroup.value);
   }
   private updateForm() {
@@ -125,42 +140,49 @@ export class FormsPageComponent implements  OnInit {
 
   private getSelectOptions() {
 
-    this.patientService.getPreferredContactList()
+    this.patientService.getSelectionList(GET_PREFERRED_CONTACT_LIST)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.preferredContactList = optionList;
         this.controls.preferredContact.setValue(this.patient.preferredContact);
     });
 
-    this.patientService.getReferralSourcesList()
+    this.patientService.getSelectionList(GET_REFERRAL_SOURCE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.referrelSourceList = optionList;
         this.controls.referralSource.setValue(this.patient.referralSource);
     });
 
-    this.patientService.getLanguageList()
+    this.patientService.getSelectionList(GET_LANGUAGE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.languageList = optionList;
         this.controls.language.setValue(this.patient.language);
       });
 
-    this.patientService.getWorkStatusList()
+    this.patientService.getSelectionList(GET_WORK_STATUS)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.workStatusList = optionList;
         this.controls.workStatus.setValue(this.patient.workStatus);
     });
 
-    this.patientService.getRaceList()
+    this.patientService.getSelectionList(GET_EMPLOYER)
+      .subscribe(optionList => {
+        this.ref.markForCheck();
+        this.employer = optionList;
+        this.controls.workStatus.setValue(this.patient.employer);
+      });
+
+    this.patientService.getSelectionList(GET_RACE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.raceList = optionList;
         this.controls.race.setValue(this.patient.race);
     });
 
-    this.patientService.getEthnicityList()
+    this.patientService.getSelectionList(GET_ETHNICITY)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.ethnicityList = optionList;

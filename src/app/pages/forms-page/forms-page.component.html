@@ -81,8 +81,8 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="24" fxFlex.lg="32" fxFlex.md="32" fxFlex.sm="48" fxFlex.xs="100">
       <mat-select placeholder="Employer" formControlName="employer">
-        <mat-option >
-          some text
+        <mat-option *ngFor="let employer of employer" [value]="employer.value">
+          {{employer.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>

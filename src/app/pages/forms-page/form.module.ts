@@ -16,7 +16,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { TextMaskModule } from 'angular2-text-mask';
 
 import { FormsPageComponent } from './forms-page.component';
-import {PatientService} from './patient.service';
+import {PatientService} from '../../services/patient.service';
 
 
 

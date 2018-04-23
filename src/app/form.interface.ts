@@ -3,13 +3,17 @@ export interface ApiSelectInterface {
   id: string;
 }
 
+export interface ApiPatientInterface {
+  id: string;
+  patientInfo: PatientInterface;
+}
+
 export interface SelectOptionInterface {
   value: string;
   viewValue: string;
 }
 
 export interface PatientInterface {
-  // id: string;
   title: string;
   firstName: string;
   lastName: string;
