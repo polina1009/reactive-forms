@@ -13,11 +13,11 @@ export class FamilyMembersComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<FamilyMembersComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
-    console.log(data);
     this.value = data.value;
   }
 
   ngOnInit() {
+    console.log(this.value);
   }
 
   save() {

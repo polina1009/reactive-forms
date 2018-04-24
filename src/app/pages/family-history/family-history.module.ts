@@ -8,6 +8,7 @@ import {FamilyHistoryService} from './family-history.service';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -18,6 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,
     MatSlideToggleModule,
     MatDialogModule,
+    MatCardModule,
     FlexLayoutModule
   ],
   declarations: [

@@ -9,32 +9,25 @@ import {FamilyMembersComponent} from './components';
 })
 export class FamilyHistoryComponent implements OnInit {
 
-  public value = '';
+  value = '';
 
   constructor(public dialog: MatDialog) { }
 
-  openDialog() {
+  openDialog(value: string) {
 
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    // dialogConfig.position = {
-    //   top: '0',
-    //   bottom: '0'
-    // };
-
     dialogConfig.data = {
-      value: this.value
+      value
     };
 
     dialogConfig.maxHeight = '100vh';
     dialogConfig.height = '100vh';
     dialogConfig.width = '100vw';
     dialogConfig.maxWidth = '100vw';
-
-    this.dialog.open(FamilyMembersComponent, dialogConfig);
 
     const dialogRef = this.dialog.open(FamilyMembersComponent, dialogConfig);
 

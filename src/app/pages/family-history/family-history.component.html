@@ -1,20 +1,125 @@
 <div class="wrapper">
   <ul>
-    <li><button mat-raised-button (click)="openDialog()" value="Arthritis">Arthritis</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Blindness">Blindness</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Cancer">Cancer</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Corneal Disease">Corneal Disease</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Crossed Eyes">Crossed Eyes</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Diabetes">Diabetes</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Glaucoma">Glaucoma</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Heart Disease">Heart Disease</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="High Cholesterol">High Cholesterol</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Kidney Disease">Kidney Disease</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Lazy Eye">Lazy Eye</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Lupus">Lupus</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Macular Degeneration">Macular Degeneration</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Retinal Disease">Retinal Disease</button></li>
-    <li><button mat-raised-button (click)="openDialog()" value="Thuroid Disease">Thuroid Disease</button></li>
+    <li><mat-card
+      (click)="openDialog('Arthritis')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Arthritis</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Blindness')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Blindness</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Cancer')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Cancer</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Corneal Disease')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Corneal Disease</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Crossed Eyes')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Crossed Eyes</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Diabetes')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Diabetes</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Glaucoma')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Glaucoma</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Heart Disease')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Heart Disease</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('High Cholesterol')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>High Cholesterol</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Kidney Disease')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Kidney Disease</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Lazy Eye')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Lazy Eye</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Lupus')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Lupus</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Macular Degeneration')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Macular Degeneration</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Retinal Disease')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Retinal Disease</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
+    <li><mat-card
+      (click)="openDialog('Thuroid Disease')"
+      fxLayout="row"
+      fxLayoutAlign="space-between center">
+      <mat-card-title><h4>Thuroid Disease</h4></mat-card-title>
+      <mat-card-subtitle><h2></h2></mat-card-subtitle>
+      <mat-card-content><h2>></h2></mat-card-content>
+    </mat-card></li>
   </ul>
 </div>
 
