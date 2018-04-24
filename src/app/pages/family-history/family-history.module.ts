@@ -8,6 +8,7 @@ import {FamilyHistoryService} from './family-history.service';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -16,7 +17,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     BrowserModule,
     FormsModule,
     MatSlideToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    FlexLayoutModule
   ],
   declarations: [
     FamilyHistoryComponent,

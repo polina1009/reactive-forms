@@ -1,17 +1,55 @@
-<h2 mat-dialog-title>{{description}}</h2>
-<mat-dialog-content>
-  <mat-slide-toggle>Mother</mat-slide-toggle>
-  <mat-slide-toggle>Father</mat-slide-toggle>
-  <mat-slide-toggle>Sister</mat-slide-toggle>
-  <mat-slide-toggle>Brother</mat-slide-toggle>
-  <mat-slide-toggle>Child</mat-slide-toggle>
-  <mat-slide-toggle>Grandmother</mat-slide-toggle>
-  <mat-slide-toggle>Grandfather</mat-slide-toggle>
-  <mat-slide-toggle>Uncle</mat-slide-toggle>
-  <mat-slide-toggle>Aunt</mat-slide-toggle>
-</mat-dialog-content>
+<div>
+  <h2 mat-dialog-title>{{value}}</h2>
+  <mat-dialog-content class="toggle-container" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <mat-slide-toggle
+      color="primary"
+      labelPosition="before"
+      fxFlex.md="100"
+    >Mother</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Father</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Sister</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Brother</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Child</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Grandmother</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Grandfather</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Uncle</mat-slide-toggle>
+    <mat-slide-toggle
+      labelPosition="before"
+      color="primary"
+      fxFlex.md="100"
+    >Aunt</mat-slide-toggle>
+  </mat-dialog-content>
 
-<mat-dialog-actions>
-  <button (click)="save()">Done</button>
-</mat-dialog-actions>
+  <mat-dialog-actions fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <button mat-raised-button color="primary" (click)="save()">Done</button>
+  </mat-dialog-actions>
+</div>
 

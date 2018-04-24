@@ -8,19 +8,14 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class FamilyMembersComponent implements OnInit {
 
-  description: string;
+  value: string;
 
   constructor(
     public dialogRef: MatDialogRef<FamilyMembersComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-
-    this.description = data.description;
+    @Inject(MAT_DIALOG_DATA) data) {
+    console.log(data);
+    this.value = data.value;
   }
-
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
-
 
   ngOnInit() {
   }

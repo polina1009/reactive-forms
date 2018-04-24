@@ -1,4 +1,8 @@
-mat-dialog-content {
-  height: 100vh;
-  width: 100vw;
+/*mat-dialog-content {*/
+  /*height: 100vh;*/
+  /*width: 100vw;*/
+/*}*/
+
+mat-dialog-actions {
+  margin-bottom: 500px;
 }

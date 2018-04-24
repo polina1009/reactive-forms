@@ -9,8 +9,7 @@ import {FamilyMembersComponent} from './components';
 })
 export class FamilyHistoryComponent implements OnInit {
 
-  // animal: string;
-  // name: string;
+  public value = '';
 
   constructor(public dialog: MatDialog) { }
 
@@ -21,17 +20,18 @@ export class FamilyHistoryComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 
-    dialogConfig.data = {
-      id: 1,
-      title: 'Angular For Beginners'
-    };
+    // dialogConfig.position = {
+    //   top: '0',
+    //   bottom: '0'
+    // };
 
-    dialogConfig.position = {
-      top: '0',
-      bottom: '0'
+    dialogConfig.data = {
+      value: this.value
     };
 
     dialogConfig.maxHeight = '100vh';
+    dialogConfig.height = '100vh';
+    dialogConfig.width = '100vw';
     dialogConfig.maxWidth = '100vw';
 
     this.dialog.open(FamilyMembersComponent, dialogConfig);
