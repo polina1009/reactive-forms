@@ -43,6 +43,8 @@ export class FamilyHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('#######');
+    console.log(this.illnessList);
   }
 
 }

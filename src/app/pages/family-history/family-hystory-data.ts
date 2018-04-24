@@ -47,65 +47,73 @@ export const allMembers = [
   }
 ];
 
+function fillAllMembers() {
+  const allMembersRand = allMembers.map(member => {
+    member.isSelected = Math.random() > 0.5 ? true : false;
+    return JSON.parse(JSON.stringify(member));
+  });
+  return allMembersRand;
+}
+
 export const illnessList = [
   {
     title: 'Arthritis',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Blindness',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Cancer',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Corneal Disease',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Crossed Eyes',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Diabetes',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Glaucoma',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Heart Disease',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'High Cholesterol',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Kidney Disease',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Lazy Eye',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Lupus',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Macular Degeneration',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Retinal Disease',
-    members: allMembers
+    members: fillAllMembers()
   },
   {
     title: 'Thuroid Disease',
-    members: allMembers
+    members: fillAllMembers()
   }
 ];
