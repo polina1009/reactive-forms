@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {allMembers} from '../../family-hystory-data';
 
 @Component({
   selector: 'app-family-members',
@@ -8,20 +9,25 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class FamilyMembersComponent implements OnInit {
 
-  value: string;
+  title: string;
+  public allMembers = allMembers;
 
   constructor(
     public dialogRef: MatDialogRef<FamilyMembersComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
-    this.value = data.value;
+    // console.log(data);
+    this.title = data.title;
+  }
+  ngOnInit() {
+    this.getFiltredMemders();
   }
 
-  ngOnInit() {
-    console.log(this.value);
+  getFiltredMemders() {
+    return this.allMembers.filter(member => member.isSelected);
   }
 
   save() {
-    this.dialogRef.close();
+    this.dialogRef.close(this.getFiltredMemders());
   }
 
 }

@@ -1,55 +1,20 @@
-<div>
-  <h2 mat-dialog-title>{{value}}</h2>
-  <mat-dialog-content class="toggle-container" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <mat-slide-toggle
-      color="primary"
-      labelPosition="before"
-      fxFlex.md="100"
-    >Mother</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Father</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Sister</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Brother</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Child</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Grandmother</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Grandfather</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Uncle</mat-slide-toggle>
-    <mat-slide-toggle
-      labelPosition="before"
-      color="primary"
-      fxFlex.md="100"
-    >Aunt</mat-slide-toggle>
-  </mat-dialog-content>
-
-  <mat-dialog-actions fxLayout="column wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <button mat-raised-button color="primary" (click)="save()">Done</button>
-  </mat-dialog-actions>
-</div>
+<mat-dialog-content class="toggle-container" fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxLayout="column" fxLayoutAlign="center center">
+    <mat-card-title><h4>{{title}}</h4></mat-card-title>
+    <mat-card-content>
+      <ul fxLayout="column" fxLayoutAlign="start">
+        <li *ngFor="let member of allMembers">
+          <mat-slide-toggle
+            color="primary"
+            labelPosition="before"
+            [(ngModel)]="member.isSelected"
+          ><h4>{{member.name}}</h4></mat-slide-toggle>
+        </li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="save()">Done</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-dialog-content>
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {FamilyMembersComponent} from './components';
+import { IllnessInterface, MemberInterface } from './family-history.interface';
+import {allMembers, illnessList} from './family-hystory-data';
+
 
 @Component({
   selector: 'app-family-history',
@@ -9,11 +12,12 @@ import {FamilyMembersComponent} from './components';
 })
 export class FamilyHistoryComponent implements OnInit {
 
-  value = '';
+  public illnessList = illnessList;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {
+  }
 
-  openDialog(value: string) {
+  openDialog(illness: IllnessInterface) {
 
     const dialogConfig = new MatDialogConfig();
 
@@ -21,7 +25,8 @@ export class FamilyHistoryComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
-      value
+      selectedMembers: illness.members,
+      title: illness.title
     };
 
     dialogConfig.maxHeight = '100vh';
@@ -31,22 +36,11 @@ export class FamilyHistoryComponent implements OnInit {
 
     const dialogRef = this.dialog.open(FamilyMembersComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(
-      data => console.log('Dialog output:', data)
-    );
+    dialogRef.afterClosed().subscribe((results) => {
+      console.log(illness);
+      illness.members = results;
+    });
   }
-
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(FamilyMembersComponent, {
-  //     width: '250px',
-  //     data: { name: this.name, animal: this.animal }
-  //   });
-  //
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('The dialog was closed');
-  //     this.animal = result;
-  //   });
-  // }
 
   ngOnInit() {
   }

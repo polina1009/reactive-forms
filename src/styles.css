@@ -1,5 +1,9 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+body {
+  margin: 0 auto;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
