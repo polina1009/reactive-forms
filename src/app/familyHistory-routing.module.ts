@@ -8,7 +8,12 @@ import { NgModule } from '@angular/core';
 
 // const appRoutes: Routes = [
 //   { path: 'family-member', component: FamilyMembersComponent},
-//   { path: 'family-history',        component: FamilyHistoryComponent },
+//   {
+//     path: {'family-history',
+//       component: FamilyHistoryComponent,
+//       data: {
+//       }
+//     },
 //   { path: '',   redirectTo: '/family-history', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 // ];

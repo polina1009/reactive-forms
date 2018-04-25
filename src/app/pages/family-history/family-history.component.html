@@ -13,20 +13,17 @@
           fxLayout="row wrap"
           fxLayoutAlign="start center"
         >
-          <h4>{{illness.title}}</h4>
+          <h6>{{illness.title}}</h6>
         </mat-card-title>
         <mat-card-content
-          fxFlex.md="65"
-          fxFlex.sm="65"
+          fxFlex
           fxLayout="row wrap"
           fxLayoutAlign="start center"
         >
-          <h3>{{getNeatMembersString(illness.members)}}</h3>
+          <p class="mat-card-content-text">{{getNeatMembersString(illness.members)}}</p>
         </mat-card-content>
         <mat-card-actions fxLayout="row wrap"
                           fxLayoutAlign="start center"
-                          fxFlex.md="5"
-                          fxFlex.sm="5"
         >
           <i class="material-icons">keyboard_arrow_right</i>
         </mat-card-actions>

@@ -4,7 +4,7 @@
   fxLayoutAlign="center center"
 >
   <mat-card fxLayout="column" fxLayoutAlign="center center">
-    <mat-card-title fxFlex.md="100" fxFlex.sm="100"><h2>{{title}}</h2></mat-card-title>
+    <mat-card-title fxFlex.md="100" fxFlex.sm="100"><h4>{{title}}</h4></mat-card-title>
     <mat-card-content fxLayoutAlign="center center" fxFlex.md="50" fxFlex.sm="50">
       <ul fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.md="33" fxFlex.sm="45">
         <li
@@ -16,7 +16,7 @@
           <mat-slide-toggle
             color="primary"
             [(ngModel)]="member.isSelected"
-          ><h2>{{member.name}}</h2></mat-slide-toggle>
+          ><p class="slide-toggle-text">{{member.name}}</p></mat-slide-toggle>
         </li>
       </ul>
     </mat-card-content>
