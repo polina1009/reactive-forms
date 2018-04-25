@@ -52,7 +52,7 @@ function fillAllMembers() {
     member.isSelected = Math.random() > 0.5 ? true : false;
     return JSON.parse(JSON.stringify(member));
   });
-  return allMembersRand;
+  return JSON.parse(JSON.stringify(allMembersRand));
 }
 
 export const illnessList = [

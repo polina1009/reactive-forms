@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-// import {allMembers} from '../../family-hystory-data';
+import {allMembers, illnessList} from '../../family-hystory-data';
 
 @Component({
   selector: 'app-family-members',
@@ -10,7 +10,6 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export class FamilyMembersComponent implements OnInit {
 
   title: string;
-  // public allMembers = allMembers;
   public selectedMembers = [];
 
   constructor(
@@ -21,7 +20,6 @@ export class FamilyMembersComponent implements OnInit {
     this.selectedMembers = data.selectedMembers;
   }
   ngOnInit() {
-    // this.getFiltredMemders();
   }
 
   getFiltredMemders() {

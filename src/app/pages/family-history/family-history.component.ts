@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import { IllnessInterface, MemberInterface } from './family-history.interface';
-import {allMembers, illnessList} from './family-hystory-data';
+import { illnessList} from './family-hystory-data';
 
 
 @Component({
@@ -46,5 +46,14 @@ export class FamilyHistoryComponent implements OnInit {
     console.log('#######');
     console.log(this.illnessList);
   }
+
+  getNeatMembersString(members) {
+    return members
+      .filter(m => m.isSelected)
+      .map(m => m.name)
+      .join(', ');
+  }
+
+
 
 }
