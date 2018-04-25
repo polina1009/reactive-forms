@@ -29,10 +29,10 @@ export class FamilyHistoryComponent implements OnInit {
       title: illness.title
     };
 
-    dialogConfig.maxHeight = '100vh';
-    dialogConfig.height = '100vh';
-    dialogConfig.width = '100vw';
-    dialogConfig.maxWidth = '100vw';
+    // dialogConfig.maxHeight = '100vh';
+    // dialogConfig.height = '100vh';
+    // dialogConfig.width = '100vw';
+    // dialogConfig.maxWidth = '100vw';
 
     const dialogRef = this.dialog.open(FamilyMembersComponent, dialogConfig);
 

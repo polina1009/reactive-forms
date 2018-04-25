@@ -1,4 +1,15 @@
-mat-card {
-  width: 100vw;
-  height: 100vh;
+.mat-dialog-container {
+  padding: 0;
+}
+
+.mat-card {
+  padding: 40px;
+}
+
+.family-members-dialog .mat-slide-toggle {
+  margin-top: 10px;
+}
+
+.family-members-dialog .mat-slide-toggle .mat-slide-toggle-content {
+  margin-left: 5px;
 }
