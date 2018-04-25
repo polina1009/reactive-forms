@@ -4,17 +4,28 @@
       <mat-card
         *ngFor="let illness of illnessList"
         (click)="openDialog(illness)"
-        fxLayout="row"
+        fxLayout="row wrap"
         fxLayoutAlign="start center"
       >
-        <mat-card-title fxFlex.md="30" fxLayoutAlign="start center"><h4>{{illness.title}}</h4></mat-card-title>
-        <mat-card-content fxFlex.md="65" fxLayout="row wrap" fxLayoutAlign="start center">
-          <!--<h3 *ngFor="let memb of illness.members let i = index">-->
-            <!--<span *ngIf="memb.isSelected">{{memb.name}}</span>-->
-          <!--</h3>-->
+        <mat-card-title
+          fxFlex.md="30"
+          fxFlex.sm="30"
+          fxLayout="row wrap"
+          fxLayoutAlign="start center"
+        >
+          <h4>{{illness.title}}</h4>
+        </mat-card-title>
+        <mat-card-content
+          fxFlex.md="65"
+          fxFlex.sm="65"
+          fxLayout="row wrap"
+          fxLayoutAlign="start center"
+        >
           <h3>{{getNeatMembersString(illness.members)}}</h3>
         </mat-card-content>
-        <mat-card-actions fxFlex.md="5"><i class="material-icons">keyboard_arrow_right</i></mat-card-actions>
+        <mat-card-actions fxFlex.md="5" fxFlex.sm="5">
+          <i class="material-icons">keyboard_arrow_right</i>
+        </mat-card-actions>
       </mat-card>
     </li>
   </ul>
