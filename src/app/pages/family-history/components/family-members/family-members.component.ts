@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 @Component({
   selector: 'app-family-members',
   templateUrl: './family-members.component.html',
-  styleUrls: ['./family-members.component.css'],
+  styleUrls: ['./family-members.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class FamilyMembersComponent implements OnInit {

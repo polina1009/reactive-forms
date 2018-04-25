@@ -17,7 +17,7 @@ import {map} from 'rxjs/operator/map';
 @Component({
   selector: 'app-forms-page',
   templateUrl: './forms-page.component.html',
-  styleUrls: ['./forms-page.component.css'],
+  styleUrls: ['./forms-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
