@@ -1,35 +1,28 @@
-<mat-dialog-content
-  class="toggle-container family-members-dialog"
-  fxLayout="row wrap"
-  fxLayoutAlign="center center"
->
-  <mat-card fxLayout="column" fxLayoutAlign="center center">
-    <mat-card-title fxFlex.md="100" fxFlex.sm="100"><h4>{{title}}</h4></mat-card-title>
-    <mat-card-content fxLayoutAlign="center center" fxFlex.md="50" fxFlex.sm="50">
-      <ul fxLayout="row wrap" fxLayoutAlign="center center" fxFlex.md="33" fxFlex.sm="45">
-        <li
-          *ngFor="let member of selectedMembers"
-          fxFlex.md="100"
-          fxFlex.sm="100"
-          fxLayoutAlign="start center"
-        >
-          <mat-slide-toggle
-            color="primary"
-            [(ngModel)]="member.isSelected"
-          ><p class="slide-toggle-text">{{member.name}}</p></mat-slide-toggle>
-        </li>
-      </ul>
-    </mat-card-content>
-    <mat-card-actions>
-      <button
-        mat-raised-button color="primary"
-        (click)="save()"
-        fxFlex.md="100"
-        fxFlex.sm="100"
+<div class="family-member-container" fxLayout="column wrap" fxLayoutAlign="center center">
+  <div mat-dialog-title >
+    <h4>{{title}}</h4>
+  </div>
+  <mat-dialog-content class="family-member-content" fxLayout="column wrap" fxLayoutAlign="center center">
+    <ul fxFlex>
+      <li
+        *ngFor="let member of selectedMembers"
+        fxLayoutAlign="start center"
       >
-        <h2>Done</h2>
-      </button>
-    </mat-card-actions>
-  </mat-card>
-</mat-dialog-content>
+        <mat-slide-toggle
+          color="primary"
+          [(ngModel)]="member.isSelected"
+        >
+          <p class="slide-toggle-text">{{member.name}}</p>
+        </mat-slide-toggle>
+      </li>
+    </ul>
+  </mat-dialog-content>
+  <mat-dialog-actions class="family-member-action">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="save()"
+    >Done</button>
+  </mat-dialog-actions>
+</div>
 

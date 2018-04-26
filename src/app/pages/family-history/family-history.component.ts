@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import { IllnessInterface } from './family-history.interface';
-import { illnessList} from './family-hystory-data';
+import { illnessList} from './family-history-data';
 
 
 @Component({
@@ -17,8 +17,7 @@ export class FamilyHistoryComponent implements OnInit {
   constructor(public dialog: MatDialog) {
   }
 
-  openDialog(illness: IllnessInterface) {
-
+  getPripearedDialogConfig (illness: IllnessInterface) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -29,10 +28,14 @@ export class FamilyHistoryComponent implements OnInit {
       title: illness.title
     };
 
-    dialogConfig.width = '60vw';
-    dialogConfig.maxWidth = '60vw';
+    dialogConfig.width = '50vw';
+    dialogConfig.maxWidth = '50vw';
 
-    const dialogRef = this.dialog.open(FamilyMembersComponent, dialogConfig);
+    return dialogConfig;
+  }
+
+  openDialog(illness: IllnessInterface) {
+    const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPripearedDialogConfig(illness));
 
     dialogRef.afterClosed().subscribe((results) => {
       console.log(illness);
@@ -45,9 +48,9 @@ export class FamilyHistoryComponent implements OnInit {
 
   getNeatMembersString(members) {
     return members
-      .filter(m => m.isSelected)
-      .map(m => m.name)
-      .join(', ');
+        .filter(m => m.isSelected)
+        .map(m => m.name)
+        .join(', ');
   }
 
 

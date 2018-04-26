@@ -12,10 +12,8 @@ export class FamilyMembersComponent implements OnInit {
   title: string;
   public selectedMembers = [];
 
-  constructor(
-    public dialogRef: MatDialogRef<FamilyMembersComponent>,
-    @Inject(MAT_DIALOG_DATA) data) {
-    // console.log(data);
+  constructor(public dialogRef: MatDialogRef<FamilyMembersComponent>,
+              @Inject(MAT_DIALOG_DATA) data) {
     this.title = data.title;
     this.selectedMembers = data.selectedMembers;
   }

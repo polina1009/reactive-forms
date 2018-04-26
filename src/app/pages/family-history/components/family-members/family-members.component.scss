@@ -1,20 +1,26 @@
-.mat-dialog-container {
-  padding: 0;
+.family-member-container {
 
-  .family-members-dialog .mat-slide-toggle {
-    margin-top: 10px;
+  .family-member-content {
+    padding: 0;
+    margin-bottom: 40px;
+    overflow: hidden;
 
-    .mat-slide-toggle-content {
-      margin-left: 5px;
-    }
+    .mat-slide-toggle {
+      margin-top: 10px;
 
-    .slide-toggle-text {
-      font-size: 21px;
+      .mat-slide-toggle-content {
+        margin-left: 5px;
+      }
+      .slide-toggle-text {
+        font-size: 21px;
+      }
     }
   }
-}
 
-.mat-card {
-  padding: 40px;
-}
+  .family-member-action {
+    margin: 0;
+    padding: 0;
 
+
+  }
+}

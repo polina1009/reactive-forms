@@ -1,8 +1,15 @@
-<div style="text-align:center">
-  <app-header></app-header>
+<div class="app-wrapper" fxLayout="column" fxLayoutAlign="start stretch">
+  <header class="header">
+    <app-header></app-header>
+  </header>
   <!--<app-forms-page></app-forms-page>-->
-  <app-family-history></app-family-history>
-  <app-footer></app-footer>
+  <div class="main-content">
+    <app-family-history></app-family-history>
+  </div>
+  <div class="helper" fxFlex fxFlexFill></div>
+  <footer class="footer" >
+    <app-footer></app-footer>
+  </footer>
   <!--<router-outlet></router-outlet>-->
 </div>
 
