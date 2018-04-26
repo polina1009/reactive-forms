@@ -7,12 +7,16 @@ import { PageNotFoundComponent } from './pages/page-not-found';
 
 const appRoutes: Routes = [
   {
-    path: 'demographics', component: FormsPageComponent, data: {}
+    path: 'demographics',
+    component: FormsPageComponent,
+    data: {}
   },
   {
-    path: 'family-history', component: FamilyHistoryComponent, data: {}
+    path: 'family-history',
+    component: FamilyHistoryComponent,
+    data: {}
   },
-  { path: '',   redirectTo: '/family-history', pathMatch: 'full' },
+  { path: '',   redirectTo: '/demographics', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

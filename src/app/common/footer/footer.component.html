@@ -1,12 +1,12 @@
 <div class="footer-wrapper">
-  <mat-card class="footer-container">
-    <mat-card-content
+  <mat-toolbar class="footer-container">
+    <mat-toolbar-row
       fxLayout="row wrap"
       fxLayoutAlign="space-between center"
     >
-      <button mat-raised-button color="primary">Previos</button>
-      <p>6 of 9</p>
-      <button mat-raised-button color="primary">Next</button>
-    </mat-card-content>
-  </mat-card>
+      <button mat-button >Previos</button>
+      <span class="page-number">6 of 9</span>
+      <button mat-button routerLink="/family-history" routerLinkActive="active">Next</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>
