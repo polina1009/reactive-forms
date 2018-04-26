@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import { IllnessInterface } from './family-history.interface';
-import { illnessList} from './family-hystory-data';
+import { illnessList} from './family-hystory-data'; // TODO file name with error
 
 
 @Component({
@@ -12,14 +12,14 @@ import { illnessList} from './family-hystory-data';
 })
 export class FamilyHistoryComponent implements OnInit {
 
-  public illnessList = illnessList;
+  public illnessList = illnessList; // TODO Set interface and data set put to ngOnInit
 
   constructor(public dialog: MatDialog) {
   }
 
   openDialog(illness: IllnessInterface) {
 
-    const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig(); // TODO put preparing config to separate method
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -43,7 +43,7 @@ export class FamilyHistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  getNeatMembersString(members) {
+  getNeatMembersString(members) { // TODO Remake to pipe
     return members
       .filter(m => m.isSelected)
       .map(m => m.name)
