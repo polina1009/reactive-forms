@@ -1,4 +1,4 @@
-.mat-dialog-container {
+.mat-dialog-container { // TODO This style will be global for all modals. Remake this
   padding: 0;
 
   .family-members-dialog .mat-slide-toggle {
@@ -14,7 +14,7 @@
   }
 }
 
-.mat-card {
+.mat-card { // TODO This style will be global for all modals. Remake this
   padding: 40px;
 }
 

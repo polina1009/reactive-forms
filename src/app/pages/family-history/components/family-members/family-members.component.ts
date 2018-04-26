@@ -16,7 +16,7 @@ export class FamilyMembersComponent implements OnInit {
     public dialogRef: MatDialogRef<FamilyMembersComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
     // console.log(data);
-    this.title = data.title;
+    this.title = data.title; // TODO Put it to onInit hook. In constructor should be just initial states
     this.selectedMembers = data.selectedMembers;
   }
   ngOnInit() {
