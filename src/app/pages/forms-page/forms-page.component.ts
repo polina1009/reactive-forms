@@ -103,14 +103,12 @@ export class FormsPageComponent implements  OnInit {
         this.patient = patient;
 
         this.updateForm();
-        console.log(this.setPatient());
+        this.setPatient();
 
       });
   }
 
   setPatient() {
-    console.log(this.patientGroup);
-    console.log('#####', this.patient);
     return JSON.stringify(this.patientGroup.value);
   }
   private updateForm() {
