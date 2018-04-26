@@ -4,9 +4,9 @@
       fxLayout="row wrap"
       fxLayoutAlign="space-between center"
     >
-      <button mat-raised-button color="primary" >Previos</button>
-      <span class="page-number">6 of 9</span>
-      <button mat-button routerLink="/family-history" routerLinkActive="active">Next</button>
+      <button mat-raised-button color="primary" routerLink="/demographics" routerLinkActive="active">Previos</button>
+      <span class="page-number">{{pageNumber}}</span>
+      <button mat-raised-button color="primary" routerLink="/family-history" routerLinkActive="active">Next</button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>
