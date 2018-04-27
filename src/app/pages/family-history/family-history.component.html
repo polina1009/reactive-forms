@@ -21,7 +21,10 @@
           fxLayout="row wrap"
           fxLayoutAlign="start center"
         >
-          <p class="mat-card-content-text">{{getNeatMembersString(illness.members)}}</p>
+          <p class="mat-card-content-text"
+          >
+            {{illness.members | selectedMembers}}
+          </p>
         </mat-card-content>
         <mat-card-actions fxLayout="row wrap"
                           fxLayoutAlign="start center"

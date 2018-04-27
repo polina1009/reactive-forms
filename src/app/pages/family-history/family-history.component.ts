@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {FamilyMembersComponent} from './components';
-import { IllnessInterface } from './family-history.interface';
+import {IllnessInterface, MemberInterface} from './family-history.interface';
 import { illnessList} from './family-history-data';
 
 
@@ -12,7 +12,7 @@ import { illnessList} from './family-history-data';
 })
 export class FamilyHistoryComponent implements OnInit {
 
-  public illnessList = illnessList;
+  public illnessList: IllnessInterface[] = illnessList;
 
   constructor(public dialog: MatDialog) {
   }
@@ -37,21 +37,21 @@ export class FamilyHistoryComponent implements OnInit {
   openDialog(illness: IllnessInterface) {
     const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPripearedDialogConfig(illness));
 
-    dialogRef.afterClosed().subscribe((results) => {
-      console.log(illness);
+    dialogRef.afterClosed().subscribe((results: MemberInterface[]) => {
       illness.members = results;
+      this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
     });
   }
 
   ngOnInit() {
   }
 
-  getNeatMembersString(members) {
-    return members
-        .filter(m => m.isSelected)
-        .map(m => m.name)
-        .join(', ');
-  }
+  // getNeatMembersString(members) {
+  //   return members
+  //       .filter(m => m.isSelected)
+  //       .map(m => m.name)
+  //       .join(', ');
+  // }
 
 
 

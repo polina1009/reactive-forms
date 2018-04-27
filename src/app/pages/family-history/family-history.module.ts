@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { FamilyHistoryComponent } from './family-history.component';
 import { FamilyMembersComponent } from './components';
 import {FamilyHistoryService} from './family-history.service';
+import { FamilyHistoryPipe } from './family-history.pipe';
 
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -27,6 +28,7 @@ import {MatButtonModule} from '@angular/material';
   declarations: [
     FamilyHistoryComponent,
     FamilyMembersComponent,
+    FamilyHistoryPipe
   ],
   entryComponents: [
     FamilyMembersComponent
