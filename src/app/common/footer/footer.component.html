@@ -4,9 +4,26 @@
       fxLayout="row wrap"
       fxLayoutAlign="space-between center"
     >
-      <button mat-raised-button color="primary" routerLink="/demographics" routerLinkActive="active">Previos</button>
+      <div fxFlex="12">
+        <button
+          *ngIf="showPage"
+          mat-raised-button
+          color="primary"
+          routerLink="/demographics"
+          routerLinkActive="active"
+        >
+          Previos
+        </button>
+      </div>
       <span class="page-number">{{pageNumber}}</span>
-      <button mat-raised-button color="primary" routerLink="/family-history" routerLinkActive="active">Next</button>
+      <button
+        mat-raised-button
+        color="primary"
+        routerLink="/family-history"
+        routerLinkActive="active"
+      >
+        {{buttonValue}}
+      </button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>

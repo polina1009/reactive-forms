@@ -46,13 +46,4 @@ export class FamilyHistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  // getNeatMembersString(members) {
-  //   return members
-  //       .filter(m => m.isSelected)
-  //       .map(m => m.name)
-  //       .join(', ');
-  // }
-
-
-
 }

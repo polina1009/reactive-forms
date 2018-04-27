@@ -12,8 +12,21 @@ import 'rxjs/add/operator/mergeMap';
 export class FooterComponent implements OnInit {
 
   pageNumber: string;
+  public showPage = true;
+  public buttonValue = 'Next';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.changeFooterButton();
+  }
+
+  changeFooterButton () {
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        e.url === '/demographics' ? this.showPage = false : this.showPage = true;
+        e.url === '/family-history' ? this.buttonValue = 'Finish' : this.buttonValue = 'Next';
+      }
+    });
+  }
 
   ngOnInit() {
     this.router.events
@@ -26,9 +39,7 @@ export class FooterComponent implements OnInit {
           } else if (root.data && root.data['pageNumber']) {
             this.pageNumber = root.data['pageNumber'];
             return;
-          } else {
-            return;
-          }
+          } else { return; }
         }
       });
   }
