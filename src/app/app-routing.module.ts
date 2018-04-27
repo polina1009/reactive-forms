@@ -9,12 +9,12 @@ const appRoutes: Routes = [
   {
     path: 'demographics',
     component: FormsPageComponent,
-    data: { title: 'Demographics', pageNumber: '1 of 2' }
+    data: { title: 'Demographics', pageNumber: 1 }
   },
   {
     path: 'family-history',
     component: FamilyHistoryComponent,
-    data: { title: 'Family History', pageNumber: '2 of 2' }
+    data: { title: 'Family History', pageNumber: 2 }
   },
   { path: '',   redirectTo: '/demographics', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

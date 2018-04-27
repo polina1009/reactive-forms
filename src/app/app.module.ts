@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
+import {RoutingService} from './services/routing.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import {AppRoutingModule} from './app-routing.module';
     MatButtonModule,
     FlexLayoutModule
   ],
-  providers: [ApiService],
+  providers: [ApiService, RoutingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
