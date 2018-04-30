@@ -4,8 +4,13 @@ import { NgModule } from '@angular/core';
 import { FormsPageComponent } from './pages/forms-page';
 import { FamilyHistoryComponent } from './pages/family-history';
 import { PageNotFoundComponent } from './pages/page-not-found';
+import {LoginComponent} from './pages/login/login.component';
 
 const appRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: 'demographics',
     component: FormsPageComponent,
@@ -16,7 +21,7 @@ const appRoutes: Routes = [
     component: FamilyHistoryComponent,
     data: { title: 'Family History', pageNumber: 2 }
   },
-  { path: '',   redirectTo: '/demographics', pathMatch: 'full' },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

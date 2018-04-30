@@ -20,6 +20,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {LoginModule} from './pages/login/login.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormModule,
     AppRoutingModule,
     FamilyHistoryModule,
+    LoginModule,
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
