@@ -9,6 +9,7 @@ import {
   GET_ETHNICITY,
   GET_PATIENT
 } from './services/api.constants';
+import {RouterStateInterface} from './store/router.interface';
 
 export const mock_data = {
   [GET_PREFERRED_CONTACT_LIST]: [

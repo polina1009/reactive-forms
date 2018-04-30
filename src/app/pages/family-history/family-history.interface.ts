@@ -8,4 +8,3 @@ export interface IllnessInterface {
   title: string;
   members: MemberInterface[];
 }
-

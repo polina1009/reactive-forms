@@ -10,13 +10,16 @@ import {HeaderComponent} from './common/header';
 import {FooterComponent} from './common/footer';
 
 import {ApiService} from './services/api.service';
+import {AppRoutingModule} from './app-routing.module';
+import { RoutingService } from './services/routing.service';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { pageDataReducer} from './store/router.reducer';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {AppRoutingModule} from './app-routing.module';
-import {RoutingService} from './services/routing.service';
 
 
 @NgModule({
@@ -34,7 +37,11 @@ import {RoutingService} from './services/routing.service';
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    StoreModule.forRoot({
+      page: pageDataReducer
+    }),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [ApiService, RoutingService],
   bootstrap: [AppComponent]

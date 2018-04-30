@@ -4,6 +4,9 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import {RoutingService} from '../../services/routing.service';
+import {Observable} from 'rxjs/Observable';
+import {RouterStateInterface} from '../../store/router.interface';
+import {select, Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-footer',
@@ -12,12 +15,17 @@ import {RoutingService} from '../../services/routing.service';
 })
 export class FooterComponent implements OnInit {
 
-  public pageNumber: string;
+  public page$: Observable<RouterStateInterface>;
   public showPage = true;
   public buttonValue = 'Next';
 
-  constructor(private router: Router, private routerService: RoutingService) {
+  constructor(
+    private router: Router,
+    private routerService: RoutingService,
+    private store: Store<RouterStateInterface>
+  ) {
     this.changeFooterButton();
+    this.page$ = store.pipe(select('page'));
   }
 
   changeFooterButton () {
@@ -30,6 +38,9 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.page$.subscribe((pageData) => {
+      console.log(pageData);
+    })
   }
 
 }

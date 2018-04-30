@@ -4,13 +4,23 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/pairwise';
+import {Store, select} from '@ngrx/store';
+import {AppStoreInterface} from '../interfaces/store.interface';
+import {Observable} from 'rxjs/Observable';
+import {RouterStateInterface} from '../store/router.interface';
+import {SET_PAGES_ROUTER_DATA} from '../store/router.constants';
 
 @Injectable()
 export class RoutingService {
-  title;
+  private page$: Observable<RouterStateInterface>;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-    console.log(this.getRoutingDataProperty());
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private store: Store<AppStoreInterface>
+  ) {
+    this.page$ = store.pipe(select('page'));
+    this.getRoutingDataProperty();
   }
 
   getRoutingDataProperty() {
@@ -23,28 +33,11 @@ export class RoutingService {
       })
       .filter((route) => route.outlet === 'primary')
       .mergeMap((route) => route.data)
-      .subscribe((event) => {
-        console.log('@@@@@@@@@@', event);
+      .subscribe((pageData) => {
+
+        this.store.dispatch({ type: SET_PAGES_ROUTER_DATA, payload: pageData });
       });
 
   }
-
-  // getRoutingDataProperty() {
-  //   this.router.events
-  //     .filter((event: any) => event instanceof NavigationEnd)
-  //     .subscribe(() => {
-  //       let root = this.router.routerState.snapshot.root;
-  //       while (root) {
-  //         if (root.children && root.children.length) {
-  //           root = root.children[0];
-  //         } else if (root.data) {
-  //           root.paramMap.get('data');
-  //           // property = root.data[dataProperty];
-  //           // console.log('$$$$$$$$$$$$$$$$$', root.paramMap.get('data'));
-  //           return ;
-  //         } else { return; }
-  //       }
-  //     });
-  // }
 
 }

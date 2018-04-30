@@ -25,6 +25,8 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@ngrx/store": "^5.2.0",
+    "@ngrx/store-devtools": "^5.2.0",
     "angular-in-memory-web-api": "^0.5.4",
     "angular-input-masks": "^4.1.0",
     "angular2-input-text-mask": "^0.16.8",

@@ -1,0 +1,2 @@
+export const SET_PAGES_ROUTER_DATA = 'SET_PAGES_ROUTER_DATA';
+

@@ -4,6 +4,9 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import {RoutingService} from '../../services/routing.service';
+import {RouterStateInterface} from '../../store/router.interface';
+import {select, Store} from '@ngrx/store';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -11,29 +14,19 @@ import {RoutingService} from '../../services/routing.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  public page$: Observable<RouterStateInterface>;
 
-  title: string;
-
-  constructor(private router: Router, private routerService: RoutingService) {
+  constructor(
+    private router: Router,
+    private routerService: RoutingService,
+    private store: Store<RouterStateInterface>
+  ) {
+    this.page$ = store.pipe(select('page'));
   }
 
   ngOnInit() {
-    // this.routerService.getRoutingDataProperty(this.title, 'title');
-
-    // this.router.events
-    //   .filter((event: any) => event instanceof NavigationEnd)
-    //   .subscribe(() => {
-    //     let root = this.router.routerState.snapshot.root;
-    //     while (root) {
-    //       if (root.children && root.children.length) {
-    //         root = root.children[0];
-    //       } else if (root.data && root.data['title']) {
-    //         this.title = root.data['title'];
-    //         return;
-    //       } else {
-    //         return;
-    //       }
-    //     }
-    //   });
+    this.page$.subscribe((pageData) => {
+      console.log(pageData);
+    });
   }
 }
