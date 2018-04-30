@@ -31,6 +31,7 @@ export class FooterComponent implements OnInit {
   changeFooterButton () {
     this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
+        console.log(e.id);
         e.url === '/demographics' ? this.showPage = false : this.showPage = true;
         e.url === '/family-history' ? this.buttonValue = 'Finish' : this.buttonValue = 'Next';
       }
@@ -40,7 +41,6 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
     this.page$.subscribe((pageData) => {
       console.log(pageData);
-    })
+    });
   }
-
 }
