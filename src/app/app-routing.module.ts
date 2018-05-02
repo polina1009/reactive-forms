@@ -4,14 +4,10 @@ import { NgModule } from '@angular/core';
 import { FormsPageComponent } from './pages/forms-page';
 import { FamilyHistoryComponent } from './pages/family-history';
 import { PageNotFoundComponent } from './pages/page-not-found';
-import {LoginComponent} from './auth/login.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthComponent } from './auth11/auth.component';
+import { AuthGuard } from './auth11/auth.guard';
 
 const appRoutes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent
-  },
   {
     path: 'demographics',
     component: FormsPageComponent,
@@ -22,6 +18,10 @@ const appRoutes: Routes = [
     path: 'family-history',
     component: FamilyHistoryComponent,
     data: { title: 'Family History', pageNumber: 2 }
+  },
+  {
+    path: 'login',
+    component: AuthComponent
   },
   { path: '',   redirectTo: '/demographics', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

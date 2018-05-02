@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {LoginService} from './login.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-auth',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class AuthComponent implements OnInit {
 
   loginForm: FormGroup;
   public formSubmitAttempt: boolean;
 
-  constructor(private fB: FormBuilder) { }
+  constructor(
+    private fB: FormBuilder,
+    private loginService: LoginService
+  ) { }
 
   public createForm () {
     this.loginForm = this.fB.group({
@@ -24,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.createForm();
   }
 
-  isFieldInvalid(field: string) { // {6}
+  isFieldInvalid(field: string) {
     return (
       (!this.loginForm.get(field).valid && this.loginForm.get(field).touched) ||
       (this.loginForm.get(field).untouched && this.formSubmitAttempt)
@@ -32,7 +36,12 @@ export class LoginComponent implements OnInit {
   }
 
 
-  submitForm(value: any): void {
-    console.log(value);
+  submitForm() {
+    console.log(this.loginForm.value);
+    if (this.loginForm.valid) {
+      this.loginService.login(this.loginForm.value);
+    }
+    this.formSubmitAttempt = true;
   }
+
 }

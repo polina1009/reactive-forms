@@ -16,7 +16,7 @@ export class LoginService {
   login(user: UserInterface) {
     if (user.email !== '' && user.password !== '' ) {
       this.loggedIn.next(true);
-      this.router.navigate(['/demographics']);
+      this.router.navigate(['/']);
     }
   }
 

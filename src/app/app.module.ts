@@ -8,6 +8,7 @@ import { FamilyHistoryModule } from './pages/family-history';
 import {PageNotFoundComponent} from './pages/page-not-found';
 import {HeaderComponent} from './common/header';
 import {FooterComponent} from './common/footer';
+import { LoginService } from './auth11/login.service';
 
 import {ApiService} from './services/api.service';
 import {AppRoutingModule} from './app-routing.module';
@@ -20,7 +21,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {LoginModule} from './auth/login.module';
+import {AuthModule} from './auth11/auth.module';
+import {AuthGuard} from './auth11/auth.guard';
 
 
 @NgModule({
@@ -35,7 +37,7 @@ import {LoginModule} from './auth/login.module';
     FormModule,
     AppRoutingModule,
     FamilyHistoryModule,
-    LoginModule,
+    AuthModule,
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
@@ -45,7 +47,7 @@ import {LoginModule} from './auth/login.module';
     }),
     StoreDevtoolsModule.instrument()
   ],
-  providers: [ApiService, RoutingService],
+  providers: [ApiService, RoutingService, LoginService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

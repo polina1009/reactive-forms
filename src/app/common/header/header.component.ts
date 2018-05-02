@@ -7,7 +7,7 @@ import {RoutingService} from '../../services/routing.service';
 import {RouterStateInterface} from '../../store/router.interface';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
-import { LoginService } from '../../auth/login.service';
+import { LoginService } from '../../auth11/login.service';
 
 @Component({
   selector: 'app-header',
