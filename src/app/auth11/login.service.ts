@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UserInterface } from '../form.interface';
 
@@ -11,7 +11,10 @@ export class LoginService {
     return this.loggedIn.asObservable();
   }
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   login(user: UserInterface) {
     if (user.email !== '' && user.password !== '' ) {
@@ -22,7 +25,7 @@ export class LoginService {
 
   logout() {
     this.loggedIn.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/login'], { relativeTo: this.route });
   }
 
 }

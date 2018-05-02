@@ -3,7 +3,8 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  Router
+  Router,
+  ActivatedRoute
 } from '@angular/router';
 import { LoginService } from './login.service';
 
@@ -17,7 +18,8 @@ import 'rxjs/add/operator/map';
 export class AuthGuard implements CanActivate {
   constructor(
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   canActivate(
@@ -28,7 +30,7 @@ export class AuthGuard implements CanActivate {
       .take(1)
       .map((isLoggedIn: boolean) => {
         if (!isLoggedIn) {
-          this.router.navigate(['/auth']);
+          this.router.navigate(['/login'], { relativeTo: this.route });
           return false;
         }
         return true;
