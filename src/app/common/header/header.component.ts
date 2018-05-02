@@ -33,4 +33,8 @@ export class HeaderComponent implements OnInit {
       console.log(pageData);
     });
   }
+
+  onLogout() {
+    this.loginService.logout();
+  }
 }

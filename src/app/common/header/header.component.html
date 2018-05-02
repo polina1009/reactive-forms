@@ -6,7 +6,7 @@
     >
       <button mat-button class="header-finish-btn">Finish Later</button>
       <span>{{ (page$ | async)?.title }}</span>
-      <p class="patient-name">Tadeu Souza</p>
+      <button mat-raised-button color="primary" (click)="onLogout()">Logout</button>
     </mat-toolbar-row>
   </mat-toolbar>
 
