@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -14,10 +14,9 @@ import { LoginService } from '../../services/login.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
   public page$: Observable<RouterStateInterface>;
   _isLoggedIn$: Observable<boolean>;
-  pageDataSubscribe;
 
   constructor(
     private router: Router,
@@ -30,16 +29,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._isLoggedIn$ = this.loginService.isLoggedIn;
-    this.page$.subscribe((pageData) => {
-      console.log(pageData);
-    });
   }
 
   onLogout() {
     this.loginService.logout();
-  }
-
-  ngOnDestroy() {
-    this.pageDataSubscribe.unsubscribe();
   }
 }

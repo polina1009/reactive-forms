@@ -21,8 +21,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   public buttonValue = 'Next';
   _isLoggedIn$: Observable<boolean>;
 
-  pageDataSubscribe;
-  routerEventSubscribe;
+  private routerEventSubscribe;
 
   constructor(
     private router: Router,
@@ -45,13 +44,9 @@ export class FooterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._isLoggedIn$ = this.loginService.isLoggedIn;
-    this.pageDataSubscribe = this.page$.subscribe((pageData) => {
-      console.log(pageData);
-    });
   }
 
   ngOnDestroy() {
-    this.pageDataSubscribe.unsubscribe();
     this.routerEventSubscribe.unsubscribe();
   }
 }
