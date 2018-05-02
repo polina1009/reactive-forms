@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {LoginService} from './login.service';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-auth',
@@ -37,7 +37,6 @@ export class AuthComponent implements OnInit {
 
 
   submitForm() {
-    console.log(this.loginForm.value);
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value);
     }

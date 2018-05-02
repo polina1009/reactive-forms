@@ -6,7 +6,7 @@ import {
   Router,
   ActivatedRoute
 } from '@angular/router';
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -7,44 +7,51 @@ import {RoutingService} from '../../services/routing.service';
 import {Observable} from 'rxjs/Observable';
 import {RouterStateInterface} from '../../store/router.interface';
 import {select, Store} from '@ngrx/store';
-import {LoginService} from '../../auth11/login.service';
+import {LoginService} from '../../services/login.service';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent implements OnInit, OnDestroy {
 
   public page$: Observable<RouterStateInterface>;
   public showPage = true;
   public buttonValue = 'Next';
-  isLoggedIn$: Observable<boolean>;
+  _isLoggedIn$: Observable<boolean>;
+
+  pageDataSubscribe;
+  routerEventSubscribe;
 
   constructor(
     private router: Router,
     private routerService: RoutingService,
     private store: Store<RouterStateInterface>,
-  private loginService: LoginService
+    private loginService: LoginService
   ) {
     this.changeFooterButton();
     this.page$ = store.pipe(select('page'));
   }
 
   changeFooterButton () {
-    this.router.events.subscribe((e) => {
+    this.routerEventSubscribe = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
-        console.log(e.id);
-        e.url === '/demographics' ? this.showPage = false : this.showPage = true;
+        e.url === '/' || e.url === '/demographics' ? this.showPage = false : this.showPage = true;
         e.url === '/family-history' ? this.buttonValue = 'Finish' : this.buttonValue = 'Next';
       }
     });
   }
 
   ngOnInit() {
-    this.isLoggedIn$ = this.loginService.isLoggedIn;
-    this.page$.subscribe((pageData) => {
+    this._isLoggedIn$ = this.loginService.isLoggedIn;
+    this.pageDataSubscribe = this.page$.subscribe((pageData) => {
       console.log(pageData);
     });
+  }
+
+  ngOnDestroy() {
+    this.pageDataSubscribe.unsubscribe();
+    this.routerEventSubscribe.unsubscribe();
   }
 }

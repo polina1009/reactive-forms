@@ -5,10 +5,10 @@ import { UserInterface } from '../form.interface';
 
 @Injectable()
 export class LoginService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private _loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLoggedIn() {
-    return this.loggedIn.asObservable();
+    return this._loggedIn.asObservable();
   }
 
   constructor(
@@ -18,13 +18,13 @@ export class LoginService {
 
   login(user: UserInterface) {
     if (user.email !== '' && user.password !== '' ) {
-      this.loggedIn.next(true);
+      this._loggedIn.next(true);
       this.router.navigate(['/']);
     }
   }
 
   logout() {
-    this.loggedIn.next(false);
+    this._loggedIn.next(false);
     this.router.navigate(['/login'], { relativeTo: this.route });
   }
 

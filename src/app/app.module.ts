@@ -8,7 +8,7 @@ import { FamilyHistoryModule } from './pages/family-history';
 import {PageNotFoundComponent} from './pages/page-not-found';
 import {HeaderComponent} from './common/header';
 import {FooterComponent} from './common/footer';
-import { LoginService } from './auth11/login.service';
+import { LoginService } from './services/login.service';
 
 import {ApiService} from './services/api.service';
 import {AppRoutingModule} from './app-routing.module';
@@ -21,8 +21,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {AuthModule} from './auth11/auth.module';
-import {AuthGuard} from './auth11/auth.guard';
+import {AuthModule} from './pages/auth/auth.module';
+import {AuthGuard} from './guards/auth.guard';
 
 
 @NgModule({
