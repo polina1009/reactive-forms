@@ -7,6 +7,7 @@ import {RoutingService} from '../../services/routing.service';
 import {Observable} from 'rxjs/Observable';
 import {RouterStateInterface} from '../../store/router.interface';
 import {select, Store} from '@ngrx/store';
+import {LoginService} from '../../auth/login.service';
 
 @Component({
   selector: 'app-footer',
@@ -18,11 +19,13 @@ export class FooterComponent implements OnInit {
   public page$: Observable<RouterStateInterface>;
   public showPage = true;
   public buttonValue = 'Next';
+  isLoggedIn$: Observable<boolean>;
 
   constructor(
     private router: Router,
     private routerService: RoutingService,
-    private store: Store<RouterStateInterface>
+    private store: Store<RouterStateInterface>,
+  private loginService: LoginService
   ) {
     this.changeFooterButton();
     this.page$ = store.pipe(select('page'));
@@ -39,6 +42,7 @@ export class FooterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.page$.subscribe((pageData) => {
       console.log(pageData);
     });

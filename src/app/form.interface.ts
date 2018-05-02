@@ -37,3 +37,8 @@ export interface PatientInterface {
   ethnicity: string;
   gender: string;
 }
+
+export interface UserInterface {
+  email: string;
+  password: string;
+}

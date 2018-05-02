@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { FormsPageComponent } from './pages/forms-page';
 import { FamilyHistoryComponent } from './pages/family-history';
 import { PageNotFoundComponent } from './pages/page-not-found';
-import {LoginComponent} from './pages/login/login.component';
+import {LoginComponent} from './auth/login.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
   {
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
   {
     path: 'demographics',
     component: FormsPageComponent,
+    canActivate: [AuthGuard],
     data: { title: 'Demographics', pageNumber: 1 }
   },
   {
@@ -21,7 +23,7 @@ const appRoutes: Routes = [
     component: FamilyHistoryComponent,
     data: { title: 'Family History', pageNumber: 2 }
   },
-  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+  { path: '',   redirectTo: '/demographics', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

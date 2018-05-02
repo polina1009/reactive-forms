@@ -1,5 +1,5 @@
 <div class="footer-wrapper">
-  <mat-toolbar class="footer-container">
+  <mat-toolbar class="footer-container" *ngIf="isLoggedIn$ | async">
     <mat-toolbar-row
       fxLayout="row wrap"
       fxLayoutAlign="space-between center"
