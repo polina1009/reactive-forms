@@ -1,0 +1,35 @@
+<div class="medical-history-wrapper">
+  <form class="mh-form">
+    <div>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Surgeries">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Date of Surgery">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Injuries/Hospitalizations">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Date of Injury">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field >
+        <input type="text" matInput placeholder="Last Medical Exam">
+      </mat-form-field>
+      <mat-slide-toggle
+        color="primary"
+        *ngFor="let elem of toggleList"
+      >
+        <p class="slide-toggle-text">{{elem.name}}</p>
+      </mat-slide-toggle>
+    </div>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Other Medical Conditions">
+    </mat-form-field>
+  </form>
+</div>

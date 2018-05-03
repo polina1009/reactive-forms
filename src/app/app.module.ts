@@ -23,6 +23,7 @@ import {MatButtonModule} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {AuthModule} from './pages/auth/auth.module';
 import {AuthGuard} from './guards/auth.guard';
+import {MedicalHistoryModule} from './pages/medical-history/medical-history.module';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {AuthGuard} from './guards/auth.guard';
     FormModule,
     AppRoutingModule,
     FamilyHistoryModule,
+    MedicalHistoryModule,
     AuthModule,
     MatToolbarModule,
     MatCardModule,

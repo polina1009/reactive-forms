@@ -6,6 +6,7 @@ import { FamilyHistoryComponent } from './pages/family-history';
 import { PageNotFoundComponent } from './pages/page-not-found';
 import { AuthComponent } from './pages/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
+import {MedicalHistoryComponent} from './pages/medical-history';
 
 const appRoutes: Routes = [
   {
@@ -15,9 +16,14 @@ const appRoutes: Routes = [
     data: { title: 'Demographics', pageNumber: 1 }
   },
   {
+    path: 'medical-history',
+    component: MedicalHistoryComponent,
+    data: {title: 'Medical History', pageNumber: 2}
+  },
+  {
     path: 'family-history',
     component: FamilyHistoryComponent,
-    data: { title: 'Family History', pageNumber: 2 }
+    data: { title: 'Family History', pageNumber: 3 }
   },
   {
     path: 'login',
