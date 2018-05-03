@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
 
@@ -8,6 +9,7 @@ import { ToggleIllnessInterface } from './medical-history.interface';
   styleUrls: ['./medical-history.component.scss']
 })
 export class MedicalHistoryComponent implements OnInit {
+  medicalHistoryForms: FormGroup;
   public toggleList: ToggleIllnessInterface[];
 
   public maskDate = {
@@ -17,11 +19,34 @@ export class MedicalHistoryComponent implements OnInit {
   };
 
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
     this.toggleList = toggleIllnessList;
   }
 
+  createForm() {
+    this.medicalHistoryForms = this.fb.group({
+      lastMedicalExam: this.fb.control(''),
+      allergies: this.fb.control(''),
+      arthritis: this.fb.control(''),
+      autoimmuneDisease: this.fb.control(''),
+      cancer: this.fb.control(''),
+      diabetes: this.fb.control(''),
+      headaches: this.fb.control(''),
+      hepatitis: this.fb.control(''),
+      highCholesterol: this.fb.control(''),
+      heartDisease: this.fb.control(''),
+      highBloodPressure: this.fb.control(''),
+      hiv: this.fb.control(''),
+      patientIsPregnant: this.fb.control(''),
+      patientIsBreastfeeding: this.fb.control(''),
+      thyroidDisease: this.fb.control(''),
+      std: this.fb.control(''),
+      otherMedicalConditions: this.fb.control('')
+    });
+  }
+
   ngOnInit() {
+    this.createForm();
   }
 
 }

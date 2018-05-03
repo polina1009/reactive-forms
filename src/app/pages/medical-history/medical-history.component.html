@@ -1,5 +1,6 @@
 <div class="medical-history-wrapper">
   <form
+    [formGroup]="medicalHistoryForms"
     class="mh-form"
     fxLayout="row wrap"
     fxLayoutAlign="start center"
@@ -42,11 +43,12 @@
          class="mat-input-cont"
     >
       <mat-form-field fxFlex.lg="46" fxFlex.md="46" fxFlex.sm="46">
-        <input type="text" matInput [textMask]="maskDate" placeholder="Last Medical Exam">
+        <input type="text" matInput [textMask]="maskDate" placeholder="Last Medical Exam" formControlName="lastMedicalExam">
       </mat-form-field>
       <mat-slide-toggle
         color="primary"
         *ngFor="let elem of toggleList"
+        [formControlName]="elem.id"
         fxFlex.lg="45"
         fxFlex.md="45"
         fxFlex.sm="45"
@@ -55,7 +57,7 @@
       </mat-slide-toggle>
     </div>
     <mat-form-field fxFlex>
-      <input type="text" matInput placeholder="Other Medical Conditions">
+      <input type="text" matInput placeholder="Other Medical Conditions" formControlName="otherMedicalConditions">
     </mat-form-field>
   </form>
 </div>

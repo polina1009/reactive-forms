@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MedicalHistoryComponent} from './medical-history.component';
 import {MedicalHistoryService} from './medical-history.service';
 
@@ -19,6 +20,8 @@ import {
   declarations: [MedicalHistoryComponent],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     TextMaskModule,
     MatButtonModule,
