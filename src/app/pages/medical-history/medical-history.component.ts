@@ -10,6 +10,12 @@ import { ToggleIllnessInterface } from './medical-history.interface';
 export class MedicalHistoryComponent implements OnInit {
   public toggleList: ToggleIllnessInterface[];
 
+  public maskDate = {
+    guide: true,
+    showMask : false,
+    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+  };
+
 
   constructor() {
     this.toggleList = toggleIllnessList;

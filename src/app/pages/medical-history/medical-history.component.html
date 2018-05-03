@@ -1,34 +1,60 @@
 <div class="medical-history-wrapper">
-  <form class="mh-form">
-    <div>
-      <mat-form-field>
+  <form
+    class="mh-form"
+    fxLayout="row wrap"
+    fxLayoutAlign="start center"
+  >
+    <div fxLayout="row wrap"
+         fxLayoutAlign="start center"
+         fxLayoutGap="20px"
+         fxFlex="100"
+         class="mat-input-cont"
+    >
+      <mat-form-field fxFlex.lg="46" fxFlex.md="46" fxFlex.sm="46">
         <input type="text" matInput placeholder="Surgeries">
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput placeholder="Date of Surgery">
+      <mat-form-field fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="33">
+        <input type="text" matInput [textMask]="maskDate" placeholder="Date of Surgery">
       </mat-form-field>
+      <button class="mat-btn" mat-mini-fab color="primary" ><i class="material-icons">add</i></button>
+      <button class="mat-btn" mat-mini-fab color="warn" ><i class="material-icons">clear</i></button>
     </div>
-    <div>
-      <mat-form-field>
+    <div fxLayout="row wrap"
+         fxLayoutAlign="start center"
+         fxLayoutGap="20px"
+         fxFlex="100"
+         class="mat-input-cont"
+    >
+      <mat-form-field fxFlex.lg="46" fxFlex.md="46" fxFlex.sm="46">
         <input type="text" matInput placeholder="Injuries/Hospitalizations">
       </mat-form-field>
-      <mat-form-field>
-        <input type="text" matInput placeholder="Date of Injury">
+      <mat-form-field fxFlex.lg="33" fxFlex.md="33" fxFlex.sm="33">
+        <input type="text" matInput [textMask]="maskDate" placeholder="Date of Injury">
       </mat-form-field>
+      <button class="mat-btn" mat-mini-fab color="primary"><i class="material-icons">add</i></button>
+      <button class="mat-btn" mat-mini-fab color="warn"><i class="material-icons">clear</i></button>
     </div>
 
-    <div>
-      <mat-form-field >
-        <input type="text" matInput placeholder="Last Medical Exam">
+    <div fxLayout="row wrap"
+         fxLayoutAlign="start center"
+         fxLayoutGap="20px"
+         fxFlex="100"
+         class="mat-input-cont"
+    >
+      <mat-form-field fxFlex.lg="46" fxFlex.md="46" fxFlex.sm="46">
+        <input type="text" matInput [textMask]="maskDate" placeholder="Last Medical Exam">
       </mat-form-field>
       <mat-slide-toggle
         color="primary"
         *ngFor="let elem of toggleList"
+        fxFlex.lg="45"
+        fxFlex.md="45"
+        fxFlex.sm="45"
       >
         <p class="slide-toggle-text">{{elem.name}}</p>
       </mat-slide-toggle>
     </div>
-    <mat-form-field>
+    <mat-form-field fxFlex>
       <input type="text" matInput placeholder="Other Medical Conditions">
     </mat-form-field>
   </form>
