@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
 
@@ -10,8 +10,10 @@ import { ToggleIllnessInterface } from './medical-history.interface';
 })
 export class MedicalHistoryComponent implements OnInit {
   medicalHistoryForms: FormGroup;
-  public toggleList: ToggleIllnessInterface[];
+  surgeries: FormArray;
+  injuries: FormArray;
 
+  public toggleList: ToggleIllnessInterface[];
   public maskDate = {
     guide: true,
     showMask : false,
@@ -21,10 +23,16 @@ export class MedicalHistoryComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.toggleList = toggleIllnessList;
+    this.createForm();
   }
 
   createForm() {
+    this.surgeries = this.fb.array([this.createSurgeries()]);
+    this.injuries = this.fb.array([this.createInjuries()]);
+
     this.medicalHistoryForms = this.fb.group({
+      surgeries: this.surgeries,
+      injuries: this.injuries,
       lastMedicalExam: this.fb.control(''),
       allergies: this.fb.control(''),
       arthritis: this.fb.control(''),
@@ -43,10 +51,34 @@ export class MedicalHistoryComponent implements OnInit {
       std: this.fb.control(''),
       otherMedicalConditions: this.fb.control('')
     });
+    console.log(this.medicalHistoryForms.get('surgeries'));
+  }
+
+  createSurgeries(): FormGroup {
+    return this.fb.group({
+      surgeriesType: '',
+      dateOfSurgery: ''
+    });
+  }
+
+  createInjuries(): FormGroup {
+    return this.fb.group({
+      typeOfInjury: '',
+      dateOfInjury: ''
+    });
+  }
+
+  addSurgery(): void {
+    const surgeriesArrayControl = this.medicalHistoryForms.get('surgeries') as FormArray;
+    surgeriesArrayControl.push(this.createSurgeries());
+  }
+
+  addInjuries(): void {
+    const injuriesArrayControl = this.medicalHistoryForms.get('injuries') as FormArray;
+    injuriesArrayControl.push(this.createInjuries());
   }
 
   ngOnInit() {
-    this.createForm();
   }
 
 }
