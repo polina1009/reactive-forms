@@ -9,7 +9,7 @@
           *ngIf="showPage"
           mat-raised-button
           color="primary"
-          routerLink="/demographics"
+          [routerLink]="previousPage"
           routerLinkActive="active"
         >
           Previos
@@ -19,7 +19,7 @@
       <button
         mat-raised-button
         color="primary"
-        routerLink="/medical-history"
+        [routerLink]="nextPage"
         routerLinkActive="active"
       >
         {{buttonValue}}

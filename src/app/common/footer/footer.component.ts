@@ -18,11 +18,22 @@ import {Subscription} from 'rxjs/Subscription';
 export class FooterComponent implements OnInit, OnDestroy {
 
   public page$: Observable<RouterStateInterface>;
+  private nextUrl = {
+    '/': '/medical-history',
+    '/medical-history': '/family-history'
+  };
+  private prevUrl = {
+    '/family-history': '/medical-history',
+    '/medical-history': '/'
+  };
+  public previousPage: string;
+  public nextPage: string;
   public showPage: boolean;
   public buttonValue = 'Next';
   _isLoggedIn$: Observable<boolean>;
 
   private _routerEventSubscribe: Subscription;
+  private _nextPageSubscribe: Subscription;
 
   constructor(
     private router: Router,
@@ -31,12 +42,13 @@ export class FooterComponent implements OnInit, OnDestroy {
     private store: Store<RouterStateInterface>,
     private loginService: LoginService
   ) {
-    this.changeFooterButton();
+    this.getNextPageUrl();
+    this.changeFooterData();
     this.page$ = store.pipe(select('page'));
     this.showPage = true;
   }
 
-  changeFooterButton () {
+  changeFooterData () {
     this._routerEventSubscribe = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         e.url === '/' || e.url === '/demographics' ? this.showPage = false : this.showPage = true;
@@ -45,11 +57,29 @@ export class FooterComponent implements OnInit, OnDestroy {
     });
   }
 
+  getNextPageUrl() {
+    this._nextPageSubscribe = this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        if (Object.keys(this.nextUrl).includes(e.url) === true) {
+          this.nextPage = this.nextUrl[e.url];
+        }
+        if (Object.keys(this.prevUrl).includes(e.url) === true) {
+          this.previousPage = this.prevUrl[e.url];
+        }
+        // console.log(Object.keys(this.nextUrl).includes(e.url));
+        // console.log(this.nextUrl[e.url]);
+        // console.log(this.prevUrl[e.url]);
+      }
+    });
+  }
+
+
   ngOnInit() {
     this._isLoggedIn$ = this.loginService.isLoggedIn;
   }
 
   ngOnDestroy() {
     this._routerEventSubscribe.unsubscribe();
+    this._nextPageSubscribe.unsubscribe();
   }
 }
