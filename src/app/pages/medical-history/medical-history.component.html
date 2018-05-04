@@ -15,6 +15,7 @@
     >
       <h3 fxFlex="100">Surgeries</h3>
       <div formArrayName="surgeries"
+           *ngFor="let surgery of surgeries.controls; let i=index"
            fxFlex.lg="82"
            fxFlex.md="82"
            fxFlex.sm="82"
@@ -25,7 +26,7 @@
              fxFlex.lg="100"
              fxFlex.md="100"
              fxFlex.sm="100"
-             *ngFor="let surgery of surgeries.controls; let i=index" [formGroupName]="i">
+             [formGroupName]="i">
           <mat-form-field fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="60">
             <input type="text" matInput placeholder="Type Surgery"  formControlName="surgeriesType">
           </mat-form-field>
@@ -34,8 +35,10 @@
           </mat-form-field>
         </div>
       </div>
-      <button class="mat-btn" mat-mini-fab color="primary" (click)="addSurgery()" ><i class="material-icons">add</i></button>
-      <button class="mat-btn" mat-mini-fab color="warn" ><i class="material-icons">clear</i></button>
+      <button class="mat-btn" mat-mini-fab color="primary" (click)="addSurgeries()" ><i class="material-icons">add</i></button>
+      <button class="mat-btn" mat-mini-fab color="warn"
+              *ngIf="surgeries.controls.length > 1"
+              (click)="deleteGroup(i, 'surgeries')"><i class="material-icons">clear</i></button>
     </div>
 
 
@@ -51,6 +54,7 @@
            fxFlex.md="82"
            fxFlex.sm="82"
            formArrayName="injuries"
+           *ngFor="let injury of injuries.controls; let i=index"
       >
         <div fxLayout="row wrap"
              fxLayoutAlign="start center"
@@ -58,7 +62,7 @@
              fxFlex.lg="100"
              fxFlex.md="100"
              fxFlex.sm="100"
-             *ngFor="let injury of injuries.controls; let i=index" [formGroupName]="i">
+             [formGroupName]="i">
           <mat-form-field fxFlex.lg="60" fxFlex.md="60" fxFlex.sm="60">
             <input type="text" matInput placeholder="Type of Injury" formControlName="typeOfInjury" >
           </mat-form-field>
@@ -68,7 +72,9 @@
         </div>
       </div>
       <button class="mat-btn" mat-mini-fab color="primary" (click)="addInjuries()"><i class="material-icons">add</i></button>
-      <button class="mat-btn" mat-mini-fab color="warn"><i class="material-icons">clear</i></button>
+      <button class="mat-btn" mat-mini-fab color="warn"
+              *ngIf="injuries.controls.length > 1"
+              (click)="deleteGroup(i, 'injuries')"><i class="material-icons">clear</i></button>
     </div>
 
 

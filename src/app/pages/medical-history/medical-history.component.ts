@@ -68,15 +68,22 @@ export class MedicalHistoryComponent implements OnInit {
     });
   }
 
-  addSurgery(): void {
-    const surgeriesArrayControl = this.medicalHistoryForms.get('surgeries') as FormArray;
-    surgeriesArrayControl.push(this.createSurgeries());
+  addSurgeries(): void {
+    const arrayControl = this.medicalHistoryForms.get('surgeries') as FormArray;
+    arrayControl.push(this.createSurgeries());
   }
 
   addInjuries(): void {
     const injuriesArrayControl = this.medicalHistoryForms.get('injuries') as FormArray;
     injuriesArrayControl.push(this.createInjuries());
   }
+
+  deleteGroup(index: number, arr: string) {
+    const control = this.medicalHistoryForms.get(arr) as FormArray;
+    control.removeAt(index);
+  }
+
+
 
   ngOnInit() {
   }
