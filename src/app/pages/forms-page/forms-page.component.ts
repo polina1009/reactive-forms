@@ -13,6 +13,8 @@ import {
   GET_PATIENT
 } from '../../services/api.constants';
 import {map} from 'rxjs/operator/map';
+import {ApiService} from '../../services/api.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-forms-page',
@@ -30,6 +32,7 @@ export class FormsPageComponent implements  OnInit {
   public raceList: SelectOptionInterface[];
   public ethnicityList: SelectOptionInterface[];
   public patient: PatientInterface;
+  public formControlValue: object;
 
   patientGroup: FormGroup;
 
@@ -47,7 +50,9 @@ export class FormsPageComponent implements  OnInit {
   constructor(
     private fb: FormBuilder,
     private patientService: PatientService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    private router: Router,
+    private apiService: ApiService
   ) {
     this.preferredContactList = [];
     this.referrelSourceList = [];
@@ -66,6 +71,7 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
+    this.setFormValue();
 
   }
 
@@ -94,6 +100,7 @@ export class FormsPageComponent implements  OnInit {
       ethnicity: this.fb.control(''),
       gender: this.fb.control(''),
     });
+    // console.log(this.patientGroup.value);
   }
 
   getPatient() {
@@ -101,11 +108,26 @@ export class FormsPageComponent implements  OnInit {
       .subscribe(patient => {
         this.ref.markForCheck();
         this.patient = patient;
+        // console.log(this.patient);
 
         this.updateForm();
         this.setPatient();
 
       });
+  }
+
+  setFormValue() {
+    this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        if (e.url === '/' || e.url === '/demographics') {
+          this.apiService.getFormValue(this.patientGroup.value)
+            .subscribe(formValue => {
+              this.ref.markForCheck();
+              this.formControlValue = formValue;
+            });
+        }
+      }
+    });
   }
 
   setPatient() {

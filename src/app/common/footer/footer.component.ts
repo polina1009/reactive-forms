@@ -9,6 +9,7 @@ import {RouterStateInterface} from '../../store/router.interface';
 import {select, Store} from '@ngrx/store';
 import {LoginService} from '../../services/login.service';
 import {Subscription} from 'rxjs/Subscription';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-footer',
@@ -40,7 +41,8 @@ export class FooterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private routerService: RoutingService,
     private store: Store<RouterStateInterface>,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private apiService: ApiService
   ) {
     this.getNextPageUrl();
     this.changeFooterData();
@@ -66,9 +68,6 @@ export class FooterComponent implements OnInit, OnDestroy {
         if (Object.keys(this.prevUrl).includes(e.url) === true) {
           this.previousPage = this.prevUrl[e.url];
         }
-        // console.log(Object.keys(this.nextUrl).includes(e.url));
-        // console.log(this.nextUrl[e.url]);
-        // console.log(this.prevUrl[e.url]);
       }
     });
   }
