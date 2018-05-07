@@ -60,23 +60,42 @@ export class FooterComponent implements OnInit, OnDestroy {
     });
   }
 
-  getPageUrl() {
-    this._nextPageSubscribe = this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        if (Object.keys(this.nextUrl).includes(e.url) === true) {
-          this.nextPage = this.nextUrl[e.url];
-          console.log('$$$$$$$$$$$$');
-        }
-        if (Object.keys(this.prevUrl).includes(e.url) === true) {
-          this.previousPage = this.prevUrl[e.url];
-        }
-      }
-    });
-  }
+  // getPageUrl() {
+  //   this._nextPageSubscribe = this.router.events.subscribe((e) => {
+  //     if (e instanceof NavigationEnd) {
+  //       if (Object.keys(this.nextUrl).includes(e.url) === true) {
+  //         this.nextPage = this.nextUrl[e.url];
+  //         console.log('$$$$$$$$$$$$');
+  //       }
+  //       if (Object.keys(this.prevUrl).includes(e.url) === true) {
+  //         this.previousPage = this.prevUrl[e.url];
+  //       }
+  //     }
+  //   });
+  // }
 
   goNext() {
     this.navService.changeFormValue();
+    this.navService.navigate.subscribe(nav => {
+        this._nextPageSubscribe = this.router.events.subscribe((e) => {
+          if (e instanceof NavigationEnd) {
+            if (Object.keys(this.nextUrl).includes(e.url) === true) {
+              this.nextPage = this.nextUrl[e.url];
+              // this.router.navigate([this.nextPage]);
+              console.log('$$$$$$$$$$$$');
+            }
+            if (Object.keys(this.prevUrl).includes(e.url) === true) {
+              this.previousPage = this.prevUrl[e.url];
+            }
+          }
+        });
+    });
   }
+
+  // goNextPage() {
+  //   this.goNext();
+  //   return this.router.navigate([this.nextPage]);
+  // }
 
 
   ngOnInit() {

@@ -8,10 +8,17 @@ export class NavigationService {
 
   private formControlValue$ = new Subject();
   formControlValue = this.formControlValue$.asObservable();
+  private navigate$ = new Subject<boolean>();
+  navigate = this.navigate$.asObservable();
 
   changeFormValue() {
-    console.log(this.formControlValue, '!!!!!!!!!!!!!!!');
     this.formControlValue$.next();
+  }
+
+  doNavigate(status) {
+    if (status) {
+      this.navigate$.next();
+    }
   }
 
 }

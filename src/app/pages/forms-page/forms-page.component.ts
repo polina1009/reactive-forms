@@ -85,6 +85,7 @@ export class FormsPageComponent implements  OnInit {
         if (isSuccess) {
           formData = this.patientGroup.value;
           console.log(formData, '@@@@@@@@@@@@');
+          this.navService.doNavigate(isSuccess);
           // Do navigate
         } else {
           this.openSnackBar('Form is not full!', 'Сontinue filling');
