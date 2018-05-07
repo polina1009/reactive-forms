@@ -6,11 +6,12 @@ export class NavigationService {
 
   constructor() { }
 
-  private _formControlValue = new Subject<object>();
-  formControlValue = this._formControlValue.asObservable();
+  private formControlValue$ = new Subject();
+  formControlValue = this.formControlValue$.asObservable();
 
   changeFormValue() {
-    this._formControlValue.next();
+    console.log(this.formControlValue, '!!!!!!!!!!!!!!!');
+    this.formControlValue$.next();
   }
 
 }

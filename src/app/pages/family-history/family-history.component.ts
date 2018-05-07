@@ -17,7 +17,7 @@ export class FamilyHistoryComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private _navService: NavigationService
+    private navService: NavigationService
   ) {
   }
 
@@ -50,10 +50,10 @@ export class FamilyHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._navService.formControlValue.subscribe((formData) => {
+    this.navService.formControlValue.subscribe((formData) => {
       formData = this.illnessList;
       console.log(formData, '***********');
-    })
+    });
   }
 
 }

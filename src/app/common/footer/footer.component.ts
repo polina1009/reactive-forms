@@ -43,9 +43,9 @@ export class FooterComponent implements OnInit, OnDestroy {
     private routerService: RoutingService,
     private store: Store<RouterStateInterface>,
     private loginService: LoginService,
-    private _navService: NavigationService
+    private navService: NavigationService
   ) {
-    this.getNextPageUrl();
+    // this.getPageUrl();
     this.changeFooterData();
     this.page$ = store.pipe(select('page'));
     this.showPage = true;
@@ -60,11 +60,12 @@ export class FooterComponent implements OnInit, OnDestroy {
     });
   }
 
-  getNextPageUrl() {
+  getPageUrl() {
     this._nextPageSubscribe = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         if (Object.keys(this.nextUrl).includes(e.url) === true) {
           this.nextPage = this.nextUrl[e.url];
+          console.log('$$$$$$$$$$$$');
         }
         if (Object.keys(this.prevUrl).includes(e.url) === true) {
           this.previousPage = this.prevUrl[e.url];
@@ -73,10 +74,8 @@ export class FooterComponent implements OnInit, OnDestroy {
     });
   }
 
-
-
-  setFormValue() {
-    setTimeout(this._navService.changeFormValue(), 1000);
+  goNext() {
+    this.navService.changeFormValue();
   }
 
 

@@ -25,6 +25,7 @@ import {AuthModule} from './pages/auth/auth.module';
 import {AuthGuard} from './guards/auth.guard';
 import {MedicalHistoryModule} from './pages/medical-history/medical-history.module';
 import {NavigationService} from './services/navigation.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {NavigationService} from './services/navigation.service';
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
+    MatSnackBarModule,
     FlexLayoutModule,
     StoreModule.forRoot({
       page: pageDataReducer

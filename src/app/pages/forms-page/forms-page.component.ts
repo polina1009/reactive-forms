@@ -13,9 +13,8 @@ import {
   GET_PATIENT
 } from '../../services/api.constants';
 import {map} from 'rxjs/operator/map';
-import {ApiService} from '../../services/api.service';
-import {NavigationEnd, Router} from '@angular/router';
 import {NavigationService} from '../../services/navigation.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-forms-page',
@@ -33,7 +32,6 @@ export class FormsPageComponent implements  OnInit {
   public raceList: SelectOptionInterface[];
   public ethnicityList: SelectOptionInterface[];
   public patient: PatientInterface;
-  public formControlValue: object;
 
   patientGroup: FormGroup;
 
@@ -52,8 +50,8 @@ export class FormsPageComponent implements  OnInit {
     private fb: FormBuilder,
     private patientService: PatientService,
     private ref: ChangeDetectorRef,
-    // private router: Router,
-    private navService: NavigationService
+    private navService: NavigationService,
+    public snackBar: MatSnackBar
   ) {
     this.preferredContactList = [];
     this.referrelSourceList = [];
@@ -68,13 +66,32 @@ export class FormsPageComponent implements  OnInit {
     return this.patientGroup.controls;
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 10000,
+    });
+  }
+
   ngOnInit() {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
     this.navService.formControlValue.subscribe((formData) => {
-      formData = this.patientGroup.value;
-      console.log(formData, '@@@@@@@@@@@@');
+      setTimeout(() => {
+        const isSuccess = Math.random() > 0.5;
+
+        console.log(isSuccess);
+
+        if (isSuccess) {
+          formData = this.patientGroup.value;
+          console.log(formData, '@@@@@@@@@@@@');
+          // Do navigate
+        } else {
+          this.openSnackBar('Form is not full!', 'Сontinue filling');
+          // Error message
+        }
+        console.log('emmit end');
+      }, 1000);
     });
 
   }

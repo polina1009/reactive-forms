@@ -55,7 +55,6 @@ export class MedicalHistoryComponent implements OnInit {
       std: this.fb.control(''),
       otherMedicalConditions: this.fb.control('')
     });
-    console.log(this.medicalHistoryForms.get('surgeries'));
   }
 
   createSurgeries(): FormGroup {
