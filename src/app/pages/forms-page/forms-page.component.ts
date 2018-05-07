@@ -76,25 +76,29 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    this.navService.nextPageClick.subscribe(() => {
+    // @TODO any
+    this.navService.nextPageClick.subscribe((eventData: any) => {
+      const { currentUrl, nextUrl } = eventData;
+      if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
+        return;
+      }
       setTimeout(() => {
-        const isSuccess = Math.random() > 0.5;
-
-        console.log(isSuccess);
-
-        if (isSuccess) {
-          const formData = this.patientGroup.value;
+        const formData = this.patientGroup.value;
+        if (this.validate(formData)) {
           console.log(formData, '@@@@@@@@@@@@');
-          this.navService.doNavigate(isSuccess);
-          // Do navigate
+          this.navService.goTo(nextUrl);
         } else {
           this.openSnackBar('Form is not full!', 'Сontinue filling');
-          // Error message
         }
         console.log('emmit end');
       }, 1000);
     });
 
+  }
+
+  private validate(formData) {
+    return true;
+    // return Math.random() > 0.5;
   }
 
   public createForm() {

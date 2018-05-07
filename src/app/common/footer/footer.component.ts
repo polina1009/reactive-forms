@@ -29,6 +29,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     '/medical-history': '/'
   };
   public previousPage: string;
+  public currentPage: string;
   public nextPage: string;
   public showPage: boolean;
   public buttonValue = 'Next';
@@ -75,32 +76,43 @@ export class FooterComponent implements OnInit, OnDestroy {
   // }
 
   goNext() {
-    this.navService.clickedNextPage();
-
-    this.navService.navigate.subscribe(nav => {
-        this._nextPageSubscribe = this.router.events.subscribe((e) => {
-          if (e instanceof NavigationEnd) {
-            if (Object.keys(this.nextUrl).includes(e.url) === true) {
-              this.nextPage = this.nextUrl[e.url];
-              // this.router.navigate([this.nextPage]);
-              console.log('$$$$$$$$$$$$');
-            }
-            if (Object.keys(this.prevUrl).includes(e.url) === true) {
-              this.previousPage = this.prevUrl[e.url];
-            }
-          }
-        });
-    });
+    //
+    // this.navService.navigate.subscribe(nav => {
+    //     this._nextPageSubscribe = this.router.events.subscribe((e) => {
+    //       if (e instanceof NavigationEnd) {
+    //         if (Object.keys(this.nextUrl).includes(e.url) === true) {
+    //           this.nextPage = this.nextUrl[e.url];
+    //           // this.router.navigate([this.nextPage]);
+    //           console.log('$$$$$$$$$$$$');
+    //         }
+    //         if (Object.keys(this.prevUrl).includes(e.url) === true) {
+    //           this.previousPage = this.prevUrl[e.url];
+    //         }
+    //       }
+    //     });
+    // });
   }
 
-  // goNextPage() {
-  //   this.goNext();
-  //   return this.router.navigate([this.nextPage]);
-  // }
-
+  goNextPage() {
+    this.navService.clickedNextPage(this.currentPage, this.nextPage);
+  }
 
   ngOnInit() {
     this._isLoggedIn$ = this.loginService.isLoggedIn;
+
+    this._nextPageSubscribe = this.router.events.subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.currentPage = e.url;
+        if (Object.keys(this.nextUrl).includes(e.url) === true) {
+          this.nextPage = this.nextUrl[e.url];
+          // this.router.navigate([this.nextPage]);
+          console.log('$$$$$$$$$$$$');
+        }
+        if (Object.keys(this.prevUrl).includes(e.url) === true) {
+          this.previousPage = this.prevUrl[e.url];
+        }
+      }
+    });
   }
 
   ngOnDestroy() {

@@ -1,24 +1,25 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs/';
 
 @Injectable()
 export class NavigationService {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   private nextPageClick$ = new Subject();
   nextPageClick = this.nextPageClick$.asObservable();
   private navigate$ = new Subject<boolean>();
-  navigate = this.navigate$.asObservable();
 
-  clickedNextPage() {
-    this.nextPageClick$.next();
+  clickedNextPage(currentUrl, nextUrl) {
+    this.nextPageClick$.next({
+      currentUrl,
+      nextUrl
+    });
   }
 
-  doNavigate(status) {
-    if (status) {
-      this.navigate$.next();
-    }
+  goTo(url) {
+    this.router.navigate([url]);
   }
 
 }
