@@ -89,8 +89,8 @@ export class MedicalHistoryComponent implements OnInit {
 
 
   ngOnInit() {
-    this.navService.formControlValue.subscribe((formData) => {
-      formData = this.medicalHistoryForms.value;
+    this.navService.nextPageClick.subscribe(() => {
+      const formData = this.medicalHistoryForms.value;
       console.log(formData, '#############');
     });
   }

@@ -50,8 +50,8 @@ export class FamilyHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.navService.formControlValue.subscribe((formData) => {
-      formData = this.illnessList;
+    this.navService.nextPageClick.subscribe(() => {
+      const formData = this.illnessList;
       console.log(formData, '***********');
     });
   }

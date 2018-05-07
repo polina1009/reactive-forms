@@ -6,13 +6,13 @@ export class NavigationService {
 
   constructor() { }
 
-  private formControlValue$ = new Subject();
-  formControlValue = this.formControlValue$.asObservable();
+  private nextPageClick$ = new Subject();
+  nextPageClick = this.nextPageClick$.asObservable();
   private navigate$ = new Subject<boolean>();
   navigate = this.navigate$.asObservable();
 
-  changeFormValue() {
-    this.formControlValue$.next();
+  clickedNextPage() {
+    this.nextPageClick$.next();
   }
 
   doNavigate(status) {

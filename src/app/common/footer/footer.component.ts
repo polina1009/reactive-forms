@@ -75,7 +75,8 @@ export class FooterComponent implements OnInit, OnDestroy {
   // }
 
   goNext() {
-    this.navService.changeFormValue();
+    this.navService.clickedNextPage();
+
     this.navService.navigate.subscribe(nav => {
         this._nextPageSubscribe = this.router.events.subscribe((e) => {
           if (e instanceof NavigationEnd) {

@@ -76,14 +76,14 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    this.navService.formControlValue.subscribe((formData) => {
+    this.navService.nextPageClick.subscribe(() => {
       setTimeout(() => {
         const isSuccess = Math.random() > 0.5;
 
         console.log(isSuccess);
 
         if (isSuccess) {
-          formData = this.patientGroup.value;
+          const formData = this.patientGroup.value;
           console.log(formData, '@@@@@@@@@@@@');
           this.navService.doNavigate(isSuccess);
           // Do navigate
