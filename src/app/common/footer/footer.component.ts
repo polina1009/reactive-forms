@@ -10,6 +10,7 @@ import {select, Store} from '@ngrx/store';
 import {LoginService} from '../../services/login.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
+import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-footer',
@@ -42,7 +43,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     private routerService: RoutingService,
     private store: Store<RouterStateInterface>,
     private loginService: LoginService,
-    private apiService: ApiService
+    private _navService: NavigationService
   ) {
     this.getNextPageUrl();
     this.changeFooterData();
@@ -70,6 +71,12 @@ export class FooterComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+
+
+  setFormValue() {
+    setTimeout(this._navService.changeFormValue(), 1000);
   }
 
 

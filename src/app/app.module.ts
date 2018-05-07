@@ -24,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {AuthModule} from './pages/auth/auth.module';
 import {AuthGuard} from './guards/auth.guard';
 import {MedicalHistoryModule} from './pages/medical-history/medical-history.module';
+import {NavigationService} from './services/navigation.service';
 
 
 @NgModule({
@@ -49,7 +50,7 @@ import {MedicalHistoryModule} from './pages/medical-history/medical-history.modu
     }),
     StoreDevtoolsModule.instrument()
   ],
-  providers: [ApiService, RoutingService, LoginService, AuthGuard],
+  providers: [ApiService, RoutingService, LoginService, AuthGuard, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

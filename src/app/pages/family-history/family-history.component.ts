@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import {IllnessInterface, MemberInterface} from './family-history.interface';
 import { illnessList} from './family-history-data';
+import {NavigationService} from '../../services/navigation.service';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class FamilyHistoryComponent implements OnInit {
 
   public illnessList: IllnessInterface[] = illnessList;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    public dialog: MatDialog,
+    private _navService: NavigationService
+  ) {
   }
 
   getPripearedDialogConfig (illness: IllnessInterface) {
@@ -39,11 +43,17 @@ export class FamilyHistoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((results: MemberInterface[]) => {
       illness.members = results;
+      // console.log(illness);
       this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
+      // console.log(this.illnessList);
     });
   }
 
   ngOnInit() {
+    this._navService.formControlValue.subscribe((formData) => {
+      formData = this.illnessList;
+      console.log(formData, '***********');
+    })
   }
 
 }

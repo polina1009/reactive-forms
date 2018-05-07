@@ -21,13 +21,5 @@ export class ApiService {
       )
       .delay(500);
   }
-
-  public getFormValue(formControlValue): Observable<any> {
-    return Observable.of(formControlValue)
-      .pipe(
-        map((formData) => console.log(formData))
-      )
-      .delay(500);
-  }
 }
 

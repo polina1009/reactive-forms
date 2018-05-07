@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
+import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-medical-history',
@@ -21,7 +22,10 @@ export class MedicalHistoryComponent implements OnInit {
   };
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private navService: NavigationService
+  ) {
     this.toggleList = toggleIllnessList;
     this.createForm();
   }
@@ -86,6 +90,10 @@ export class MedicalHistoryComponent implements OnInit {
 
 
   ngOnInit() {
+    this.navService.formControlValue.subscribe((formData) => {
+      formData = this.medicalHistoryForms.value;
+      console.log(formData, '#############');
+    });
   }
 
 }

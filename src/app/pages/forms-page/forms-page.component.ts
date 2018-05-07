@@ -15,6 +15,7 @@ import {
 import {map} from 'rxjs/operator/map';
 import {ApiService} from '../../services/api.service';
 import {NavigationEnd, Router} from '@angular/router';
+import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-forms-page',
@@ -51,8 +52,8 @@ export class FormsPageComponent implements  OnInit {
     private fb: FormBuilder,
     private patientService: PatientService,
     private ref: ChangeDetectorRef,
-    private router: Router,
-    private apiService: ApiService
+    // private router: Router,
+    private navService: NavigationService
   ) {
     this.preferredContactList = [];
     this.referrelSourceList = [];
@@ -71,7 +72,10 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    this.setFormValue();
+    this.navService.formControlValue.subscribe((formData) => {
+      formData = this.patientGroup.value;
+      console.log(formData, '@@@@@@@@@@@@');
+    });
 
   }
 
@@ -114,20 +118,6 @@ export class FormsPageComponent implements  OnInit {
         this.setPatient();
 
       });
-  }
-
-  setFormValue() {
-    this.router.events.subscribe((e) => {
-      if (e instanceof NavigationEnd) {
-        if (e.url === '/' || e.url === '/demographics') {
-          this.apiService.getFormValue(this.patientGroup.value)
-            .subscribe(formValue => {
-              this.ref.markForCheck();
-              this.formControlValue = formValue;
-            });
-        }
-      }
-    });
   }
 
   setPatient() {
