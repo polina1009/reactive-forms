@@ -76,8 +76,7 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    // @TODO any
-    this.navService.nextPageClick.subscribe((eventData: any) => {
+    this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;

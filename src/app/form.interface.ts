@@ -42,3 +42,8 @@ export interface UserInterface {
   email: string;
   password: string;
 }
+
+export interface ClickedNextPageInterface {
+  currentUrl: string;
+  nextUrl: string;
+}

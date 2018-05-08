@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import {IllnessInterface, MemberInterface} from './family-history.interface';
 import { illnessList} from './family-history-data';
@@ -17,7 +17,8 @@ export class FamilyHistoryComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private navService: NavigationService
+    private navService: NavigationService,
+    public snackBar: MatSnackBar
   ) {
   }
 
@@ -43,17 +44,42 @@ export class FamilyHistoryComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((results: MemberInterface[]) => {
       illness.members = results;
-      // console.log(illness);
       this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
-      // console.log(this.illnessList);
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 10000,
     });
   }
 
   ngOnInit() {
-    this.navService.nextPageClick.subscribe(() => {
-      const formData = this.illnessList;
-      console.log(formData, '***********');
+    this.navService.nextPageClick.subscribe((eventData) => {
+      const { currentUrl, nextUrl } = eventData;
+      if (!(currentUrl.match(/family-history/))) {
+        return;
+      }
+      setTimeout(() => {
+        const formData = this.illnessList;
+        if (this.validate(formData)) {
+          console.log(formData, '***********');
+          this.navService.goTo(nextUrl);
+        } else {
+          this.openSnackBar('Form is not full!', 'Сontinue filling');
+        }
+        console.log('emmit end');
+      }, 1000);
     });
+    // this.navService.nextPageClick.subscribe(() => {
+    //   const formData = this.illnessList;
+    //   console.log(formData, '***********');
+    // });
+  }
+
+  private validate(formData) {
+    return true;
+    // return Math.random() > 0.5;
   }
 
 }

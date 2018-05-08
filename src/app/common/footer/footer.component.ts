@@ -105,8 +105,6 @@ export class FooterComponent implements OnInit, OnDestroy {
         this.currentPage = e.url;
         if (Object.keys(this.nextUrl).includes(e.url) === true) {
           this.nextPage = this.nextUrl[e.url];
-          // this.router.navigate([this.nextPage]);
-          console.log('$$$$$$$$$$$$');
         }
         if (Object.keys(this.prevUrl).includes(e.url) === true) {
           this.previousPage = this.prevUrl[e.url];

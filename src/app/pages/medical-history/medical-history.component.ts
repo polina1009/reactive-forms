@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
 import {NavigationService} from '../../services/navigation.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-medical-history',
@@ -24,7 +25,8 @@ export class MedicalHistoryComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private navService: NavigationService
+    private navService: NavigationService,
+    public snackBar: MatSnackBar
   ) {
     this.toggleList = toggleIllnessList;
     this.createForm();
@@ -86,13 +88,38 @@ export class MedicalHistoryComponent implements OnInit {
     control.removeAt(index);
   }
 
-
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 10000,
+    });
+  }
 
   ngOnInit() {
-    this.navService.nextPageClick.subscribe(() => {
-      const formData = this.medicalHistoryForms.value;
-      console.log(formData, '#############');
+    this.navService.nextPageClick.subscribe((eventData) => {
+      const { currentUrl, nextUrl } = eventData;
+      if (!(currentUrl.match(/medical-history/))) {
+        return;
+      }
+      setTimeout(() => {
+        const formData = this.medicalHistoryForms.value;
+        if (this.validate(formData)) {
+          console.log(formData, '#############');
+          this.navService.goTo(nextUrl);
+        } else {
+          this.openSnackBar('Form is not full!', 'Сontinue filling');
+        }
+        console.log('emmit end');
+      }, 1000);
     });
+    // this.navService.nextPageClick.subscribe(() => {
+    //   const formData = this.medicalHistoryForms.value;
+    //   console.log(formData, '#############');
+    // });
+  }
+
+  private validate(formData) {
+    return true;
+    // return Math.random() > 0.5;
   }
 
 }
