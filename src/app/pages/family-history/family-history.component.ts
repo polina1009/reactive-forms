@@ -66,16 +66,6 @@ export class FamilyHistoryComponent implements OnInit {
         return;
       }
       this.preparationAndDisplayFormData(nextUrl);
-      // setTimeout(() => {
-      //   const formData = this.illnessList;
-      //   if (this.navService.validate(formData)) {
-      //     console.log(formData, '***********');
-      //     this.navService.goTo(nextUrl);
-      //   } else {
-      //     this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
-      //   }
-      //   console.log('emmit end');
-      // }, 1000);
     });
 
     this.navService.prevPageClick.subscribe((eventData) => {

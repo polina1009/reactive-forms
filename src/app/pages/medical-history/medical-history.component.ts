@@ -106,18 +106,6 @@ export class MedicalHistoryComponent implements OnInit {
         return;
       }
       this.preparationAndDisplayFormData(nextUrl);
-      // const { currentUrl, nextUrl } = eventData;
-      // if (!(currentUrl.match(/medical-history/))) {
-      //   return;
-      // }
-      // setTimeout(() => {
-      //   const formData = this.medicalHistoryForms.value;
-      //   if (this.navService.validate(formData)) {
-      //     console.log(formData, '#############');
-      //     this.navService.goTo(nextUrl);
-      //   } else {
-      //     this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
-      //   }
       });
 
     this.navService.prevPageClick.subscribe((eventData) => {
