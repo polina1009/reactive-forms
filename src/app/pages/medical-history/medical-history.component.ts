@@ -87,23 +87,51 @@ export class MedicalHistoryComponent implements OnInit {
     control.removeAt(index);
   }
 
+  preparationAndDisplayFormData (url) {
+    setTimeout(() => {
+      const formData = this.medicalHistoryForms.value;
+      if (this.validate(formData)) {
+        console.log(formData, '#############');
+        this.navService.goTo(url);
+      } else {
+        this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
+      }
+    }, 1000);
+  }
+
   ngOnInit() {
     this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
       }
-      setTimeout(() => {
-        const formData = this.medicalHistoryForms.value;
-        if (this.navService.validate(formData)) {
-          console.log(formData, '#############');
-          this.navService.goTo(nextUrl);
-        } else {
-          this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
-        }
-        console.log('emmit end');
-      }, 1000);
+      this.preparationAndDisplayFormData(nextUrl);
+      // const { currentUrl, nextUrl } = eventData;
+      // if (!(currentUrl.match(/medical-history/))) {
+      //   return;
+      // }
+      // setTimeout(() => {
+      //   const formData = this.medicalHistoryForms.value;
+      //   if (this.navService.validate(formData)) {
+      //     console.log(formData, '#############');
+      //     this.navService.goTo(nextUrl);
+      //   } else {
+      //     this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
+      //   }
+      });
+
+    this.navService.prevPageClick.subscribe((eventData) => {
+      const { prevUrl, currentUrl } = eventData;
+      if (!(currentUrl.match(/medical-history/))) {
+        return;
+      }
+      this.preparationAndDisplayFormData(prevUrl);
     });
+
   }
 
+  private validate(formData) {
+    // return true;
+    return Math.random() > 0.5;
+  }
 }

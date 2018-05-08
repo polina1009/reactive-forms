@@ -9,8 +9,7 @@
           *ngIf="showPage"
           mat-raised-button
           color="primary"
-          [routerLink]="previousPage"
-          routerLinkActive="active"
+          (click)="goPrevPage()"
         >
           Previos
         </button>

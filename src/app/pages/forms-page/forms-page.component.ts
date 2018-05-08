@@ -76,16 +76,20 @@ export class FormsPageComponent implements  OnInit {
       }
       setTimeout(() => {
         const formData = this.patientGroup.value;
-        if (this.navService.validate(formData)) {
+        if (this.validate(formData)) {
           console.log(formData, '@@@@@@@@@@@@');
           this.navService.goTo(nextUrl);
         } else {
           this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
         }
-        console.log('emmit end');
       }, 1000);
     });
 
+  }
+
+  private validate(formData) {
+    // return true;
+    return Math.random() > 0.5;
   }
 
   public createForm() {

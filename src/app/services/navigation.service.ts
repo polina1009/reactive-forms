@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs/';
-import {ClickedNextPageInterface} from '../form.interface';
+import {ClickedNextPageInterface, ClickedPrevPageInterface} from '../form.interface';
 import {MatSnackBar} from '@angular/material';
 
 @Injectable()
@@ -14,6 +14,8 @@ export class NavigationService {
 
   private nextPageClick$ = new Subject<ClickedNextPageInterface>();
   nextPageClick = this.nextPageClick$.asObservable();
+  private prevPageClick$ = new Subject<ClickedPrevPageInterface>();
+  prevPageClick = this.prevPageClick$.asObservable();
 
   clickedNextPage(currentUrl, nextUrl) {
     this.nextPageClick$.next({
@@ -22,9 +24,11 @@ export class NavigationService {
     });
   }
 
-  public validate(formData) {
-    return true;
-    // return Math.random() > 0.5;
+  clickedPrevPage(prevUrl, currentUrl) {
+    this.prevPageClick$.next({
+      prevUrl,
+      currentUrl
+    });
   }
 
   openSnackBar(message: string, action: string) {

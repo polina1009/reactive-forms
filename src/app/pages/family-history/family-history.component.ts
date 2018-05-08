@@ -47,22 +47,48 @@ export class FamilyHistoryComponent implements OnInit {
     });
   }
 
+  preparationAndDisplayFormData (url) {
+    setTimeout(() => {
+      const formData = this.illnessList;
+      if (this.validate(formData)) {
+        console.log(formData, '***********');
+        this.navService.goTo(url);
+      } else {
+        this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
+      }
+    }, 1000);
+  }
+
   ngOnInit() {
     this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
         return;
       }
-      setTimeout(() => {
-        const formData = this.illnessList;
-        if (this.navService.validate(formData)) {
-          console.log(formData, '***********');
-          this.navService.goTo(nextUrl);
-        } else {
-          this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
-        }
-        console.log('emmit end');
-      }, 1000);
+      this.preparationAndDisplayFormData(nextUrl);
+      // setTimeout(() => {
+      //   const formData = this.illnessList;
+      //   if (this.navService.validate(formData)) {
+      //     console.log(formData, '***********');
+      //     this.navService.goTo(nextUrl);
+      //   } else {
+      //     this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
+      //   }
+      //   console.log('emmit end');
+      // }, 1000);
     });
+
+    this.navService.prevPageClick.subscribe((eventData) => {
+      const { prevUrl, currentUrl } = eventData;
+      if (!(currentUrl.match(/family-history/))) {
+        return;
+      }
+      this.preparationAndDisplayFormData(prevUrl);
+    });
+  }
+
+  private validate(formData) {
+    // return true;
+    return Math.random() > 0.5;
   }
 }

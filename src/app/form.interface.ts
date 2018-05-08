@@ -47,3 +47,8 @@ export interface ClickedNextPageInterface {
   currentUrl: string;
   nextUrl: string;
 }
+
+export interface ClickedPrevPageInterface {
+  currentUrl: string;
+  prevUrl: string;
+}
