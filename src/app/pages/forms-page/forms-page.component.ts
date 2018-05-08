@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PatientService } from '../../services/patient.service';
 import {SelectOptionInterface, PatientInterface} from '../../form.interface';
@@ -15,6 +15,7 @@ import {
 import {map} from 'rxjs/operator/map';
 import {NavigationService} from '../../services/navigation.service';
 import {MatSnackBar} from '@angular/material';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-forms-page',
@@ -23,7 +24,7 @@ import {MatSnackBar} from '@angular/material';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class FormsPageComponent implements  OnInit {
+export class FormsPageComponent implements  OnInit, OnDestroy {
   public preferredContactList: SelectOptionInterface[];
   public referrelSourceList: SelectOptionInterface[];
   public languageList: SelectOptionInterface[];
@@ -32,6 +33,7 @@ export class FormsPageComponent implements  OnInit {
   public raceList: SelectOptionInterface[];
   public ethnicityList: SelectOptionInterface[];
   public patient: PatientInterface;
+  private navNextSubscribe: Subscription;
 
   patientGroup: FormGroup;
 
@@ -69,7 +71,7 @@ export class FormsPageComponent implements  OnInit {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    this.navService.nextPageClick.subscribe((eventData) => {
+    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;
@@ -197,6 +199,12 @@ export class FormsPageComponent implements  OnInit {
         this.ethnicityList = optionList;
         this.controls.ethnicity.setValue(this.patient.ethnicity);
     });
+  }
+
+
+
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
   }
 
 }

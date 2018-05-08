@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
 import {NavigationService} from '../../services/navigation.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-medical-history',
   templateUrl: './medical-history.component.html',
   styleUrls: ['./medical-history.component.scss']
 })
-export class MedicalHistoryComponent implements OnInit {
+export class MedicalHistoryComponent implements OnInit, OnDestroy {
   medicalHistoryForms: FormGroup;
   surgeries: FormArray;
   injuries: FormArray;
@@ -20,6 +21,8 @@ export class MedicalHistoryComponent implements OnInit {
     showMask : false,
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
+  private navNextSubscribe: Subscription;
+  private navPrevSubscribe: Subscription;
 
 
   constructor(
@@ -87,7 +90,7 @@ export class MedicalHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.navService.nextPageClick.subscribe((eventData) => {
+    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
@@ -95,7 +98,7 @@ export class MedicalHistoryComponent implements OnInit {
       this.navService.preparationAndDisplayFormData(nextUrl, this.medicalHistoryForms.value);
       });
 
-    this.navService.prevPageClick.subscribe((eventData) => {
+    this.navPrevSubscribe = this.navService.prevPageClick.subscribe((eventData) => {
       const { prevUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
@@ -103,5 +106,10 @@ export class MedicalHistoryComponent implements OnInit {
       this.navService.preparationAndDisplayFormData(prevUrl, this.medicalHistoryForms.value);
     });
 
+  }
+
+  ngOnDestroy () {
+    this.navNextSubscribe.unsubscribe();
+    this.navPrevSubscribe.unsubscribe();
   }
 }

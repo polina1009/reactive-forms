@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import {IllnessInterface, MemberInterface} from './family-history.interface';
 import { illnessList} from './family-history-data';
 import {NavigationService} from '../../services/navigation.service';
+import {Subscription} from 'rxjs/Subscription';
 
 
 @Component({
@@ -11,9 +12,11 @@ import {NavigationService} from '../../services/navigation.service';
   templateUrl: './family-history.component.html',
   styleUrls: ['./family-history.component.scss']
 })
-export class FamilyHistoryComponent implements OnInit {
+export class FamilyHistoryComponent implements OnInit, OnDestroy {
 
   public illnessList: IllnessInterface[] = illnessList;
+  private navNextSubscribe: Subscription;
+  private navPrevSubscribe: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -48,7 +51,7 @@ export class FamilyHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.navService.nextPageClick.subscribe((eventData) => {
+    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
         return;
@@ -56,12 +59,17 @@ export class FamilyHistoryComponent implements OnInit {
       this.navService.preparationAndDisplayFormData(nextUrl, this.illnessList);
     });
 
-    this.navService.prevPageClick.subscribe((eventData) => {
+    this.navPrevSubscribe = this.navService.prevPageClick.subscribe((eventData) => {
       const { prevUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
         return;
       }
       this.navService.preparationAndDisplayFormData(prevUrl, this.illnessList);
     });
+  }
+
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
+    this.navPrevSubscribe.unsubscribe();
   }
 }

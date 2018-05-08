@@ -34,8 +34,9 @@ export class NavigationService {
   preparationAndDisplayFormData (url, formControlValue) {
     setTimeout(() => {
       const formData = formControlValue;
-      if (this.validate(formData)) {
-        console.log('#############', formData, '#############');
+      // console.log('!!!!!!!', this.validate(formData));
+      if ((this.validate(formData))) {
+        console.log('########', formData, '#########');
         this.goTo(url);
       } else {
         this.openSnackBar('Form is not full!', 'Сontinue filling');
@@ -53,8 +54,8 @@ export class NavigationService {
     this.router.navigate([url]);
   }
 
-  private validate(formData) {
-    // return true;
+  private validate(formData): boolean {
+    // const isSuccess = Math.random() > 0.5;
     return Math.random() > 0.5;
   }
 
