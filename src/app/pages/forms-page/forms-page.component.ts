@@ -51,7 +51,6 @@ export class FormsPageComponent implements  OnInit {
     private patientService: PatientService,
     private ref: ChangeDetectorRef,
     private navService: NavigationService,
-    public snackBar: MatSnackBar
   ) {
     this.preferredContactList = [];
     this.referrelSourceList = [];
@@ -66,12 +65,6 @@ export class FormsPageComponent implements  OnInit {
     return this.patientGroup.controls;
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 10000,
-    });
-  }
-
   ngOnInit() {
     this.createForm();
     this.getSelectOptions();
@@ -83,21 +76,16 @@ export class FormsPageComponent implements  OnInit {
       }
       setTimeout(() => {
         const formData = this.patientGroup.value;
-        if (this.validate(formData)) {
+        if (this.navService.validate(formData)) {
           console.log(formData, '@@@@@@@@@@@@');
           this.navService.goTo(nextUrl);
         } else {
-          this.openSnackBar('Form is not full!', 'Сontinue filling');
+          this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
         }
         console.log('emmit end');
       }, 1000);
     });
 
-  }
-
-  private validate(formData) {
-    return true;
-    // return Math.random() > 0.5;
   }
 
   public createForm() {
@@ -133,7 +121,6 @@ export class FormsPageComponent implements  OnInit {
       .subscribe(patient => {
         this.ref.markForCheck();
         this.patient = patient;
-        // console.log(this.patient);
 
         this.updateForm();
         this.setPatient();

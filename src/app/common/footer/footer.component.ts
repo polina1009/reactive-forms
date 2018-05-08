@@ -46,7 +46,6 @@ export class FooterComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private navService: NavigationService
   ) {
-    // this.getPageUrl();
     this.changeFooterData();
     this.page$ = store.pipe(select('page'));
     this.showPage = true;
@@ -59,38 +58,6 @@ export class FooterComponent implements OnInit, OnDestroy {
         e.url === '/family-history' ? this.buttonValue = 'Finish' : this.buttonValue = 'Next';
       }
     });
-  }
-
-  // getPageUrl() {
-  //   this._nextPageSubscribe = this.router.events.subscribe((e) => {
-  //     if (e instanceof NavigationEnd) {
-  //       if (Object.keys(this.nextUrl).includes(e.url) === true) {
-  //         this.nextPage = this.nextUrl[e.url];
-  //         console.log('$$$$$$$$$$$$');
-  //       }
-  //       if (Object.keys(this.prevUrl).includes(e.url) === true) {
-  //         this.previousPage = this.prevUrl[e.url];
-  //       }
-  //     }
-  //   });
-  // }
-
-  goNext() {
-    //
-    // this.navService.navigate.subscribe(nav => {
-    //     this._nextPageSubscribe = this.router.events.subscribe((e) => {
-    //       if (e instanceof NavigationEnd) {
-    //         if (Object.keys(this.nextUrl).includes(e.url) === true) {
-    //           this.nextPage = this.nextUrl[e.url];
-    //           // this.router.navigate([this.nextPage]);
-    //           console.log('$$$$$$$$$$$$');
-    //         }
-    //         if (Object.keys(this.prevUrl).includes(e.url) === true) {
-    //           this.previousPage = this.prevUrl[e.url];
-    //         }
-    //       }
-    //     });
-    // });
   }
 
   goNextPage() {

@@ -17,8 +17,7 @@ export class FamilyHistoryComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private navService: NavigationService,
-    public snackBar: MatSnackBar
+    private navService: NavigationService
   ) {
   }
 
@@ -48,12 +47,6 @@ export class FamilyHistoryComponent implements OnInit {
     });
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 10000,
-    });
-  }
-
   ngOnInit() {
     this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
@@ -62,24 +55,14 @@ export class FamilyHistoryComponent implements OnInit {
       }
       setTimeout(() => {
         const formData = this.illnessList;
-        if (this.validate(formData)) {
+        if (this.navService.validate(formData)) {
           console.log(formData, '***********');
           this.navService.goTo(nextUrl);
         } else {
-          this.openSnackBar('Form is not full!', 'Сontinue filling');
+          this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
         }
         console.log('emmit end');
       }, 1000);
     });
-    // this.navService.nextPageClick.subscribe(() => {
-    //   const formData = this.illnessList;
-    //   console.log(formData, '***********');
-    // });
   }
-
-  private validate(formData) {
-    return true;
-    // return Math.random() > 0.5;
-  }
-
 }
