@@ -74,22 +74,9 @@ export class FormsPageComponent implements  OnInit {
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;
       }
-      setTimeout(() => {
-        const formData = this.patientGroup.value;
-        if (this.validate(formData)) {
-          console.log(formData, '@@@@@@@@@@@@');
-          this.navService.goTo(nextUrl);
-        } else {
-          this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
-        }
-      }, 1000);
+      this.navService.preparationAndDisplayFormData(nextUrl, this.patientGroup.value);
     });
 
-  }
-
-  private validate(formData) {
-    // return true;
-    return Math.random() > 0.5;
   }
 
   public createForm() {

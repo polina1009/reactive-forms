@@ -47,25 +47,13 @@ export class FamilyHistoryComponent implements OnInit {
     });
   }
 
-  preparationAndDisplayFormData (url) {
-    setTimeout(() => {
-      const formData = this.illnessList;
-      if (this.validate(formData)) {
-        console.log(formData, '***********');
-        this.navService.goTo(url);
-      } else {
-        this.navService.openSnackBar('Form is not full!', 'Сontinue filling');
-      }
-    }, 1000);
-  }
-
   ngOnInit() {
     this.navService.nextPageClick.subscribe((eventData) => {
       const { currentUrl, nextUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
         return;
       }
-      this.preparationAndDisplayFormData(nextUrl);
+      this.navService.preparationAndDisplayFormData(nextUrl, this.illnessList);
     });
 
     this.navService.prevPageClick.subscribe((eventData) => {
@@ -73,12 +61,7 @@ export class FamilyHistoryComponent implements OnInit {
       if (!(currentUrl.match(/family-history/))) {
         return;
       }
-      this.preparationAndDisplayFormData(prevUrl);
+      this.navService.preparationAndDisplayFormData(prevUrl, this.illnessList);
     });
-  }
-
-  private validate(formData) {
-    // return true;
-    return Math.random() > 0.5;
   }
 }

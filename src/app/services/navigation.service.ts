@@ -31,6 +31,18 @@ export class NavigationService {
     });
   }
 
+  preparationAndDisplayFormData (url, formControlValue) {
+    setTimeout(() => {
+      const formData = formControlValue;
+      if (this.validate(formData)) {
+        console.log('#############', formData, '#############');
+        this.goTo(url);
+      } else {
+        this.openSnackBar('Form is not full!', 'Сontinue filling');
+      }
+    }, 1000);
+  }
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 10000,
@@ -39,6 +51,11 @@ export class NavigationService {
 
   goTo(url) {
     this.router.navigate([url]);
+  }
+
+  private validate(formData) {
+    // return true;
+    return Math.random() > 0.5;
   }
 
 }
