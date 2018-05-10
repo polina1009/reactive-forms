@@ -1,0 +1,33 @@
+<div class="medications-wrapper">
+  <form [formGroup]="medicationsForm">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Comments" formControlName="comments">
+    </mat-form-field>
+    <mat-slide-toggle fornControlName="takeAnyMedications">
+      <p class="slide-toggle-text">I do not take any medications</p>
+    </mat-slide-toggle>
+
+    <div>
+      <h3>Medications</h3>
+      <div formArrayName="medications"
+           *ngFor="let med of medications.controls; let i=index"
+      >
+        <div [formGroupName]="i">
+          <mat-form-field>
+            <input matInput placeholder="Name" type="text" formControlName="name">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Start Date" type="text" [textMask]="maskDate" formControlName="startDate">
+          </mat-form-field>
+          <mat-slide-toggle formControlName="current">
+            <p>Current</p>
+          </mat-slide-toggle>
+          <mat-form-field>
+            <input matInput placeholder="Stop Date" type="text" [textMask]="maskDate" formControlName="stopDate">
+          </mat-form-field>
+        </div>
+      </div>
+      <button class="mat-btn" mat-mini-fab color="primary" (click)="addMedications()"><i class="material-icons">add</i></button>
+    </div>
+  </form>
+</div>

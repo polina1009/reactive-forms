@@ -22,10 +22,12 @@ export class FooterComponent implements OnInit, OnDestroy {
   private nextUrl = {
     '/': '/medical-history',
     '/medical-history': '/ocular-history',
-    '/ocular-history': '/family-history'
+    '/ocular-history': '/medications',
+    '/medications': '/family-history'
   };
   private prevUrl = {
-    '/family-history': '/ocular-history',
+    '/family-history': '/medications',
+    '/medications': '/ocular-history',
     '/ocular-history': '/medical-history',
     '/medical-history': '/'
   };

@@ -27,6 +27,7 @@ import {MedicalHistoryModule} from './pages/medical-history/medical-history.modu
 import {NavigationService} from './services/navigation.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {OcularHistoryModule} from './pages/ocular-history';
+import {MedicationsModule} from './pages/medications/';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {OcularHistoryModule} from './pages/ocular-history';
     MedicalHistoryModule,
     AuthModule,
     OcularHistoryModule,
+    MedicationsModule,
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,

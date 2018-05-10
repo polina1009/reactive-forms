@@ -8,6 +8,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MedicalHistoryComponent } from './pages/medical-history';
 import { OcularHistoryComponent } from './pages/ocular-history';
+import {MedicationsComponent} from './pages/medications';
 
 const appRoutes: Routes = [
   {
@@ -27,9 +28,14 @@ const appRoutes: Routes = [
     data: {title: 'Ocular History', pageNumber: 3}
   },
   {
+    path: 'medications',
+    component: MedicationsComponent,
+    data: {title: 'Medications', pageNumber: 4}
+  },
+  {
     path: 'family-history',
     component: FamilyHistoryComponent,
-    data: { title: 'Family History', pageNumber: 4 }
+    data: { title: 'Family History', pageNumber: 5 }
   },
   {
     path: 'login',
