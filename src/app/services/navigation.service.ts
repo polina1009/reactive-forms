@@ -34,7 +34,6 @@ export class NavigationService {
   preparationAndDisplayFormData (url, formControlValue) {
     setTimeout(() => {
       const formData = formControlValue;
-      // console.log('!!!!!!!', this.validate(formData));
       if ((this.validate(formData))) {
         console.log('########', formData, '#########');
         this.goTo(url);
@@ -55,7 +54,6 @@ export class NavigationService {
   }
 
   private validate(formData): boolean {
-    // const isSuccess = Math.random() > 0.5;
     return Math.random() > 0.5;
   }
 

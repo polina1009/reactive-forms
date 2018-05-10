@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ToggleOcularInterface} from './ocular-history.interface';
 import { toggleOcularList } from './ocular-input-data';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {NavigationService} from '../../services/navigation.service';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-ocular-history',
   templateUrl: './ocular-history.component.html',
   styleUrls: ['./ocular-history.component.scss']
 })
-export class OcularHistoryComponent implements OnInit {
+export class OcularHistoryComponent implements OnInit, OnDestroy {
 
   ocularHistoryForms: FormGroup;
 
@@ -21,6 +22,9 @@ export class OcularHistoryComponent implements OnInit {
     showMask : false,
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
+
+  private navNextSubscribe: Subscription;
+  private navPrevSubscribe: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -56,6 +60,26 @@ export class OcularHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
+      const { currentUrl, nextUrl } = eventData;
+      if (!(currentUrl.match(/ocular-history/))) {
+        return;
+      }
+      this.navService.preparationAndDisplayFormData(nextUrl, this.ocularHistoryForms.value);
+    });
+
+    this.navPrevSubscribe = this.navService.prevPageClick.subscribe((eventData) => {
+      const { prevUrl, currentUrl } = eventData;
+      if (!(currentUrl.match(/ocular-history/))) {
+        return;
+      }
+      this.navService.preparationAndDisplayFormData(prevUrl, this.ocularHistoryForms.value);
+    });
+  }
+
+  ngOnDestroy () {
+    this.navNextSubscribe.unsubscribe();
+    this.navPrevSubscribe.unsubscribe();
   }
 
 }
