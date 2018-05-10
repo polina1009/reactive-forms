@@ -24,7 +24,7 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  getPripearedDialogConfig (illness: IllnessInterface) {
+  getPreparedDialogConfig (illness: IllnessInterface) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -42,7 +42,7 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
   }
 
   openDialog(illness: IllnessInterface) {
-    const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPripearedDialogConfig(illness));
+    const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPreparedDialogConfig(illness));
 
     dialogRef.afterClosed().subscribe((results: MemberInterface[]) => {
       illness.members = results;
