@@ -39,10 +39,10 @@ export class MedicationsComponent implements OnInit, OnDestroy {
 
   createMedications(): FormGroup {
     return this.fb.group({
-      name: '',
-      startDate: '',
-      current: '',
-      stopDate: ''
+      name: this.fb.control(''),
+      startDate: this.fb.control(''),
+      current: this.fb.control(''),
+      stopDate: this.fb.control('')
     });
   }
 
