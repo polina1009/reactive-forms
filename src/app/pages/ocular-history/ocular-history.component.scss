@@ -1,0 +1,18 @@
+.ocular-history-wrapper {
+  margin: 10px 40px;
+
+  .ocular-toggle-cont {
+    margin-bottom: 15px;
+    .ocular-toggle {
+      margin: 20px 0;
+      .mat-slide-toggle-content {
+        margin-left: 10px;
+      }
+      .slide-toggle-text {
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}

@@ -6,7 +6,8 @@ import { FamilyHistoryComponent } from './pages/family-history';
 import { PageNotFoundComponent } from './pages/page-not-found';
 import { AuthComponent } from './pages/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
-import {MedicalHistoryComponent} from './pages/medical-history';
+import { MedicalHistoryComponent } from './pages/medical-history';
+import { OcularHistoryComponent } from './pages/ocular-history';
 
 const appRoutes: Routes = [
   {
@@ -21,9 +22,14 @@ const appRoutes: Routes = [
     data: {title: 'Medical History', pageNumber: 2}
   },
   {
+    path: 'ocular-history',
+    component: OcularHistoryComponent,
+    data: {title: 'Ocular History', pageNumber: 3}
+  },
+  {
     path: 'family-history',
     component: FamilyHistoryComponent,
-    data: { title: 'Family History', pageNumber: 3 }
+    data: { title: 'Family History', pageNumber: 4 }
   },
   {
     path: 'login',

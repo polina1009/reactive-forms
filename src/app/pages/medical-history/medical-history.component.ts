@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
-import {NavigationService} from '../../services/navigation.service';
-import {Subscription} from 'rxjs/Subscription';
+import { NavigationService } from '../../services/navigation.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-medical-history',

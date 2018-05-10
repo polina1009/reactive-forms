@@ -9,7 +9,6 @@ import {RouterStateInterface} from '../../store/router.interface';
 import {select, Store} from '@ngrx/store';
 import {LoginService} from '../../services/login.service';
 import {Subscription} from 'rxjs/Subscription';
-import {ApiService} from '../../services/api.service';
 import {NavigationService} from '../../services/navigation.service';
 
 @Component({
@@ -22,10 +21,12 @@ export class FooterComponent implements OnInit, OnDestroy {
   public page$: Observable<RouterStateInterface>;
   private nextUrl = {
     '/': '/medical-history',
-    '/medical-history': '/family-history'
+    '/medical-history': '/ocular-history',
+    '/ocular-history': '/family-history'
   };
   private prevUrl = {
-    '/family-history': '/medical-history',
+    '/family-history': '/ocular-history',
+    '/ocular-history': '/medical-history',
     '/medical-history': '/'
   };
   public previousPage: string;
