@@ -12,6 +12,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatNativeDateModule,
+  MatCardModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -31,6 +32,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatNativeDateModule,
+    MatCardModule
   ],
   exports: [MedicationsComponent],
   providers: []

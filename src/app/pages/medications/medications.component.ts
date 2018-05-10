@@ -45,6 +45,11 @@ export class MedicationsComponent implements OnInit {
     arrayControl.push(this.createMedications());
   }
 
+  deleteMedications(index: number) {
+    const control = this.medicationsForm.get('medications') as FormArray;
+    control.removeAt(index);
+  }
+
   ngOnInit() {
   }
 

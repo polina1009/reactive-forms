@@ -1,33 +1,53 @@
 <div class="medications-wrapper">
-  <form [formGroup]="medicationsForm">
-    <mat-form-field>
+  <form [formGroup]="medicationsForm" fxLayout="row wrap" fxLayoutAlign="start center">
+    <mat-form-field fxFlex="100">
       <input matInput type="text" placeholder="Comments" formControlName="comments">
     </mat-form-field>
-    <mat-slide-toggle fornControlName="takeAnyMedications">
+    <mat-slide-toggle fornControlName="takeAnyMedications" fxFlex="100" color="primary">
       <p class="slide-toggle-text">I do not take any medications</p>
     </mat-slide-toggle>
 
-    <div>
-      <h3>Medications</h3>
-      <div formArrayName="medications"
+    <div class="mat-typography mat-input-cont"
+         fxLayout="row wrap"
+         fxLayoutAlign="start center"
+         fxLayoutGap="20px"
+         fxFlex="100"
+    >
+      <h2 class="medications-title">Medications</h2>
+      <mat-card formArrayName="medications"
            *ngFor="let med of medications.controls; let i=index"
+           fxFlex.lg="91"
+           fxFlex.md="91"
+           fxFlex.sm="91"
       >
-        <div [formGroupName]="i">
-          <mat-form-field>
+        <div [formGroupName]="i"
+             fxLayout="row wrap"
+             fxLayoutAlign="start center"
+             fxLayoutGap="20px"
+             fxFlex.lg="100"
+             fxFlex.md="100"
+             fxFlex.sm="100"
+        >
+          <mat-form-field fxFlex.lg="48" fxFlex.md="48" fxFlex.sm="48">
             <input matInput placeholder="Name" type="text" formControlName="name">
           </mat-form-field>
-          <mat-form-field>
+          <mat-slide-toggle formControlName="current" fxFlex.lg="43" fxFlex.md="43" fxFlex.sm="43" color="primary">
+            <p class="current-toggle-text">Current</p>
+          </mat-slide-toggle>
+          <mat-form-field fxFlex.lg="48" fxFlex.md="48" fxFlex.sm="48">
             <input matInput placeholder="Start Date" type="text" [textMask]="maskDate" formControlName="startDate">
           </mat-form-field>
-          <mat-slide-toggle formControlName="current">
-            <p>Current</p>
-          </mat-slide-toggle>
-          <mat-form-field>
+          <mat-form-field fxFlex.lg="48" fxFlex.md="48" fxFlex.sm="48">
             <input matInput placeholder="Stop Date" type="text" [textMask]="maskDate" formControlName="stopDate">
           </mat-form-field>
         </div>
+      </mat-card>
+      <div fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+        <button class="mat-btn" mat-mini-fab color="primary" (click)="addMedications()"><i class="material-icons">add</i></button>
+        <button class="mat-btn" mat-mini-fab color="warn"
+                *ngIf="medications.controls.length > 1"
+                (click)="deleteMedications(medications.controls.length - 1)"><i class="material-icons">clear</i></button>
       </div>
-      <button class="mat-btn" mat-mini-fab color="primary" (click)="addMedications()"><i class="material-icons">add</i></button>
     </div>
   </form>
 </div>

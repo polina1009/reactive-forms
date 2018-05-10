@@ -38,7 +38,7 @@
       <button class="mat-btn" mat-mini-fab color="primary" (click)="addSurgeries()" ><i class="material-icons">add</i></button>
       <button class="mat-btn" mat-mini-fab color="warn"
               *ngIf="surgeries.controls.length > 1"
-              (click)="deleteGroup(i, 'surgeries')"><i class="material-icons">clear</i></button>
+              (click)="deleteGroup(surgeries.controls.length - 1, 'surgeries')"><i class="material-icons">clear</i></button>
     </div>
 
 
@@ -74,7 +74,7 @@
       <button class="mat-btn" mat-mini-fab color="primary" (click)="addInjuries()"><i class="material-icons">add</i></button>
       <button class="mat-btn" mat-mini-fab color="warn"
               *ngIf="injuries.controls.length > 1"
-              (click)="deleteGroup(i, 'injuries')"><i class="material-icons">clear</i></button>
+              (click)="deleteGroup(injuries.controls.length - 1, 'injuries')"><i class="material-icons">clear</i></button>
     </div>
 
 

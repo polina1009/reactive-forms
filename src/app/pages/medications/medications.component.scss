@@ -1,0 +1,29 @@
+.medications-wrapper {
+  margin: 10px 40px;
+
+  .slide-toggle-text {
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mat-input-cont {
+    margin-top: 20px;
+
+    //.medications-title {
+    //
+    //}
+
+    .mat-slide-toggle {
+      margin: 20px 10px;;
+      .mat-slide-toggle-content {
+        margin-left: 10px;
+      }
+      .current-toggle-text {
+        font-size: 20px;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
