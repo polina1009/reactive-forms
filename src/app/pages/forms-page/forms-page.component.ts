@@ -71,12 +71,12 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.createForm();
     this.getSelectOptions();
     this.getPatient();
-    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
-      const { currentUrl, nextUrl } = eventData;
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+      const { navUrl, currentUrl } = eventData;
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;
       }
-      this.navService.preparationAndDisplayFormData(nextUrl, this.patientGroup.value);
+      this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
 
   }

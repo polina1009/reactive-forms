@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {FormGroup, FormBuilder, FormArray} from '@angular/forms';
+import {Subscription} from 'rxjs/Subscription';
+import {NavigationService} from '../../services/navigation.service';
 
 @Component({
   selector: 'app-medications',
   templateUrl: './medications.component.html',
   styleUrls: ['./medications.component.scss']
 })
-export class MedicationsComponent implements OnInit {
+export class MedicationsComponent implements OnInit, OnDestroy {
 
   medicationsForm: FormGroup;
   medications: FormArray;
+  private navNextSubscribe: Subscription;
 
   public maskDate = {
     guide: true,
@@ -17,7 +20,10 @@ export class MedicationsComponent implements OnInit {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    public navService: NavigationService
+  ) {
     this.createForm();
   }
 
@@ -51,6 +57,17 @@ export class MedicationsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+      const { navUrl, currentUrl } = eventData;
+      if (!(currentUrl.match(/medications/))) {
+        return;
+      }
+      this.navService.preparationAndDisplayFormData(navUrl, this.medicationsForm.value);
+    });
+  }
+
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
   }
 
 }

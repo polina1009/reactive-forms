@@ -22,7 +22,6 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
   private navNextSubscribe: Subscription;
-  private navPrevSubscribe: Subscription;
 
 
   constructor(
@@ -90,26 +89,16 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
-      const { currentUrl, nextUrl } = eventData;
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+      const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
       }
-      this.navService.preparationAndDisplayFormData(nextUrl, this.medicalHistoryForms.value);
+      this.navService.preparationAndDisplayFormData(navUrl, this.medicalHistoryForms.value);
       });
-
-    this.navPrevSubscribe = this.navService.prevPageClick.subscribe((eventData) => {
-      const { prevUrl, currentUrl } = eventData;
-      if (!(currentUrl.match(/medical-history/))) {
-        return;
-      }
-      this.navService.preparationAndDisplayFormData(prevUrl, this.medicalHistoryForms.value);
-    });
-
   }
 
   ngOnDestroy () {
     this.navNextSubscribe.unsubscribe();
-    this.navPrevSubscribe.unsubscribe();
   }
 }

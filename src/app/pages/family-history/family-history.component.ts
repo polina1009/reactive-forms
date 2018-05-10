@@ -16,7 +16,6 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
 
   public illnessList: IllnessInterface[] = illnessList;
   private navNextSubscribe: Subscription;
-  private navPrevSubscribe: Subscription;
 
   constructor(
     public dialog: MatDialog,
@@ -51,25 +50,16 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
-      const { currentUrl, nextUrl } = eventData;
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+      const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
         return;
       }
-      this.navService.preparationAndDisplayFormData(nextUrl, this.illnessList);
-    });
-
-    this.navPrevSubscribe = this.navService.prevPageClick.subscribe((eventData) => {
-      const { prevUrl, currentUrl } = eventData;
-      if (!(currentUrl.match(/family-history/))) {
-        return;
-      }
-      this.navService.preparationAndDisplayFormData(prevUrl, this.illnessList);
+      this.navService.preparationAndDisplayFormData(navUrl, this.illnessList);
     });
   }
 
   ngOnDestroy() {
     this.navNextSubscribe.unsubscribe();
-    this.navPrevSubscribe.unsubscribe();
   }
 }

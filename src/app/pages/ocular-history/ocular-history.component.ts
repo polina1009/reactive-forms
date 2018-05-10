@@ -24,7 +24,6 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   };
 
   private navNextSubscribe: Subscription;
-  private navPrevSubscribe: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -60,26 +59,17 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.navNextSubscribe = this.navService.nextPageClick.subscribe((eventData) => {
-      const { currentUrl, nextUrl } = eventData;
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+      const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/ocular-history/))) {
         return;
       }
-      this.navService.preparationAndDisplayFormData(nextUrl, this.ocularHistoryForms.value);
-    });
-
-    this.navPrevSubscribe = this.navService.prevPageClick.subscribe((eventData) => {
-      const { prevUrl, currentUrl } = eventData;
-      if (!(currentUrl.match(/ocular-history/))) {
-        return;
-      }
-      this.navService.preparationAndDisplayFormData(prevUrl, this.ocularHistoryForms.value);
+      this.navService.preparationAndDisplayFormData(navUrl, this.ocularHistoryForms.value);
     });
   }
 
   ngOnDestroy () {
     this.navNextSubscribe.unsubscribe();
-    this.navPrevSubscribe.unsubscribe();
   }
 
 }

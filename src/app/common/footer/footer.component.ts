@@ -64,11 +64,11 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   goNextPage() {
-    this.navService.clickedNextPage(this.currentPage, this.nextPage);
+    this.navService.clickedNavButton(this.nextPage, this.currentPage);
   }
 
   goPrevPage() {
-    this.navService.clickedPrevPage(this.previousPage, this.currentPage);
+    this.navService.clickedNavButton(this.previousPage, this.currentPage);
   }
 
   ngOnInit() {

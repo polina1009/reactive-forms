@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs/';
-import {ClickedNextPageInterface, ClickedPrevPageInterface} from '../form.interface';
+import {ClickedNavButtonInterface} from '../form.interface';
 import {MatSnackBar} from '@angular/material';
 
 @Injectable()
@@ -12,21 +12,12 @@ export class NavigationService {
     public snackBar: MatSnackBar
   ) { }
 
-  private nextPageClick$ = new Subject<ClickedNextPageInterface>();
-  nextPageClick = this.nextPageClick$.asObservable();
-  private prevPageClick$ = new Subject<ClickedPrevPageInterface>();
-  prevPageClick = this.prevPageClick$.asObservable();
+  private navButtonClick$ = new Subject<ClickedNavButtonInterface>();
+  navButtonClick = this.navButtonClick$.asObservable();
 
-  clickedNextPage(currentUrl, nextUrl) {
-    this.nextPageClick$.next({
-      currentUrl,
-      nextUrl
-    });
-  }
-
-  clickedPrevPage(prevUrl, currentUrl) {
-    this.prevPageClick$.next({
-      prevUrl,
+  clickedNavButton(navUrl, currentUrl) {
+    this.navButtonClick$.next({
+      navUrl,
       currentUrl
     });
   }

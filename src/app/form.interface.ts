@@ -43,12 +43,7 @@ export interface UserInterface {
   password: string;
 }
 
-export interface ClickedNextPageInterface {
+export interface ClickedNavButtonInterface {
+  navUrl: string;
   currentUrl: string;
-  nextUrl: string;
-}
-
-export interface ClickedPrevPageInterface {
-  currentUrl: string;
-  prevUrl: string;
 }
