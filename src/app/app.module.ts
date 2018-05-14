@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 import {FormModule} from './pages/forms-page';
 import { FamilyHistoryModule } from './pages/family-history';
 import {PageNotFoundComponent} from './pages/page-not-found';
@@ -54,7 +58,9 @@ import {MedicationsModule} from './pages/medications/';
     StoreModule.forRoot({
       page: pageDataReducer
     }),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    AngularFireModule.initializeApp(environment.firebase, 'patient-medical-store'),
+    AngularFirestoreModule
   ],
   providers: [ApiService, RoutingService, LoginService, AuthGuard, NavigationService],
   bootstrap: [AppComponent]

@@ -40,6 +40,7 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value);
     }
+    console.log(this.loginForm.value);
     this.formSubmitAttempt = true;
   }
 

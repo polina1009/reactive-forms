@@ -6,12 +6,23 @@ import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/delay';
 
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { SelectArrInterface } from '../interfaces/selects.interface';
+
 
 @Injectable()
 
 export class ApiService {
+  SelectionCollection: AngularFirestoreCollection<SelectArrInterface>;
+  selects: Observable<SelectArrInterface[]>;
 
-  constructor() {
+  constructor(private afs: AngularFirestore) {
+    this.SelectionCollection = this.afs.collection('selectsList');
+    this.selects = this.SelectionCollection.valueChanges();
+  }
+
+  getSelect() {
+    return this.selects;
   }
 
   public get(url: string, query?): Observable<any> {

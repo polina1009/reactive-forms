@@ -16,6 +16,7 @@ import {map} from 'rxjs/operator/map';
 import {NavigationService} from '../../services/navigation.service';
 import {MatSnackBar} from '@angular/material';
 import {Subscription} from 'rxjs/Subscription';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-forms-page',
@@ -53,6 +54,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     private patientService: PatientService,
     private ref: ChangeDetectorRef,
     private navService: NavigationService,
+    private apiService: ApiService
   ) {
     this.preferredContactList = [];
     this.referrelSourceList = [];
@@ -77,6 +79,11 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
         return;
       }
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
+    });
+
+
+    this.apiService.getSelect().subscribe(s => {
+      console.log(s);
     });
 
   }
