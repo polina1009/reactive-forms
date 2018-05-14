@@ -1,14 +1,14 @@
 export interface SelectArrInterface {
-  preferredContact: ApiSelectInterface[];
-  referralSource: ApiSelectInterface[];
-  language: ApiSelectInterface[];
-  workStatus: ApiSelectInterface[];
-  employer: ApiSelectInterface[];
-  race: ApiSelectInterface[];
-  ethnicity: ApiSelectInterface[];
+  selectName: SelectOptionInterface[];
+  // referralSource: SelectOptionInterface[];
+  // language: SelectOptionInterface[];
+  // workStatus: SelectOptionInterface[];
+  // employer: SelectOptionInterface[];
+  // race: SelectOptionInterface[];
+  // ethnicity: SelectOptionInterface[];
 }
 
-export interface ApiSelectInterface {
+export interface SelectOptionInterface {
   id: string;
   name: string;
 }

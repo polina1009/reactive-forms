@@ -17,6 +17,7 @@ import {NavigationService} from '../../services/navigation.service';
 import {MatSnackBar} from '@angular/material';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
+import {SelectArrInterface} from '../../interfaces/selects.interface';
 
 @Component({
   selector: 'app-forms-page',
@@ -35,6 +36,8 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public ethnicityList: SelectOptionInterface[];
   public patient: PatientInterface;
   private navNextSubscribe: Subscription;
+
+  private raceSelect: SelectArrInterface;
 
   patientGroup: FormGroup;
 
@@ -82,8 +85,14 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
 
 
-    this.apiService.getSelect().subscribe(s => {
+    this.apiService.getCollection$().subscribe(s => {
+      // this.raceSelect = s;
       console.log(s);
+      s.map(r => {
+        console.log(r, '!!');
+        this.raceSelect = r;
+        console.log(this.raceSelect);
+      });
     });
 
   }

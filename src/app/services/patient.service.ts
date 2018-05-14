@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import {ApiPatientInterface, ApiSelectInterface, PatientInterface, SelectOptionInterface} from '../form.interface';
+// import { SelectInterface } from '../interfaces/selects.interface';
 import {Observable} from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
@@ -36,6 +37,10 @@ export class PatientService {
 
   constructor(private apiService: ApiService) {
   }
+
+  // getSelOptions () {
+  //   this.apiService.getCollection$();
+  // }
 
   public getSelectionList(url) {
     return this.apiService.get(url)
