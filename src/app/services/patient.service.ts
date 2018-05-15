@@ -6,7 +6,6 @@ import {Observable} from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/finally';
-import {OptionInterface, SelectOptionInterface2} from '../interfaces/selects.interface';
 
 
 @Injectable()
@@ -39,29 +38,11 @@ export class PatientService {
   constructor(private apiService: ApiService) {
   }
 
-  // getSelOptions () {
-  //   this.apiService.getCollection$();
-  // }
-
-  public getSelectionList(url) {
-    return this.apiService.get(url)
-      .pipe(
-        map((list: ApiSelectInterface[]) => {
-          return list.map((item): SelectOptionInterface => {
-            return {
-              value: item.id,
-              viewValue: item.name
-            };
-          });
-        })
-      );
-  }
-
-  // getSelection() {
-  //   return this.apiService.getSelect()
+  // public getSelectionList(url) {
+  //   return this.apiService.get(url)
   //     .pipe(
-  //       map((l: OptionInterface[]) => {
-  //         return l.map((item): SelectOptionInterface2 => {
+  //       map((list: ApiSelectInterface[]) => {
+  //         return list.map((item): SelectOptionInterface => {
   //           return {
   //             value: item.id,
   //             viewValue: item.name
@@ -70,7 +51,7 @@ export class PatientService {
   //       })
   //     );
   // }
-
+  //
   getPatients(url) {
     return this.apiService.get(url);
   }

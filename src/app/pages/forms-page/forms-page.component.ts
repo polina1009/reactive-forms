@@ -16,7 +16,7 @@ import {map} from 'rxjs/operator/map';
 import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
-import {OptionInterface, SelectArrInterface, SelectOptionInterface2} from '../../interfaces/selects.interface';
+import { OptionInterface } from '../../interfaces/selects.interface';
 
 @Component({
   selector: 'app-forms-page',
@@ -26,17 +26,15 @@ import {OptionInterface, SelectArrInterface, SelectOptionInterface2} from '../..
 })
 
 export class FormsPageComponent implements  OnInit, OnDestroy {
-  public preferredContactList: SelectOptionInterface[];
-  public referrelSourceList: SelectOptionInterface[];
-  public languageList: SelectOptionInterface[];
-  public workStatusList: SelectOptionInterface[];
-  public employer: SelectOptionInterface[];
-  public raceList: SelectOptionInterface[];
-  public ethnicityList: SelectOptionInterface[];
+  public preferredContactList: OptionInterface[];
+  public referrelSourceList: OptionInterface[];
+  public languageList: OptionInterface[];
+  public workStatusList: OptionInterface[];
+  public employer: OptionInterface[];
+  public raceList: OptionInterface[];
+  public ethnicityList: OptionInterface[];
   public patient: PatientInterface;
   private navNextSubscribe: Subscription;
-
-  public raceSelect: SelectArrInterface[];
 
   patientGroup: FormGroup;
 
@@ -82,13 +80,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       }
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
-
-
-    this.apiService.getSelect().subscribe(race => {
-      this.raceSelect = race;
-      console.log(this.raceSelect);
-    });
-
   }
 
   public createForm() {
@@ -159,56 +150,58 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   private getSelectOptions() {
-
-    // this.patientService.getSelection().subscribe((optionList) => {
+    // this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST).subscribe(optionList => {
     //   this.ref.markForCheck();
-    //   this.raceSelect = optionList;
-    //   console.log(this.raceSelect, '@@@@@@@@@');
+    //   this.preferredContactList = optionList;
+    //   console.log(this.preferredContactList);
+    //   this.controls.preferredContact.setValue(this.patient.preferredContact);
     // });
 
-    this.patientService.getSelectionList(GET_PREFERRED_CONTACT_LIST)
+
+    this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.preferredContactList = optionList;
+        console.log(this.preferredContactList);
         this.controls.preferredContact.setValue(this.patient.preferredContact);
     });
 
-    this.patientService.getSelectionList(GET_REFERRAL_SOURCE)
+    this.apiService.getCollection(GET_REFERRAL_SOURCE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.referrelSourceList = optionList;
         this.controls.referralSource.setValue(this.patient.referralSource);
     });
 
-    this.patientService.getSelectionList(GET_LANGUAGE)
+    this.apiService.getCollection(GET_LANGUAGE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.languageList = optionList;
         this.controls.language.setValue(this.patient.language);
       });
 
-    this.patientService.getSelectionList(GET_WORK_STATUS)
+    this.apiService.getCollection(GET_WORK_STATUS)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.workStatusList = optionList;
         this.controls.workStatus.setValue(this.patient.workStatus);
     });
 
-    this.patientService.getSelectionList(GET_EMPLOYER)
+    this.apiService.getCollection(GET_EMPLOYER)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.employer = optionList;
         this.controls.workStatus.setValue(this.patient.employer);
       });
 
-    this.patientService.getSelectionList(GET_RACE)
+    this.apiService.getCollection(GET_RACE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.raceList = optionList;
         this.controls.race.setValue(this.patient.race);
     });
 
-    this.patientService.getSelectionList(GET_ETHNICITY)
+    this.apiService.getCollection(GET_ETHNICITY)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.ethnicityList = optionList;
