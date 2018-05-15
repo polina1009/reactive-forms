@@ -87,10 +87,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
 
 
-    this.apiService.getPageCollection().subscribe((page) =>{
-      this.pageData = page;
-      console.log('pageData', this.pageData);
-    });
+    // this.apiService.getPageCollection().subscribe((page) =>{
+    //   this.pageData = page;
+    //   console.log('pageData', this.pageData);
+    // });
   }
 
   public createForm() {
@@ -121,6 +121,14 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   getPatient() {
+    this.apiService.getPageCollection().subscribe((page) =>{
+      this.pageData = page;
+      console.log('pageData', this.pageData);
+      this.pageData.map(p => {
+        this.getFormData(p);
+        console.log('$$$$', p);
+      });
+    });
     // this.apiService.getPatient(GET_PATIENT)
     //   .subscribe(patient => {
     //     this.ref.markForCheck();
@@ -145,29 +153,29 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   setPatient() {
     return JSON.stringify(this.patientGroup.value);
   }
-  private updateForm() {
-    this.controls.title.setValue(this.patient.title);
-    this.controls.firstName.setValue(this.patient.firstName);
-    this.controls.lastName.setValue(this.patient.lastName);
-    this.controls.cellPhone.setValue(this.patient.cellPhone);
-    this.controls.home.setValue(this.patient.home);
-    this.controls.work.setValue(this.patient.work);
-    this.controls.email.setValue(this.patient.email);
-    this.controls.preferredContact.setValue(this.patient.preferredContact);
-    this.controls.address1.setValue(this.patient.address1);
-    this.controls.address2.setValue(this.patient.address2);
-    this.controls.zip.setValue(this.patient.zip);
-    this.controls.city.setValue(this.patient.city);
-    this.controls.state.setValue(this.patient.state);
-    this.controls.dateOfBirth.setValue(this.patient.dateOfBirth);
-    this.controls.ssn.setValue(this.patient.ssn);
-    this.controls.referralSource.setValue(this.patient.referralSource);
-    this.controls.language.setValue(this.patient.language);
-    this.controls.workStatus.setValue(this.patient.workStatus);
-    this.controls.employer.setValue(this.patient.employer);
-    this.controls.race.setValue(this.patient.race);
-    this.controls.ethnicity.setValue(this.patient.ethnicity);
-    this.controls.gender.setValue(this.patient.gender);
+  private getFormData(pageData) {
+    this.controls.title.setValue(pageData.title);
+    this.controls.firstName.setValue(pageData.firstName);
+    this.controls.lastName.setValue(pageData.lastName);
+    this.controls.cellPhone.setValue(pageData.cellPhone);
+    this.controls.home.setValue(pageData.home);
+    this.controls.work.setValue(pageData.work);
+    this.controls.email.setValue(pageData.email);
+    this.controls.preferredContact.setValue(pageData.preferredContact);
+    this.controls.address1.setValue(pageData.address1);
+    this.controls.address2.setValue(pageData.address2);
+    this.controls.zip.setValue(pageData.zip);
+    this.controls.city.setValue(pageData.city);
+    this.controls.state.setValue(pageData.state);
+    this.controls.dateOfBirth.setValue(pageData.dateOfBirth);
+    this.controls.ssn.setValue(pageData.ssn);
+    this.controls.referralSource.setValue(pageData.referralSource);
+    this.controls.language.setValue(pageData.language);
+    this.controls.workStatus.setValue(pageData.workStatus);
+    this.controls.employer.setValue(pageData.employer);
+    this.controls.race.setValue(pageData.race);
+    this.controls.ethnicity.setValue(pageData.ethnicity);
+    this.controls.gender.setValue(pageData.gender);
   }
 
   private getSelectOptions() {
