@@ -5,5 +5,5 @@ export const GET_WORK_STATUS = 'workStatus';
 export const GET_EMPLOYER = 'employer';
 export const GET_RACE = 'race';
 export const GET_ETHNICITY = 'ethnicity';
-export const GET_PATIENT = '/patient/id';
+export const GET_PATIENT = 'patients';
 

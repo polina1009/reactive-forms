@@ -17,6 +17,8 @@ import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
 import { OptionInterface } from '../../interfaces/selects.interface';
+import {PatientsInterface} from '../../interfaces/patient.interface';
+import {DemographicsInterface} from '../../interfaces/demographics.interface';
 
 @Component({
   selector: 'app-forms-page',
@@ -35,6 +37,9 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public ethnicityList: OptionInterface[];
   public patient: PatientInterface;
   private navNextSubscribe: Subscription;
+
+  public pat: PatientsInterface;
+  public pageData: DemographicsInterface[];
 
   patientGroup: FormGroup;
 
@@ -80,6 +85,12 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       }
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
+
+
+    this.apiService.getPageCollection().subscribe((page) =>{
+      this.pageData = page;
+      console.log('pageData', this.pageData);
+    });
   }
 
   public createForm() {
@@ -110,15 +121,25 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   getPatient() {
-    this.patientService.getPatients(GET_PATIENT)
-      .subscribe(patient => {
-        this.ref.markForCheck();
-        this.patient = patient;
+    // this.apiService.getPatient(GET_PATIENT)
+    //   .subscribe(patient => {
+    //     this.ref.markForCheck();
+    //     this.pat = patient;
+    //     console.log(this.pat);
+    //     // this.patient = patient;
+    //
+    //     this.updateForm();
+    //     this.setPatient();
 
-        this.updateForm();
-        this.setPatient();
+    //   });
 
-      });
+    // this.apiService.getPatient().subscribe((p) => {
+    //   this.pat = p;
+    //   console.log('patient', this.pat);
+    //
+    //   this.updateForm();
+    //   this.setPatient();
+    // });
   }
 
   setPatient() {
@@ -150,19 +171,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   private getSelectOptions() {
-    // this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST).subscribe(optionList => {
-    //   this.ref.markForCheck();
-    //   this.preferredContactList = optionList;
-    //   console.log(this.preferredContactList);
-    //   this.controls.preferredContact.setValue(this.patient.preferredContact);
-    // });
-
-
     this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.preferredContactList = optionList;
-        console.log(this.preferredContactList);
         this.controls.preferredContact.setValue(this.patient.preferredContact);
     });
 
