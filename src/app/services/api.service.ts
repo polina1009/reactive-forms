@@ -7,38 +7,38 @@ import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/delay';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import {SelectArrInterface, SelectOptionInterface} from '../interfaces/selects.interface';
+import {SelectArrInterface} from '../interfaces/selects.interface';
 
 
 @Injectable()
 
 export class ApiService {
-  SelectionCollection: AngularFirestoreCollection<SelectArrInterface>;
-  // selects: Observable<SelectArrInterface[]>;
-  race: SelectArrInterface;
+  SelectionCollection: AngularFirestoreDocument<any>;
+  selects$: Observable<SelectArrInterface[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.SelectionCollection = this.afs.collection('race');
-    // this.selects = this.SelectionCollection.valueChanges();
+    this.SelectionCollection = this.afs.collection('selection').doc('2J4SDDnUmKRV9D7yYrAh');
+    this.getCollection$();
   }
 
-  getCollection$(): Observable<SelectArrInterface[]> {
-    return this.SelectionCollection
-      .snapshotChanges().map(actions => {
-        return actions.map(a => {
-          this.race = a.payload.doc.data() as SelectArrInterface;
-          const id = a.payload.doc.id;
-          return this.race;
+  getCollection$() {
+    this.selects$ = this.SelectionCollection.snapshotChanges()
+      .map((doc) => {
+        console.log(doc.payload.get('race'));
+      })
+      .map((actions) => {
+        return actions.map(action => {
+          const select = action.payload.doc.data() as SelectArrInterface;
+          // select.id = action.payload.doc.id;
+          console.log('&&&&&&&', select);
+          return select;
         });
       });
   }
 
-  // getSelect() {
-  //  this.race.selectName.map(r => {
-  //    console.log(r.name);
-  //  });
-  //   // return this.selects;
-  // }
+  getSelect() {
+    return this.selects$;
+  }
 
   public get(url: string, query?): Observable<any> {
     return Observable.of(JSON.stringify(mock_data[url]))

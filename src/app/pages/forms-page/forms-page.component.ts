@@ -14,10 +14,9 @@ import {
 } from '../../services/api.constants';
 import {map} from 'rxjs/operator/map';
 import {NavigationService} from '../../services/navigation.service';
-import {MatSnackBar} from '@angular/material';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
-import {SelectArrInterface} from '../../interfaces/selects.interface';
+import {OptionInterface, SelectArrInterface, SelectOptionInterface2} from '../../interfaces/selects.interface';
 
 @Component({
   selector: 'app-forms-page',
@@ -37,7 +36,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public patient: PatientInterface;
   private navNextSubscribe: Subscription;
 
-  private raceSelect: SelectArrInterface;
+  public raceSelect: SelectArrInterface[];
 
   patientGroup: FormGroup;
 
@@ -85,14 +84,9 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
 
 
-    this.apiService.getCollection$().subscribe(s => {
-      // this.raceSelect = s;
-      console.log(s);
-      s.map(r => {
-        console.log(r, '!!');
-        this.raceSelect = r;
-        console.log(this.raceSelect);
-      });
+    this.apiService.getSelect().subscribe(race => {
+      this.raceSelect = race;
+      console.log(this.raceSelect);
     });
 
   }
@@ -122,7 +116,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       ethnicity: this.fb.control(''),
       gender: this.fb.control(''),
     });
-    // console.log(this.patientGroup.value);
   }
 
   getPatient() {
@@ -166,6 +159,12 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   private getSelectOptions() {
+
+    // this.patientService.getSelection().subscribe((optionList) => {
+    //   this.ref.markForCheck();
+    //   this.raceSelect = optionList;
+    //   console.log(this.raceSelect, '@@@@@@@@@');
+    // });
 
     this.patientService.getSelectionList(GET_PREFERRED_CONTACT_LIST)
       .subscribe(optionList => {

@@ -1,5 +1,6 @@
 export interface SelectArrInterface {
-  selectName: SelectOptionInterface[];
+  id?: string;
+  selectName: OptionInterface[];
   // referralSource: SelectOptionInterface[];
   // language: SelectOptionInterface[];
   // workStatus: SelectOptionInterface[];
@@ -8,12 +9,12 @@ export interface SelectArrInterface {
   // ethnicity: SelectOptionInterface[];
 }
 
-export interface SelectOptionInterface {
+export interface OptionInterface {
   id: string;
   name: string;
 }
 
-export interface SelectOptionInterface {
+export interface SelectOptionInterface2 {
   value: string;
   viewValue: string;
 }
