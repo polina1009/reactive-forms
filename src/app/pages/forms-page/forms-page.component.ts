@@ -35,10 +35,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public employer: OptionInterface[];
   public raceList: OptionInterface[];
   public ethnicityList: OptionInterface[];
-  public patient: PatientInterface;
+  // public patient: PatientInterface;
   private navNextSubscribe: Subscription;
 
-  public pat: PatientsInterface;
+  public pat: DemographicsInterface;
   public pageData: DemographicsInterface[];
 
   patientGroup: FormGroup;
@@ -67,7 +67,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.workStatusList = [];
     this.raceList = [];
     this.ethnicityList = [];
-    this.patient = this.patientService.defaultPatient;
+    this.pat = this.patientService.defaultPatient;
   }
 
   get controls() {
@@ -77,7 +77,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   ngOnInit() {
     this.createForm();
     this.getSelectOptions();
-    this.getPatient();
+    this.getDemographicsData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
@@ -85,12 +85,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       }
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
-
-
-    // this.apiService.getPageCollection().subscribe((page) =>{
-    //   this.pageData = page;
-    //   console.log('pageData', this.pageData);
-    // });
   }
 
   public createForm() {
@@ -103,7 +97,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       work: this.fb.control(''),
       email: this.fb.control(''),
       preferredContact: this.fb.control(''),
-      address1: this.fb.control(''),
+      address: this.fb.control(''),
       address2: this.fb.control(''),
       zip: this.fb.control(''),
       city: this.fb.control(''),
@@ -120,39 +114,25 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
   }
 
-  getPatient() {
-    this.apiService.getPageCollection().subscribe((page) =>{
+  getDemographicsData() {
+    console.log('pat', this.pat);
+    this.apiService.getPageCollection().subscribe((page) => {
       this.pageData = page;
-      console.log('pageData', this.pageData);
       this.pageData.map(p => {
         this.getFormData(p);
         console.log('$$$$', p);
       });
     });
-    // this.apiService.getPatient(GET_PATIENT)
-    //   .subscribe(patient => {
-    //     this.ref.markForCheck();
-    //     this.pat = patient;
-    //     console.log(this.pat);
-    //     // this.patient = patient;
-    //
-    //     this.updateForm();
-    //     this.setPatient();
-
-    //   });
-
-    // this.apiService.getPatient().subscribe((p) => {
-    //   this.pat = p;
-    //   console.log('patient', this.pat);
-    //
-    //   this.updateForm();
-    //   this.setPatient();
-    // });
   }
 
-  setPatient() {
-    return JSON.stringify(this.patientGroup.value);
-  }
+  // updateFormData() {
+  //   this.pat = this.patientGroup.value;
+  //   this.apiService.
+  // }
+
+  // setPatient() {
+  //   return JSON.stringify(this.patientGroup.value);
+  // }
   private getFormData(pageData) {
     this.controls.title.setValue(pageData.title);
     this.controls.firstName.setValue(pageData.firstName);
@@ -162,7 +142,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.controls.work.setValue(pageData.work);
     this.controls.email.setValue(pageData.email);
     this.controls.preferredContact.setValue(pageData.preferredContact);
-    this.controls.address1.setValue(pageData.address1);
+    this.controls.address.setValue(pageData.address);
     this.controls.address2.setValue(pageData.address2);
     this.controls.zip.setValue(pageData.zip);
     this.controls.city.setValue(pageData.city);
@@ -178,54 +158,58 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.controls.gender.setValue(pageData.gender);
   }
 
+  // private updateFormData(formItem) {
+  //
+  // }
+
   private getSelectOptions() {
     this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.preferredContactList = optionList;
-        this.controls.preferredContact.setValue(this.patient.preferredContact);
+        this.controls.preferredContact.setValue(this.pat.preferredContact);
     });
 
     this.apiService.getCollection(GET_REFERRAL_SOURCE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.referrelSourceList = optionList;
-        this.controls.referralSource.setValue(this.patient.referralSource);
+        this.controls.referralSource.setValue(this.pat.referralSource);
     });
 
     this.apiService.getCollection(GET_LANGUAGE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.languageList = optionList;
-        this.controls.language.setValue(this.patient.language);
+        this.controls.language.setValue(this.pat.language);
       });
 
     this.apiService.getCollection(GET_WORK_STATUS)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.workStatusList = optionList;
-        this.controls.workStatus.setValue(this.patient.workStatus);
+        this.controls.workStatus.setValue(this.pat.workStatus);
     });
 
     this.apiService.getCollection(GET_EMPLOYER)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.employer = optionList;
-        this.controls.workStatus.setValue(this.patient.employer);
+        this.controls.workStatus.setValue(this.pat.employer);
       });
 
     this.apiService.getCollection(GET_RACE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.raceList = optionList;
-        this.controls.race.setValue(this.patient.race);
+        this.controls.race.setValue(this.pat.race);
     });
 
     this.apiService.getCollection(GET_ETHNICITY)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.ethnicityList = optionList;
-        this.controls.ethnicity.setValue(this.patient.ethnicity);
+        this.controls.ethnicity.setValue(this.pat.ethnicity);
     });
   }
 

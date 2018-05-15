@@ -19,7 +19,7 @@ export class PatientService {
     work: '',
     email: '',
     preferredContact: '',
-    address1: '',
+    address: '',
     address2: '',
     zip: '',
     city: '',
@@ -52,7 +52,7 @@ export class PatientService {
   //     );
   // }
   //
-  getPatients(url) {
-    return this.apiService.get(url);
-  }
+  // getPatients(url) {
+  //   return this.apiService.get(url);
+  // }
 }

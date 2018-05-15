@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs/';
 import {ClickedNavButtonInterface} from '../form.interface';
 import {MatSnackBar} from '@angular/material';
+import {ApiService} from './api.service';
 
 @Injectable()
 export class NavigationService {
 
   constructor(
     private router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private apiService: ApiService
   ) { }
 
   private navButtonClick$ = new Subject<ClickedNavButtonInterface>();

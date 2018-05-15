@@ -36,19 +36,12 @@ export class ApiService {
     return this.demographics$;
   }
 
-  // getPatient() {
-  //   this.patientCollection = this.afs.collection('patients');
-  //   this.pat$ = this.patientCollection.valueChanges();
-  //   return this.pat$;
-  //   // this.pat$ = this.patientCollection.valueChanges();
-  //   // return this.pat$;
-  // }
-
-  public get(url: string, query?): Observable<any> {
-    return Observable.of(JSON.stringify(mock_data[url]))
-      .pipe(
-        map((data) => JSON.parse(data))
-      )
-      .delay(500);
+  updateFormData(formData) {
+    this.patientDoc.update(formData);
   }
 }
+//
+// updateItem(item: ItemsInterface) {
+//   this.itemDoc = this.afs.doc(`items/${item.id}`);
+//   this.itemDoc.update(item);
+// }
