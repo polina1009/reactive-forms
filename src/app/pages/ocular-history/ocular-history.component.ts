@@ -5,6 +5,9 @@ import { toggleOcularList } from './ocular-input-data';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
+import {PatientService} from '../../services/patient.service';
+import { GET_OCULAR_HISTORY } from '../../services/api.constants';
+import {OcularHistoryInterface} from '../../interfaces/ocular-history.inteface';
 
 @Component({
   selector: 'app-ocular-history',
@@ -24,13 +27,19 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   };
 
   private navNextSubscribe: Subscription;
+  public pageData: OcularHistoryInterface[];
 
   constructor(
     private fb: FormBuilder,
-    private navService: NavigationService
+    private navService: NavigationService,
+    private patientService: PatientService
   ) {
     this.toggleOcularList = toggleOcularList;
     this.createForm();
+  }
+
+  get controls() {
+    return this.ocularHistoryForms.controls;
   }
 
   createForm() {
@@ -58,12 +67,46 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  setFormData(pageData) {
+    this.controls.lastVisionExam.setValue(pageData.lastVisionExam);
+    this.controls.cataracts.setValue(pageData.cataracts);
+    this.controls.contactLenses.setValue(pageData.contactLenses);
+    this.controls.cornealDisease.setValue(pageData.cornealDisease);
+    this.controls.crossedEyes.setValue(pageData.crossedEyes);
+    this.controls.diabeticEyeDisease.setValue(pageData.diabeticEyeDisease);
+    this.controls.diabeticRetinopathy.setValue(pageData.diabeticRetinopathy);
+    this.controls.droopingEyelid.setValue(pageData.droopingEyelid);
+    this.controls.dryEye.setValue(pageData.dryEye);
+    this.controls.eyelidCondition.setValue(pageData.eyelidCondition);
+    this.controls.eyeInfection.setValue(pageData.eyeInfection);
+    this.controls.eyeInjury.setValue(pageData.eyeInjury);
+    this.controls.glasses.setValue(pageData.glasses);
+    this.controls.glaucoma.setValue(pageData.glaucoma);
+    this.controls.lazyEye.setValue(pageData.lazyEye);
+    this.controls.macularDisease.setValue(pageData.macularDisease);
+    this.controls.prominentEyes.setValue(pageData.prominentEyes);
+    this.controls.redEye.setValue(pageData.redEye);
+    this.controls.retinalDisease.setValue(pageData.retinalDisease);
+    this.controls.otherEyeConditions.setValue(pageData.otherEyeConditions);
+  }
+
+  getOcularHistoryData() {
+    this.patientService.getOcularHistory(GET_OCULAR_HISTORY).subscribe((page) => {
+      this.pageData = page;
+      this.pageData.map(p => {
+        this.setFormData(p);
+      });
+    });
+  }
+
   ngOnInit() {
+    this.getOcularHistoryData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/ocular-history/))) {
         return;
       }
+      this.patientService.updateOcularHistory(this.ocularHistoryForms.value, GET_OCULAR_HISTORY)
       this.navService.preparationAndDisplayFormData(navUrl, this.ocularHistoryForms.value);
     });
   }

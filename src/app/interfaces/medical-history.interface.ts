@@ -1,4 +1,5 @@
 export interface MedicalHistoryInterface {
+  id?: string;
   surgeries: SurgeriesInterface[];
   injuries: InjuriesInterface[];
   lastMedicalExam: string;

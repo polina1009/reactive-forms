@@ -6,9 +6,10 @@ import { FamilyHistoryInterface } from './family-history.interface';
 
 
 export interface PatientsInterface {
+  id?: string;
   demographics: DemographicsInterface[];
-  // medicalHistory: MedicalHistoryInterface[];
-  // ocularHistory: OcularHistoryInterface[];
+  medicalHistory: MedicalHistoryInterface[];
+  ocularHistory: OcularHistoryInterface[];
   // medications: MedicationsInterface[];
   // familyHistory: FamilyHistoryInterface;
 }

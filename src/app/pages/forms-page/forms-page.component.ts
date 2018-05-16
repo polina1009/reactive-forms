@@ -36,8 +36,8 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public ethnicityList: SelectsListInterface[];
   private navNextSubscribe: Subscription;
 
-  public pat: DemographicsInterface;
-  public pageData: DemographicsInterface[];
+  private pat: DemographicsInterface;
+  private pageData: DemographicsInterface[];
 
   patientGroup: FormGroup;
 
@@ -57,7 +57,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     private patientService: PatientService,
     private ref: ChangeDetectorRef,
     private navService: NavigationService,
-    private apiService: ApiService
   ) {
     this.preferredContactList = [];
     this.referrelSourceList = [];
@@ -81,7 +80,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;
       }
-      this.patientService.updatePageData(this.patientGroup.value, GET_DEMOGRAPHICS);
+      this.patientService.updateDemographicsData(this.patientGroup.value, GET_DEMOGRAPHICS);
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
   }

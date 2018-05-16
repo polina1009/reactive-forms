@@ -9,6 +9,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { ApiOptionInterface} from '../interfaces/selects.interface';
 import { PatientsInterface } from '../interfaces/patient.interface';
 import {DemographicsInterface} from '../interfaces/demographics.interface';
+import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
+import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 
 
 @Injectable()
@@ -38,7 +40,7 @@ export class ApiService {
     query = this.patient.collection(url).snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
-          const data = action.payload.doc.data() as DemographicsInterface;
+          const data = action.payload.doc.data();
           data.id = action.payload.doc.id;
           this.pageId = data.id;
           return data;
@@ -47,7 +49,17 @@ export class ApiService {
     return query;
   }
 
-  updateData(formData: DemographicsInterface, url: string) {
+  updateDemographics(formData: DemographicsInterface, url: string) {
+    this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesDoc.update(formData);
+  }
+
+  updateMedicalHistory(formData: MedicalHistoryInterface, url: string) {
+    this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesDoc.update(formData);
+  }
+
+  updateOcularHistory(formData: OcularHistoryInterface, url: string) {
     this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesDoc.update(formData);
   }

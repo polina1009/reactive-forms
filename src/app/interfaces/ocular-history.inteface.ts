@@ -1,4 +1,5 @@
 export interface OcularHistoryInterface {
+  id?: string;
   lastVisionExam: string;
   cataracts: ToggleOcularInterface;
   contactLenses: ToggleOcularInterface;

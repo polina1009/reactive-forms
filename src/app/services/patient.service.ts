@@ -6,6 +6,8 @@ import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/finally';
 import {ApiOptionInterface, SelectsListInterface} from '../interfaces/selects.interface';
 import {DemographicsInterface} from '../interfaces/demographics.interface';
+import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
+import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 
 
 @Injectable()
@@ -36,6 +38,8 @@ export class PatientService {
   };
 
   demographics$: Observable<DemographicsInterface[]>;
+  medicalHistory$: Observable<MedicalHistoryInterface[]>;
+  ocularHistory$: Observable<OcularHistoryInterface[]>;
 
   constructor(private apiService: ApiService) {
   }
@@ -58,7 +62,23 @@ export class PatientService {
     return this.apiService.getPageData(url, this.demographics$);
   }
 
-  updatePageData(formData, url) {
-    return this.apiService.updateData(formData, url);
+  getMedicalHistory(url) {
+    return this.apiService.getPageData(url, this.medicalHistory$);
+  }
+
+  getOcularHistory(url) {
+    return this.apiService.getPageData(url, this.ocularHistory$);
+  }
+
+  updateDemographicsData(formData, url) {
+    return this.apiService.updateDemographics(formData, url);
+  }
+
+  updateMedicalHistory(formData, url) {
+    return this.apiService.updateMedicalHistory(formData, url);
+  }
+
+  updateOcularHistory(formData, url) {
+    return this.apiService.updateOcularHistory(formData, url);
   }
 }
