@@ -18,9 +18,8 @@ export class ApiService {
   select$: Observable<ApiOptionInterface[]>;
 
   patientDoc: AngularFirestoreDocument<PatientsInterface>;
-  demographics$: Observable<DemographicsInterface[]>;
-  demographicsDoc: AngularFirestoreDocument<DemographicsInterface>;
-  dataId: string;
+  pagesDoc: AngularFirestoreDocument<DemographicsInterface>;
+  pageId: string;
 
   constructor(private afs: AngularFirestore) {
   }
@@ -35,21 +34,21 @@ export class ApiService {
     return this.select$;
   }
 
-  getPageCollection(url: string) {
-    this.demographics$ = this.patient.collection(url).snapshotChanges()
+  getPageData(url: string, query?) {
+    query = this.patient.collection(url).snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
           const data = action.payload.doc.data() as DemographicsInterface;
           data.id = action.payload.doc.id;
-          this.dataId = data.id;
+          this.pageId = data.id;
           return data;
         });
       });
-    return this.demographics$;
+    return query;
   }
 
-  updateDemographicsData(formData: DemographicsInterface, url: string) {
-    this.demographicsDoc = this.patientDoc.collection(url).doc(`${this.dataId}`);
-    this.demographicsDoc.update(formData);
+  updateData(formData: DemographicsInterface, url: string) {
+    this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesDoc.update(formData);
   }
 }

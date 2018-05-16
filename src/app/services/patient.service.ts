@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import {ApiPatientInterface, ApiSelectInterface, PatientInterface, SelectOptionInterface} from '../form.interface';
-// import { SelectInterface } from '../interfaces/selects.interface';
 import {Observable} from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/finally';
 import {ApiOptionInterface, SelectsListInterface} from '../interfaces/selects.interface';
+import {DemographicsInterface} from '../interfaces/demographics.interface';
 
 
 @Injectable()
@@ -36,6 +35,8 @@ export class PatientService {
     gender: '',
   };
 
+  demographics$: Observable<DemographicsInterface[]>;
+
   constructor(private apiService: ApiService) {
   }
 
@@ -54,10 +55,10 @@ export class PatientService {
   }
 
   getDemographics(url) {
-    return this.apiService.getPageCollection(url);
+    return this.apiService.getPageData(url, this.demographics$);
   }
 
   updatePageData(formData, url) {
-    return this.apiService.updateDemographicsData(formData, url);
+    return this.apiService.updateData(formData, url);
   }
 }
