@@ -10,13 +10,13 @@ import {
   GET_EMPLOYER,
   GET_RACE,
   GET_ETHNICITY,
-  GET_PATIENT
+  GET_DEMOGRAPHICS
 } from '../../services/api.constants';
 import {map} from 'rxjs/operator/map';
 import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
-import { OptionInterface } from '../../interfaces/selects.interface';
+import {ApiOptionInterface, SelectsListInterface} from '../../interfaces/selects.interface';
 import {DemographicsInterface} from '../../interfaces/demographics.interface';
 
 @Component({
@@ -27,13 +27,13 @@ import {DemographicsInterface} from '../../interfaces/demographics.interface';
 })
 
 export class FormsPageComponent implements  OnInit, OnDestroy {
-  public preferredContactList: OptionInterface[];
-  public referrelSourceList: OptionInterface[];
-  public languageList: OptionInterface[];
-  public workStatusList: OptionInterface[];
-  public employer: OptionInterface[];
-  public raceList: OptionInterface[];
-  public ethnicityList: OptionInterface[];
+  public preferredContactList: SelectsListInterface[];
+  public referrelSourceList: SelectsListInterface[];
+  public languageList: SelectsListInterface[];
+  public workStatusList: SelectsListInterface[];
+  public employer: SelectsListInterface[];
+  public raceList: SelectsListInterface[];
+  public ethnicityList: SelectsListInterface[];
   private navNextSubscribe: Subscription;
 
   public pat: DemographicsInterface;
@@ -81,7 +81,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;
       }
-      this.apiService.updateDemographicsData(this.patientGroup.value);
+      this.patientService.updatePageData(this.patientGroup.value, GET_DEMOGRAPHICS);
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
   }
@@ -114,7 +114,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   getDemographicsData() {
-    this.apiService.getPageCollection().subscribe((page) => {
+    this.patientService.getDemographics(GET_DEMOGRAPHICS).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
         this.getFormData(p);
@@ -148,49 +148,49 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   private getSelectOptions() {
-    this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST)
+    this.patientService.getOptionList(GET_PREFERRED_CONTACT_LIST)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.preferredContactList = optionList;
         this.controls.preferredContact.setValue(this.pat.preferredContact);
     });
 
-    this.apiService.getCollection(GET_REFERRAL_SOURCE)
+    this.patientService.getOptionList(GET_REFERRAL_SOURCE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.referrelSourceList = optionList;
         this.controls.referralSource.setValue(this.pat.referralSource);
     });
 
-    this.apiService.getCollection(GET_LANGUAGE)
+    this.patientService.getOptionList(GET_LANGUAGE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.languageList = optionList;
         this.controls.language.setValue(this.pat.language);
       });
 
-    this.apiService.getCollection(GET_WORK_STATUS)
+    this.patientService.getOptionList(GET_WORK_STATUS)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.workStatusList = optionList;
         this.controls.workStatus.setValue(this.pat.workStatus);
     });
 
-    this.apiService.getCollection(GET_EMPLOYER)
+    this.patientService.getOptionList(GET_EMPLOYER)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.employer = optionList;
         this.controls.workStatus.setValue(this.pat.employer);
       });
 
-    this.apiService.getCollection(GET_RACE)
+    this.patientService.getOptionList(GET_RACE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.raceList = optionList;
         this.controls.race.setValue(this.pat.race);
     });
 
-    this.apiService.getCollection(GET_ETHNICITY)
+    this.patientService.getOptionList(GET_ETHNICITY)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.ethnicityList = optionList;

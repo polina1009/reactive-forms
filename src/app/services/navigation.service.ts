@@ -11,7 +11,6 @@ export class NavigationService {
   constructor(
     private router: Router,
     public snackBar: MatSnackBar,
-    private apiService: ApiService
   ) { }
 
   private navButtonClick$ = new Subject<ClickedNavButtonInterface>();
@@ -28,7 +27,6 @@ export class NavigationService {
     setTimeout(() => {
       const formData = formControlValue;
       if ((this.validate(formData))) {
-        // this.apiService.updateFormData(formData);
         console.log('########', formData, '#########');
         this.goTo(url);
       } else {

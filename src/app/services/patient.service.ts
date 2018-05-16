@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/finally';
+import {ApiOptionInterface, SelectsListInterface} from '../interfaces/selects.interface';
 
 
 @Injectable()
@@ -38,21 +39,25 @@ export class PatientService {
   constructor(private apiService: ApiService) {
   }
 
-  // public getSelectionList(url) {
-  //   return this.apiService.get(url)
-  //     .pipe(
-  //       map((list: ApiSelectInterface[]) => {
-  //         return list.map((item): SelectOptionInterface => {
-  //           return {
-  //             value: item.id,
-  //             viewValue: item.name
-  //           };
-  //         });
-  //       })
-  //     );
-  // }
-  //
-  // getPatients(url) {
-  //   return this.apiService.get(url);
-  // }
+  public getOptionList(url) {
+    return this.apiService.getSelectCollection(url)
+      .pipe(
+        map((list: ApiOptionInterface[]) => {
+          return list.map((item): SelectsListInterface => {
+            return {
+              value: item.id,
+              viewValue: item.name
+            };
+          });
+        })
+      );
+  }
+
+  getDemographics(url) {
+    return this.apiService.getPageCollection(url);
+  }
+
+  updatePageData(formData, url) {
+    return this.apiService.updateDemographicsData(formData, url);
+  }
 }
