@@ -81,6 +81,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
         return;
       }
+      this.apiService.updateDemographicsData(this.patientGroup.value);
       this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
     });
   }
@@ -113,12 +114,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   }
 
   getDemographicsData() {
-    console.log('pat', this.pat);
     this.apiService.getPageCollection().subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
         this.getFormData(p);
-        console.log('$$$$', p);
       });
     });
   }

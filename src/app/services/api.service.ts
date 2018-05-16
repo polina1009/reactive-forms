@@ -46,7 +46,7 @@ export class ApiService {
     return this.demographics$;
   }
 
-  updateFormData(formData: DemographicsInterface) {
+  updateDemographicsData(formData: DemographicsInterface) {
     this.demographicsDoc = this.patientDoc.collection<DemographicsInterface>('demographics').doc(`${this.dataId}`);
     this.demographicsDoc.update(formData);
   }

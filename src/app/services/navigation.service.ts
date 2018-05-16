@@ -28,7 +28,7 @@ export class NavigationService {
     setTimeout(() => {
       const formData = formControlValue;
       if ((this.validate(formData))) {
-        this.apiService.updateFormData(formData);
+        // this.apiService.updateFormData(formData);
         console.log('########', formData, '#########');
         this.goTo(url);
       } else {
