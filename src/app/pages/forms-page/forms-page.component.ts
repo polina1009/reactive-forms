@@ -17,7 +17,6 @@ import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
 import {ApiService} from '../../services/api.service';
 import { OptionInterface } from '../../interfaces/selects.interface';
-import {PatientsInterface} from '../../interfaces/patient.interface';
 import {DemographicsInterface} from '../../interfaces/demographics.interface';
 
 @Component({
@@ -35,7 +34,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public employer: OptionInterface[];
   public raceList: OptionInterface[];
   public ethnicityList: OptionInterface[];
-  // public patient: PatientInterface;
   private navNextSubscribe: Subscription;
 
   public pat: DemographicsInterface;
@@ -125,14 +123,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
   }
 
-  // updateFormData() {
-  //   this.pat = this.patientGroup.value;
-  //   this.apiService.
-  // }
-
-  // setPatient() {
-  //   return JSON.stringify(this.patientGroup.value);
-  // }
   private getFormData(pageData) {
     this.controls.title.setValue(pageData.title);
     this.controls.firstName.setValue(pageData.firstName);
@@ -157,10 +147,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.controls.ethnicity.setValue(pageData.ethnicity);
     this.controls.gender.setValue(pageData.gender);
   }
-
-  // private updateFormData(formItem) {
-  //
-  // }
 
   private getSelectOptions() {
     this.apiService.getCollection(GET_PREFERRED_CONTACT_LIST)

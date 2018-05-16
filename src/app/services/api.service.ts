@@ -20,6 +20,8 @@ export class ApiService {
 
   patientDoc: AngularFirestoreDocument<PatientsInterface>;
   demographics$: Observable<DemographicsInterface[]>;
+  demographicsDoc: AngularFirestoreDocument<DemographicsInterface>;
+  dataId: string;
 
   constructor(private afs: AngularFirestore) {
   }
@@ -32,16 +34,20 @@ export class ApiService {
 
   getPageCollection() {
     this.patientDoc = this.afs.doc<PatientsInterface>('patients/1');
-    this.demographics$ = this.patientDoc.collection<DemographicsInterface>('demographics').valueChanges();
+    this.demographics$ = this.patientDoc.collection<DemographicsInterface>('demographics').snapshotChanges()
+      .map((actions) => {
+        return actions.map(action => {
+          const data = action.payload.doc.data() as DemographicsInterface;
+          data.id = action.payload.doc.id;
+          this.dataId = data.id;
+          return data;
+        });
+      });
     return this.demographics$;
   }
 
-  updateFormData(formData) {
-    this.patientDoc.update(formData);
+  updateFormData(formData: DemographicsInterface) {
+    this.demographicsDoc = this.patientDoc.collection<DemographicsInterface>('demographics').doc(`${this.dataId}`);
+    this.demographicsDoc.update(formData);
   }
 }
-//
-// updateItem(item: ItemsInterface) {
-//   this.itemDoc = this.afs.doc(`items/${item.id}`);
-//   this.itemDoc.update(item);
-// }
