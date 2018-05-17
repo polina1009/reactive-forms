@@ -10,6 +10,6 @@ export interface PatientsInterface {
   demographics: DemographicsInterface[];
   medicalHistory: MedicalHistoryInterface[];
   ocularHistory: OcularHistoryInterface[];
-  // medications: MedicationsInterface[];
+  medications: MedicationsInterface[];
   // familyHistory: FamilyHistoryInterface;
 }

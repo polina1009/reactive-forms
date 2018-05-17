@@ -1,6 +1,9 @@
+import { ApiToggleInterface } from './toggle.interface';
+
 export interface MedicationsInterface {
+  id?: string;
   comments: string;
-  takeAnyMedications: MedicationsToggleInterface;
+  takeAnyMedications: ApiToggleInterface;
   medications: MedArrInterface[];
 }
 
@@ -9,10 +12,4 @@ export interface MedArrInterface {
   current: boolean;
   startDate: string;
   stopDate: string;
-}
-
-export interface MedicationsToggleInterface {
-  id: string;
-  name: string;
-  isSelected: boolean;
 }

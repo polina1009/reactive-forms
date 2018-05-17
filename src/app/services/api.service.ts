@@ -13,6 +13,7 @@ import {DemographicsInterface} from '../interfaces/demographics.interface';
 import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
+import {MedicationsInterface} from '../interfaces/medications.interface';
 
 
 @Injectable()
@@ -25,7 +26,10 @@ export class ApiService {
   toggle$: Observable<ApiToggleInterface[]>;
 
   patientDoc: AngularFirestoreDocument<PatientsInterface>;
-  pagesDoc: AngularFirestoreDocument<DemographicsInterface>;
+  pagesDemogDoc: AngularFirestoreDocument<DemographicsInterface>;
+  pagesMedHistDoc: AngularFirestoreDocument<MedicalHistoryInterface>;
+  pagesOculHistgDoc: AngularFirestoreDocument<OcularHistoryInterface>;
+  pagesMedDoc: AngularFirestoreDocument<MedicationsInterface>;
   pageId: string;
 
   constructor(private afs: AngularFirestore) {
@@ -54,6 +58,7 @@ export class ApiService {
           const data = action.payload.doc.data();
           data.id = action.payload.doc.id;
           this.pageId = data.id;
+          console.log(this.pageId);
           return data;
         });
       });
@@ -61,17 +66,31 @@ export class ApiService {
   }
 
   updateDemographics(formData: DemographicsInterface, url: string) {
-    this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesDoc.update(formData);
+    console.log(this.pageId);
+    this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesDemogDoc.update(formData);
   }
 
   updateMedicalHistory(formData: MedicalHistoryInterface, url: string) {
-    this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesDoc.update(formData);
+    console.log(this.pageId);
+    this.pagesMedHistDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesMedHistDoc.update(formData);
   }
 
   updateOcularHistory(formData: OcularHistoryInterface, url: string) {
-    this.pagesDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesDoc.update(formData);
+    console.log(this.pageId);
+    this.pagesOculHistgDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesOculHistgDoc.update(formData);
   }
+
+  updateMedications(formData: MedicationsInterface, url: string) {
+    this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesMedDoc.update(formData);
+  }
+
+  // updateMedications(formData: MedicationsInterface, url: string) {
+  //   console.log(this.pageId);
+  //   this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+  //   this.pagesMedDoc.update(formData);
+  // }
 }

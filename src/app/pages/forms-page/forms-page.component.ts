@@ -33,6 +33,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public raceList: SelectsListInterface[];
   public ethnicityList: SelectsListInterface[];
   private navNextSubscribe: Subscription;
+  private getDataSubscription: Subscription;
 
   private pat: DemographicsInterface;
   public pageData: DemographicsInterface[];
@@ -198,6 +199,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
 
 
   ngOnDestroy() {
+    this.getDataSubscription.unsubscribe();
     this.navNextSubscribe.unsubscribe();
   }
 

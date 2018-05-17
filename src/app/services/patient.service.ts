@@ -9,6 +9,7 @@ import {DemographicsInterface} from '../interfaces/demographics.interface';
 import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
+import {MedicationsInterface} from '../interfaces/medications.interface';
 
 
 @Injectable()
@@ -41,6 +42,7 @@ export class PatientService {
   demographics$: Observable<DemographicsInterface[]>;
   medicalHistory$: Observable<MedicalHistoryInterface[]>;
   ocularHistory$: Observable<OcularHistoryInterface[]>;
+  medications$: Observable<MedicationsInterface[]>;
 
   constructor(private apiService: ApiService) {
   }
@@ -87,6 +89,10 @@ export class PatientService {
     return this.apiService.getPageData(url, this.ocularHistory$);
   }
 
+  getMedications(url) {
+    return this.apiService.getPageData(url, this.medications$);
+  }
+
   updateDemographicsData(formData, url) {
     return this.apiService.updateDemographics(formData, url);
   }
@@ -98,4 +104,12 @@ export class PatientService {
   updateOcularHistory(formData, url) {
     return this.apiService.updateOcularHistory(formData, url);
   }
+
+  updateMedications(formData, url) {
+    return this.apiService.updateMedications(formData, url);
+  }
+
+  // updateMedications(formData, url) {
+  //   return this.apiService.updateMedications(formData, url);
+  // }
 }

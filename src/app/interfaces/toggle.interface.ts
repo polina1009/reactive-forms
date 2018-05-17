@@ -1,12 +1,12 @@
 export interface ApiToggleInterface {
-  index: string;
+  index?: string;
   id: string;
   name: string;
   isSelected: boolean;
 }
 
 export interface ToggleInterface {
-  index: string;
+  index?: string;
   groupName: string;
   value: string;
   isSelected: boolean;

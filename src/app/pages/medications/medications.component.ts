@@ -1,12 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import {FormGroup, FormBuilder, FormArray} from '@angular/forms';
 import {Subscription} from 'rxjs/Subscription';
 import {NavigationService} from '../../services/navigation.service';
+import {PatientService} from '../../services/patient.service';
+import { GET_MEDICATIONS } from '../../services/api.constants';
+import {MedicationsInterface} from '../../interfaces/medications.interface';
 
 @Component({
   selector: 'app-medications',
   templateUrl: './medications.component.html',
-  styleUrls: ['./medications.component.scss']
+  styleUrls: ['./medications.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MedicationsComponent implements OnInit, OnDestroy {
 
@@ -19,12 +23,19 @@ export class MedicationsComponent implements OnInit, OnDestroy {
     showMask : false,
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
+  public pageData: MedicationsInterface[];
 
   constructor(
     private fb: FormBuilder,
-    public navService: NavigationService
+    private navService: NavigationService,
+    private ref: ChangeDetectorRef,
+    private patientService: PatientService
   ) {
     this.createForm();
+  }
+
+  get controls() {
+    return this.medicationsForm.controls;
   }
 
   createForm() {
@@ -46,6 +57,25 @@ export class MedicationsComponent implements OnInit, OnDestroy {
     });
   }
 
+  private setFormData(pageData) {
+    const medications = this.medicationsForm.get('medications') as FormArray;
+    medications.removeAt(0);
+
+    this.controls.comments.setValue(pageData.comments);
+    this.controls.takeAnyMedications.setValue(pageData.takeAnyMedications);
+    this.controls.medications.patchValue(pageData.medications);
+    pageData.medications.forEach(m => medications.push(this.fb.group(m)));
+  }
+
+  getMedicationsData() {
+    this.patientService.getMedications(GET_MEDICATIONS).subscribe((page) => {
+      this.pageData = page;
+      this.pageData.map(p => {
+        this.setFormData(p);
+      });
+    });
+  }
+
   addMedications() {
     const arrayControl = this.medicationsForm.get('medications') as FormArray;
     arrayControl.push(this.createMedications());
@@ -57,6 +87,9 @@ export class MedicationsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getMedicationsData();
+    // this.patientService.updateMedications(this.medicationsForm.value, GET_MEDICATIONS);
+    this.patientService.updateMedications(this.medicationsForm.value, GET_MEDICATIONS);
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medications/))) {

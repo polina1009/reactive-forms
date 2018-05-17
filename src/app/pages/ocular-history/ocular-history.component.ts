@@ -28,6 +28,7 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   };
 
   private navNextSubscribe: Subscription;
+  private getDataSubscription: Subscription;
   public pageData: OcularHistoryInterface[];
 
   constructor(
@@ -93,7 +94,7 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   }
 
   getOcularHistoryData() {
-    this.patientService.getOcularHistory(GET_OCULAR_HISTORY).subscribe((page) => {
+    this.getDataSubscription = this.patientService.getOcularHistory(GET_OCULAR_HISTORY).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
         this.setFormData(p);
@@ -119,10 +120,10 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
       this.patientService.updateOcularHistory(this.ocularHistoryForms.value, GET_OCULAR_HISTORY);
       this.navService.preparationAndDisplayFormData(navUrl, this.ocularHistoryForms.value);
     });
-    console.log(this.ocularHistoryForms.value);
   }
 
   ngOnDestroy () {
+    this.getDataSubscription.unsubscribe();
     this.navNextSubscribe.unsubscribe();
   }
 

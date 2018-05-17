@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs/';
 import {ClickedNavButtonInterface} from '../form.interface';
 import {MatSnackBar} from '@angular/material';
-import {ApiService} from './api.service';
 
 @Injectable()
 export class NavigationService {
@@ -27,7 +26,6 @@ export class NavigationService {
     setTimeout(() => {
       const formData = formControlValue;
       if ((this.validate(formData))) {
-        console.log('########', formData, '#########');
         this.goTo(url);
       } else {
         this.openSnackBar('Form is not full!', 'Сontinue filling');
