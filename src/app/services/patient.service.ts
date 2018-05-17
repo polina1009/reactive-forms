@@ -8,6 +8,7 @@ import {ApiOptionInterface, SelectsListInterface} from '../interfaces/selects.in
 import {DemographicsInterface} from '../interfaces/demographics.interface';
 import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
+import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
 
 
 @Injectable()
@@ -52,6 +53,22 @@ export class PatientService {
             return {
               value: item.id,
               viewValue: item.name
+            };
+          });
+        })
+      );
+  }
+
+  public getToggleList(url) {
+    return this.apiService.getToggleList(url)
+      .pipe(
+        map((list: ApiToggleInterface[]) => {
+          return list.map((item): ToggleInterface => {
+            return {
+              index: item.index,
+              groupName: item.id,
+              value: item.name,
+              isSelected: item.isSelected
             };
           });
         })

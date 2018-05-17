@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PatientService } from '../../services/patient.service';
-import {SelectOptionInterface, PatientInterface} from '../../form.interface';
 import {
   GET_PREFERRED_CONTACT_LIST,
   GET_REFERRAL_SOURCE,
@@ -15,8 +14,7 @@ import {
 import {map} from 'rxjs/operator/map';
 import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
-import {ApiService} from '../../services/api.service';
-import {ApiOptionInterface, SelectsListInterface} from '../../interfaces/selects.interface';
+import { SelectsListInterface } from '../../interfaces/selects.interface';
 import {DemographicsInterface} from '../../interfaces/demographics.interface';
 
 @Component({
@@ -37,7 +35,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   private navNextSubscribe: Subscription;
 
   private pat: DemographicsInterface;
-  private pageData: DemographicsInterface[];
+  public pageData: DemographicsInterface[];
 
   patientGroup: FormGroup;
 

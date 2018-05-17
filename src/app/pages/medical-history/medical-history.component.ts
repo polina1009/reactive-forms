@@ -1,25 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { toggleIllnessList } from './medical-history-data';
 import { ToggleIllnessInterface } from './medical-history.interface';
 import { NavigationService } from '../../services/navigation.service';
 import { Subscription } from 'rxjs/Subscription';
 import {PatientService} from '../../services/patient.service';
-import { GET_MEDICAL_HISTORY } from '../../services/api.constants'
-import {DemographicsInterface} from '../../interfaces/demographics.interface';
+import { GET_MEDICAL_HISTORY, GET_MEDICAL_TOGGLE_LIST } from '../../services/api.constants';
 import {MedicalHistoryInterface} from '../../interfaces/medical-history.interface';
+import {ToggleInterface} from '../../interfaces/toggle.interface';
 
 @Component({
   selector: 'app-medical-history',
   templateUrl: './medical-history.component.html',
-  styleUrls: ['./medical-history.component.scss']
+  styleUrls: ['./medical-history.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MedicalHistoryComponent implements OnInit, OnDestroy {
   medicalHistoryForms: FormGroup;
   surgeries: FormArray;
   injuries: FormArray;
 
-  public toggleList: ToggleIllnessInterface[];
+  public toggleList: ToggleInterface[];
   public maskDate = {
     guide: true,
     showMask : false,
@@ -32,10 +32,11 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private ref: ChangeDetectorRef,
     private patientService: PatientService,
     private navService: NavigationService
   ) {
-    this.toggleList = toggleIllnessList;
+    this.toggleList = [];
     this.createForm();
   }
 
@@ -70,23 +71,66 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  getToggleList() {
+    this.patientService.getToggleList(GET_MEDICAL_TOGGLE_LIST).subscribe(toggleList => {
+      this.ref.markForCheck();
+      this.toggleList = toggleList;
+    });
+  }
+
   createSurgeries(): FormGroup {
     return this.fb.group({
-      surgeriesType: '',
-      dateOfSurgery: ''
+      surgeriesType: this.fb.control(''),
+      dateOfSurgery: this.fb.control(''),
     });
   }
 
   createInjuries(): FormGroup {
     return this.fb.group({
-      typeOfInjury: '',
-      dateOfInjury: ''
+      typeOfInjury: this.fb.control(''),
+      dateOfInjury: this.fb.control(''),
     });
   }
 
   private setFormData(pageData) {
-    this.controls.surgeries.setValue(pageData.surgeries);
-    this.controls.injuries.setValue(pageData.injuries);
+    // console.log(this.controls.surgeries.value.length);
+    // const cloneS = JSON.stringify(pageData.surgeries);
+    // console.log(JSON.parse(cloneS));
+    //
+    // this.controls.surgeries.value.splice(0, (this.controls.surgeries.value.length), JSON.parse(cloneS));
+    // this.controls.surgeries.value.map(pD => {
+    //   if (!!(pD.length > 1)) {
+    //     console.log(pD.length);
+    //     this.addSurgeries();
+    //   }
+    // });
+
+
+    // console.log(this.controls.injuries.value.length);
+    // this.controls.injuries.value.splice(0, this.controls.injuries.value.length, ...pageData.injuries);
+    // console.log(this.controls.injuries.value.length);
+    // if ((this.controls.injuries.value.length) > 1) {
+    //   this.controls.injuries.value.forEach(c => {
+    //     this.addInjuries();
+    //   });
+    //   // this.addInjuries();
+    // }
+    // this.controls.injuries.value.splice(0, this.controls.injuries.value.length, ...pageData.injuries);
+    // if ((this.controls.injuries.value.length) > 1) {
+    //   this.controls.injuries.value.forEach(c => {
+    //     this.addInjuries();
+    //   });
+    //   this.addInjuries();
+    // }
+    const surgeries = this.medicalHistoryForms.get('surgeries') as FormArray;
+    const injuries = this.medicalHistoryForms.get('injuries') as FormArray;
+    surgeries.removeAt(0);
+    injuries.removeAt(0);
+
+    this.controls.surgeries.patchValue(pageData.surgeries);
+    pageData.surgeries.forEach(s => surgeries.push(this.fb.group(s)));
+    this.controls.injuries.patchValue(pageData.injuries);
+    pageData.injuries.forEach(inj => injuries.push(this.fb.group(inj)));
     this.controls.lastMedicalExam.setValue(pageData.lastMedicalExam);
     this.controls.allergies.setValue(pageData.allergies);
     this.controls.arthritis.setValue(pageData.arthritis);
@@ -115,16 +159,17 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-
+  onPushFormGroup(formGroup: FormGroup, control?: string) {
+    const arrayControl = this.medicalHistoryForms.get(control) as FormArray;
+    arrayControl.push(formGroup);
+  }
 
   addSurgeries(): void {
-    const arrayControl = this.medicalHistoryForms.get('surgeries') as FormArray;
-    arrayControl.push(this.createSurgeries());
+    this.onPushFormGroup(this.createSurgeries(), 'surgeries', );
   }
 
   addInjuries(): void {
-    const injuriesArrayControl = this.medicalHistoryForms.get('injuries') as FormArray;
-    injuriesArrayControl.push(this.createInjuries());
+    this.onPushFormGroup(this.createInjuries(), 'injuries');
   }
 
   deleteGroup(index: number, arr: string) {
@@ -133,6 +178,7 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getToggleList();
     this.getMedicalHistoryData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;

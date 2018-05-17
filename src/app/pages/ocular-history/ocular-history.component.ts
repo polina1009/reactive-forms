@@ -1,6 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {ToggleOcularInterface} from './ocular-history.interface';
-import { toggleOcularList } from './ocular-input-data';
+import {Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {NavigationService} from '../../services/navigation.service';
@@ -8,17 +6,20 @@ import {Subscription} from 'rxjs/Subscription';
 import {PatientService} from '../../services/patient.service';
 import { GET_OCULAR_HISTORY } from '../../services/api.constants';
 import {OcularHistoryInterface} from '../../interfaces/ocular-history.inteface';
+import {ToggleInterface} from '../../interfaces/toggle.interface';
+import { GET_TOGGLE_OCULAR_LIST } from '../../services/api.constants';
 
 @Component({
   selector: 'app-ocular-history',
   templateUrl: './ocular-history.component.html',
-  styleUrls: ['./ocular-history.component.scss']
+  styleUrls: ['./ocular-history.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OcularHistoryComponent implements OnInit, OnDestroy {
 
   ocularHistoryForms: FormGroup;
 
-  public toggleOcularList: ToggleOcularInterface[];
+  public toggleOcularList: ToggleInterface[];
 
   public maskDate = {
     guide: true,
@@ -31,10 +32,11 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
+    private ref: ChangeDetectorRef,
     private navService: NavigationService,
     private patientService: PatientService
   ) {
-    this.toggleOcularList = toggleOcularList;
+    this.toggleOcularList = [];
     this.createForm();
   }
 
@@ -99,16 +101,25 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
+  private getToggle() {
+    this.patientService.getToggleList(GET_TOGGLE_OCULAR_LIST).subscribe(toggleList => {
+      this.ref.markForCheck();
+      this.toggleOcularList = toggleList;
+    });
+  }
+
   ngOnInit() {
+    this.getToggle();
     this.getOcularHistoryData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/ocular-history/))) {
         return;
       }
-      this.patientService.updateOcularHistory(this.ocularHistoryForms.value, GET_OCULAR_HISTORY)
+      this.patientService.updateOcularHistory(this.ocularHistoryForms.value, GET_OCULAR_HISTORY);
       this.navService.preparationAndDisplayFormData(navUrl, this.ocularHistoryForms.value);
     });
+    console.log(this.ocularHistoryForms.value);
   }
 
   ngOnDestroy () {

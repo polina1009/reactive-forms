@@ -93,12 +93,12 @@
       <mat-slide-toggle
         color="primary"
         *ngFor="let elem of toggleList"
-        [formControlName]="elem.id"
+        [formControlName]="elem.groupName"
         fxFlex.lg="45"
         fxFlex.md="45"
         fxFlex.sm="45"
       >
-        <p class="slide-toggle-text">{{elem.name}}</p>
+        <p class="slide-toggle-text">{{elem.value}}</p>
       </mat-slide-toggle>
     </div>
     <mat-form-field fxFlex>

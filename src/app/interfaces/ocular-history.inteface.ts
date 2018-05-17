@@ -1,28 +1,26 @@
+import { ApiToggleInterface } from './toggle.interface';
+
 export interface OcularHistoryInterface {
   id?: string;
   lastVisionExam: string;
-  cataracts: ToggleOcularInterface;
-  contactLenses: ToggleOcularInterface;
-  crossedEyes: ToggleOcularInterface;
-  diabeticEyeDisease: ToggleOcularInterface;
-  diabeticRetinopathy: ToggleOcularInterface;
-  droopingEyelid: ToggleOcularInterface;
-  dryEye: ToggleOcularInterface;
-  eyelidCondition: ToggleOcularInterface;
-  eyeInfection: ToggleOcularInterface;
-  eyeInjury: ToggleOcularInterface;
-  glasses: ToggleOcularInterface;
-  glaucoma: ToggleOcularInterface;
-  lazyEye: ToggleOcularInterface;
-  macularDisease: ToggleOcularInterface;
-  prominentEyes: ToggleOcularInterface;
-  redEye: ToggleOcularInterface;
-  RetinalDisease: ToggleOcularInterface;
+  cataracts: ApiToggleInterface;
+  contactLenses: ApiToggleInterface;
+  crossedEyes: ApiToggleInterface;
+  diabeticEyeDisease: ApiToggleInterface;
+  diabeticRetinopathy: ApiToggleInterface;
+  droopingEyelid: ApiToggleInterface;
+  dryEye: ApiToggleInterface;
+  eyelidCondition: ApiToggleInterface;
+  eyeInfection: ApiToggleInterface;
+  eyeInjury: ApiToggleInterface;
+  glasses: ApiToggleInterface;
+  glaucoma: ApiToggleInterface;
+  lazyEye: ApiToggleInterface;
+  macularDisease: ApiToggleInterface;
+  prominentEyes: ApiToggleInterface;
+  redEye: ApiToggleInterface;
+  RetinalDisease: ApiToggleInterface;
   otherEyeConditions: string;
 }
 
-export interface ToggleOcularInterface {
-  id: string;
-  name: string;
-  isSelected: boolean;
-}
+

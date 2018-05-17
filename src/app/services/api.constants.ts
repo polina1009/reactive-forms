@@ -6,6 +6,8 @@ export const GET_EMPLOYER = 'employer';
 export const GET_RACE = 'race';
 export const GET_ETHNICITY = 'ethnicity';
 export const GET_PATIENT = 'patients/1';
+export const GET_TOGGLE_OCULAR_LIST = 'ocularToggleList';
+export const GET_MEDICAL_TOGGLE_LIST = 'medicalHistoryToggleList';
 
 
 export const GET_DEMOGRAPHICS = 'demographics';

@@ -15,14 +15,14 @@
     >
       <mat-slide-toggle
         class="ocular-toggle"
-        *ngFor="let o of toggleOcularList"
-        [formControlName]="o.id"
+        *ngFor="let toggle of toggleOcularList"
+        [formControlName]="toggle.groupName"
         color="primary"
         fxFlex.lg="47"
         fxFlex.md="47"
         fxFlex.sm="47"
       >
-        <p class="slide-toggle-text">{{o.name}}</p>
+        <p class="slide-toggle-text">{{toggle.value}}</p>
       </mat-slide-toggle>
     </div>
 
