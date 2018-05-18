@@ -10,6 +10,7 @@ import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
 import {MedicationsInterface} from '../interfaces/medications.interface';
+import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 
 
 @Injectable()
@@ -43,6 +44,7 @@ export class PatientService {
   medicalHistory$: Observable<MedicalHistoryInterface[]>;
   ocularHistory$: Observable<OcularHistoryInterface[]>;
   medications$: Observable<MedicationsInterface[]>;
+  familyHistory$: Observable<FamilyHistoryInterface[]>;
 
   constructor(private apiService: ApiService) {
   }
@@ -93,6 +95,10 @@ export class PatientService {
     return this.apiService.getPageData(url, this.medications$);
   }
 
+  getFamilyHistory(url) {
+    return this.apiService.getPageData(url, this.familyHistory$);
+  }
+
   updateDemographicsData(formData, url) {
     return this.apiService.updateDemographics(formData, url);
   }
@@ -108,8 +114,4 @@ export class PatientService {
   updateMedications(formData, url) {
     return this.apiService.updateMedications(formData, url);
   }
-
-  // updateMedications(formData, url) {
-  //   return this.apiService.updateMedications(formData, url);
-  // }
 }

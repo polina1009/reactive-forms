@@ -58,7 +58,6 @@ export class ApiService {
           const data = action.payload.doc.data();
           data.id = action.payload.doc.id;
           this.pageId = data.id;
-          console.log(this.pageId);
           return data;
         });
       });
@@ -66,31 +65,26 @@ export class ApiService {
   }
 
   updateDemographics(formData: DemographicsInterface, url: string) {
-    console.log(this.pageId);
+    console.log(formData);
     this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesDemogDoc.update(formData);
   }
 
   updateMedicalHistory(formData: MedicalHistoryInterface, url: string) {
-    console.log(this.pageId);
+    console.log(formData);
     this.pagesMedHistDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesMedHistDoc.update(formData);
   }
 
   updateOcularHistory(formData: OcularHistoryInterface, url: string) {
-    console.log(this.pageId);
+    console.log(formData);
     this.pagesOculHistgDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesOculHistgDoc.update(formData);
   }
 
   updateMedications(formData: MedicationsInterface, url: string) {
+    console.log(formData);
     this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesMedDoc.update(formData);
   }
-
-  // updateMedications(formData: MedicationsInterface, url: string) {
-  //   console.log(this.pageId);
-  //   this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-  //   this.pagesMedDoc.update(formData);
-  // }
 }

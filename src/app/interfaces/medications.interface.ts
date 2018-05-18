@@ -1,9 +1,7 @@
-import { ApiToggleInterface } from './toggle.interface';
-
 export interface MedicationsInterface {
   id?: string;
   comments: string;
-  takeAnyMedications: ApiToggleInterface;
+  takeAnyMedications: boolean;
   medications: MedArrInterface[];
 }
 

@@ -11,5 +11,5 @@ export interface PatientsInterface {
   medicalHistory: MedicalHistoryInterface[];
   ocularHistory: OcularHistoryInterface[];
   medications: MedicationsInterface[];
-  // familyHistory: FamilyHistoryInterface;
+  familyHistory: FamilyHistoryInterface;
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {FamilyMembersComponent} from './components';
 import {IllnessInterface, MemberInterface} from './family-history.interface';
 import { illnessList} from './family-history-data';
 import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
+import {FamilyHistoryInterface} from '../../interfaces/family-history.interface';
 
 
 @Component({
@@ -14,16 +15,17 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class FamilyHistoryComponent implements OnInit, OnDestroy {
 
-  public illnessList: IllnessInterface[] = illnessList;
+  public illnessList: FamilyHistoryInterface[];
   private navNextSubscribe: Subscription;
 
   constructor(
     public dialog: MatDialog,
     private navService: NavigationService
   ) {
+    this.illnessList = [];
   }
 
-  getPreparedDialogConfig (illness: IllnessInterface) {
+  getPreparedDialogConfig (illness: FamilyHistoryInterface) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -40,7 +42,7 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
     return dialogConfig;
   }
 
-  openDialog(illness: IllnessInterface) {
+  openDialog(illness: FamilyHistoryInterface) {
     const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPreparedDialogConfig(illness));
 
     dialogRef.afterClosed().subscribe((results: MemberInterface[]) => {

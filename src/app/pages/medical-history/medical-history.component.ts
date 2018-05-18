@@ -192,7 +192,7 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy () {
-    this.getDataSubscription.unsubscribe();
+    // this.getDataSubscription.unsubscribe();
     this.navNextSubscribe.unsubscribe();
   }
 }

@@ -26,6 +26,7 @@ export class NavigationService {
     setTimeout(() => {
       const formData = formControlValue;
       if ((this.validate(formData))) {
+        console.log(formData);
         this.goTo(url);
       } else {
         this.openSnackBar('Form is not full!', 'Сontinue filling');
@@ -44,7 +45,8 @@ export class NavigationService {
   }
 
   private validate(formData): boolean {
-    return Math.random() > 0.5;
+    return true;
+    // return Math.random() > 0.5;
   }
 
 }
