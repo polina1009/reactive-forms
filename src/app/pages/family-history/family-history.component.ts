@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {FamilyMembersComponent} from './components';
-import {IllnessInterface, MemberInterface} from './family-history.interface';
-import { illnessList} from './family-history-data';
 import {NavigationService} from '../../services/navigation.service';
 import {Subscription} from 'rxjs/Subscription';
 import {FamilyHistoryInterface} from '../../interfaces/family-history.interface';
+import {ApiToggleInterface} from '../../interfaces/toggle.interface';
+import {PatientService} from '../../services/patient.service';
+import { GET_FAMILY_HISTORY } from '../../services/api.constants';
 
 
 @Component({
@@ -20,9 +21,14 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private navService: NavigationService
-  ) {
-    this.illnessList = [];
+    private navService: NavigationService,
+    private patientService: PatientService
+  ) {}
+
+  getpageData() {
+    this.patientService.getFamilyHistory(GET_FAMILY_HISTORY).subscribe(pageData => {
+      this.illnessList = pageData;
+    });
   }
 
   getPreparedDialogConfig (illness: FamilyHistoryInterface) {
@@ -45,13 +51,14 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
   openDialog(illness: FamilyHistoryInterface) {
     const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPreparedDialogConfig(illness));
 
-    dialogRef.afterClosed().subscribe((results: MemberInterface[]) => {
+    dialogRef.afterClosed().subscribe((results: ApiToggleInterface[]) => {
       illness.members = results;
       this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
     });
   }
 
   ngOnInit() {
+    this.getpageData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
