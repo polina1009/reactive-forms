@@ -26,7 +26,6 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
   };
   private navNextSubscribe: Subscription;
-  private getDataSubscription: Subscription;
 
   public pageData: MedicalHistoryInterface[];
 

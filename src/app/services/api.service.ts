@@ -14,6 +14,7 @@ import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
 import {MedicationsInterface} from '../interfaces/medications.interface';
+import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 
 
 @Injectable()
@@ -30,6 +31,7 @@ export class ApiService {
   pagesMedHistDoc: AngularFirestoreDocument<MedicalHistoryInterface>;
   pagesOculHistgDoc: AngularFirestoreDocument<OcularHistoryInterface>;
   pagesMedDoc: AngularFirestoreDocument<MedicationsInterface>;
+  pageFamilyHist: AngularFirestoreCollection<FamilyHistoryInterface>;
   pageId: string;
 
   constructor(private afs: AngularFirestore) {
@@ -65,26 +67,27 @@ export class ApiService {
   }
 
   updateDemographics(formData: DemographicsInterface, url: string) {
-    console.log(formData);
     this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesDemogDoc.update(formData);
   }
 
   updateMedicalHistory(formData: MedicalHistoryInterface, url: string) {
-    console.log(formData);
     this.pagesMedHistDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesMedHistDoc.update(formData);
   }
 
   updateOcularHistory(formData: OcularHistoryInterface, url: string) {
-    console.log(formData);
     this.pagesOculHistgDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesOculHistgDoc.update(formData);
   }
 
   updateMedications(formData: MedicationsInterface, url: string) {
-    console.log(formData);
     this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
     this.pagesMedDoc.update(formData);
+  }
+
+  updateFamilyHistory(formData: FamilyHistoryInterface, url: string) {
+    this.pageFamilyHist = this.patientDoc.collection(url);
+    this.pageFamilyHist.doc(`${this.pageId}`).update(formData);
   }
 }

@@ -88,12 +88,12 @@ export class MedicationsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getMedicationsData();
-    this.patientService.updateMedications(this.medicationsForm.value, GET_MEDICATIONS);
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medications/))) {
         return;
       }
+      this.patientService.updateMedications(this.medicationsForm.value, GET_MEDICATIONS);
       this.navService.preparationAndDisplayFormData(navUrl, this.medicationsForm.value);
     });
   }

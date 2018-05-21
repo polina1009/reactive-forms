@@ -18,6 +18,7 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
 
   public illnessList: FamilyHistoryInterface[];
   private navNextSubscribe: Subscription;
+  private  illnessObj;
 
   constructor(
     public dialog: MatDialog,
@@ -25,9 +26,19 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
     private patientService: PatientService
   ) {}
 
-  getpageData() {
-    this.patientService.getFamilyHistory(GET_FAMILY_HISTORY).subscribe(pageData => {
-      this.illnessList = pageData;
+  // getPageData() {
+  //   this.patientService.getFamilyHistory(GET_FAMILY_HISTORY).subscribe(pageData => {
+  //     this.illnessList = pageData;
+  //   });
+  // }
+  getPageData() {
+    this.patientService.getFamilyHistory('fam222').subscribe(pageData => {
+      console.log(pageData);
+      pageData.map(p => {
+        this.illnessObj = p;
+        console.log(p);
+        this.illnessList = p.fam;
+      });
     });
   }
 
@@ -48,17 +59,25 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
     return dialogConfig;
   }
 
+  updateData() {
+    this.patientService.updateFamilyHistory(this.illnessObj, 'fam222');
+  }
+
   openDialog(illness: FamilyHistoryInterface) {
     const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPreparedDialogConfig(illness));
+    console.log(illness);
 
     dialogRef.afterClosed().subscribe((results: ApiToggleInterface[]) => {
       illness.members = results;
-      this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
+      this.updateData();
+      console.log(this.illnessList);
+      // this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
+      // this.patientService.updateFamilyHistory(illness, GET_FAMILY_HISTORY);
     });
   }
 
   ngOnInit() {
-    this.getpageData();
+    this.getPageData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {

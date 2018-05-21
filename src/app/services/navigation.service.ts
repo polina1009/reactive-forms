@@ -26,7 +26,6 @@ export class NavigationService {
     setTimeout(() => {
       const formData = formControlValue;
       if ((this.validate(formData))) {
-        console.log(formData);
         this.goTo(url);
       } else {
         this.openSnackBar('Form is not full!', 'Сontinue filling');

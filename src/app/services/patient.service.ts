@@ -114,4 +114,8 @@ export class PatientService {
   updateMedications(formData, url) {
     return this.apiService.updateMedications(formData, url);
   }
+
+  updateFamilyHistory(formData, url) {
+    return this.apiService.updateFamilyHistory(formData, url);
+  }
 }
