@@ -54,7 +54,7 @@ export class ApiService {
   }
 
   getPageData(url: string, query?) {
-    query = this.patient.collection(url).snapshotChanges()
+    query = this.patient.collection(url, ref => ref.orderBy('index', 'asc')).snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
           const data = action.payload.doc.data();
@@ -88,6 +88,6 @@ export class ApiService {
 
   updateFamilyHistory(formData: FamilyHistoryInterface, url: string) {
     this.pageFamilyHist = this.patientDoc.collection(url);
-    this.pageFamilyHist.doc(`${this.pageId}`).update(formData);
+    this.pageFamilyHist.doc(`${formData.id}`).update(formData);
   }
 }
