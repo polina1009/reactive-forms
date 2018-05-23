@@ -49,6 +49,14 @@ export class PatientService {
   constructor(private apiService: ApiService) {
   }
 
+  getPatient() {
+    return this.apiService.getPatientColl();
+  }
+
+  updatePatient(patient) {
+    return this.apiService.updatePatient(patient);
+  }
+
   public getOptionList(url) {
     return this.apiService.getSelectCollection(url)
       .pipe(

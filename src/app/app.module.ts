@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {FormModule} from './pages/forms-page';
 import { FamilyHistoryModule } from './pages/family-history';
@@ -60,7 +61,8 @@ import {MedicationsModule} from './pages/medications/';
     }),
     StoreDevtoolsModule.instrument(),
     AngularFireModule.initializeApp(environment.firebase, 'patient-medical-store'),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [ApiService, RoutingService, LoginService, AuthGuard, NavigationService],
   bootstrap: [AppComponent]

@@ -1,10 +1,13 @@
 <div class="login-wrapper">
   <form
     [formGroup]="loginForm"
-    (ngSubmit)="submitForm(loginForm.value)"
+    *ngIf="newPatient"
+    (ngSubmit)="submitLoginForm(loginForm.value)"
     class="example-form"
     fxLayout="column wrap"
     fxLayoutAlign="center center" >
+    <h1>Login</h1>
+    <p class="button is-small" (click)="toggleForm()">Create new Patient?</p>
     <mat-form-field class="form-field">
       <input matInput placeholder="Email" type="text" formControlName="email">
       <mat-error *ngIf="isFieldInvalid('email')">
@@ -23,5 +26,34 @@
             routerLinkActive="active"
             [disabled]="!loginForm.valid"
     >Login</button>
+  </form>
+
+  <form
+    [formGroup]="loginForm"
+    *ngIf="!newPatient"
+    (ngSubmit)="submitSignUpForm(loginForm.value)"
+    class="example-form"
+    fxLayout="column wrap"
+    fxLayoutAlign="center center" >
+    <h1>Create Patient</h1>
+    <p class="button is-small" (click)="toggleForm()">Log Patient?</p>
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Email" type="text" formControlName="email">
+      <mat-error *ngIf="isFieldInvalid('email')">
+        Please inform your email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Password" type="password" formControlName="password">
+      <mat-error *ngIf="isFieldInvalid('email')">
+        Please inform your password
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary"
+            type="submit"
+            routerLink="/demographics"
+            routerLinkActive="active"
+            [disabled]="!loginForm.valid"
+    >Create</button>
   </form>
 </div>

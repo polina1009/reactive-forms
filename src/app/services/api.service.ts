@@ -4,7 +4,7 @@ import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/delay';
-import { GET_PATIENT } from './api.constants';
+import { GET_PATIENT, GET_PATIENT_DOC } from './api.constants';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { ApiOptionInterface} from '../interfaces/selects.interface';
@@ -12,7 +12,7 @@ import { PatientsInterface } from '../interfaces/patient.interface';
 import {DemographicsInterface} from '../interfaces/demographics.interface';
 import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
-import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
+import {ApiToggleInterface} from '../interfaces/toggle.interface';
 import {MedicationsInterface} from '../interfaces/medications.interface';
 import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 
@@ -20,6 +20,9 @@ import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 @Injectable()
 
 export class ApiService {
+  patientCollection: AngularFirestoreCollection<PatientsInterface>;
+  patient$: Observable<PatientsInterface[]>;
+
   selectionCollection: AngularFirestoreCollection<ApiOptionInterface>;
   select$: Observable<ApiOptionInterface[]>;
 
@@ -33,12 +36,32 @@ export class ApiService {
   pagesMedDoc: AngularFirestoreDocument<MedicationsInterface>;
   pageFamilyHist: AngularFirestoreCollection<FamilyHistoryInterface>;
   pageId: string;
+  patientId: string;
 
   constructor(private afs: AngularFirestore) {
+    this.patientCollection = this.afs.collection(GET_PATIENT);
+  }
+
+  getPatientColl() {
+    this.patient$ = this.patientCollection.snapshotChanges()
+      .map((actions) => {
+        return actions.map(action => {
+          const patient = action.payload.doc.data();
+          patient.id = action.payload.doc.id;
+          this.patientId = patient.id;
+          return patient;
+        });
+      });
+    return this.patient$;
+  }
+
+  updatePatient(patient: PatientsInterface) {
+    console.log(this.patientCollection);
+    this.patientCollection.add(patient);
   }
 
   get patient() {
-    return this.patientDoc = this.afs.doc<PatientsInterface>(GET_PATIENT);
+    return this.patientDoc = this.afs.doc<PatientsInterface>(GET_PATIENT_DOC);
   }
 
   getSelectCollection(url: string) {
