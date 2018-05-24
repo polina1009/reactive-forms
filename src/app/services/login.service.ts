@@ -7,6 +7,7 @@ import { firebase } from '@firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {ApiService} from './api.service';
 
 @Injectable()
 export class LoginService {
@@ -21,7 +22,8 @@ export class LoginService {
     private afAuth: AngularFireAuth,
     private router: Router,
     private route: ActivatedRoute,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private apiService: ApiService
   ) { }
 
   emailLogin(email: string, password: string) {
@@ -38,6 +40,7 @@ export class LoginService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(success => {
         console.log('success', success);
+        this.apiService.updateJustLoggedUserWithDefaults(email);
       })
       .catch(error => {
         console.log(error);
@@ -59,7 +62,10 @@ export class LoginService {
   signUp(user: PatientsInterface) {
     if (user.email !== '' && user.password !== '') {
       this.emailSignUp(user.email, user.password);
-      this.patientService.updatePatient(user);
+      this.patientService.addPatient(user);
+      console.log(user);
+      this._loggedIn.next(true);
+      this.router.navigate(['/']);
       user.email = '';
       user.password = '';
     }

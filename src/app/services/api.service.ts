@@ -4,11 +4,11 @@ import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/delay';
-import { GET_PATIENT, GET_PATIENT_DOC } from './api.constants';
+import { GET_PATIENT, GET_PATIENT_DOC, GET_DEFAULT_PAGE } from './api.constants';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { ApiOptionInterface} from '../interfaces/selects.interface';
-import { PatientsInterface } from '../interfaces/patient.interface';
+import {DefaultInterface, PatientsInterface} from '../interfaces/patient.interface';
 import {DemographicsInterface} from '../interfaces/demographics.interface';
 import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
 import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
@@ -23,6 +23,8 @@ export class ApiService {
   patientCollection: AngularFirestoreCollection<PatientsInterface>;
   patient$: Observable<PatientsInterface[]>;
 
+  defaulrDoc: AngularFirestoreDocument<DefaultInterface>;
+
   selectionCollection: AngularFirestoreCollection<ApiOptionInterface>;
   select$: Observable<ApiOptionInterface[]>;
 
@@ -35,11 +37,32 @@ export class ApiService {
   pagesOculHistgDoc: AngularFirestoreDocument<OcularHistoryInterface>;
   pagesMedDoc: AngularFirestoreDocument<MedicationsInterface>;
   pageFamilyHist: AngularFirestoreCollection<FamilyHistoryInterface>;
+  defaultPageId: string;
   pageId: string;
   patientId: string;
 
   constructor(private afs: AngularFirestore) {
     this.patientCollection = this.afs.collection(GET_PATIENT);
+    // this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
+  }
+
+  updateJustLoggedUserWithDefaults(searchFields) {
+    console.log(searchFields);
+    const ref: any = this.afs.collection('patients').ref;
+
+    ref.where('email', '==', searchFields)
+      .onSnapshot(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          doc.ref.get().then(userRef => {
+            const userData = userRef.data();
+            userData.id = userRef.id;
+            console.log('!!!!!!', userRef.id, userData);
+          });
+        });
+      }).subscribe(data => {
+        this.patientId = data.id;
+        console.log(data);
+    });
   }
 
   getPatientColl() {
@@ -48,20 +71,22 @@ export class ApiService {
         return actions.map(action => {
           const patient = action.payload.doc.data();
           patient.id = action.payload.doc.id;
-          this.patientId = patient.id;
           return patient;
         });
       });
     return this.patient$;
   }
 
-  updatePatient(patient: PatientsInterface) {
-    console.log(this.patientCollection);
+  addPatient(patient: PatientsInterface) {
     this.patientCollection.add(patient);
   }
 
   get patient() {
-    return this.patientDoc = this.afs.doc<PatientsInterface>(GET_PATIENT_DOC);
+    return this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
+  }
+
+  get defaultPage() {
+    return this.defaulrDoc = this.afs.doc<DefaultInterface>(GET_DEFAULT_PAGE);
   }
 
   getSelectCollection(url: string) {
@@ -88,6 +113,21 @@ export class ApiService {
       });
     return query;
   }
+
+  getDefaultPage(url: string, query?) {
+    query = this.defaultPage.collection(url, ref => ref.orderBy('index', 'asc')).snapshotChanges();
+      // .map((actions) => {
+      //   return actions.map(action => {
+      //     const data = action.payload.doc.data();
+      //     data.id = action.payload.doc.id;
+      //     this.defaultPageId = data.id;
+      //     return data;
+      //   });
+      // });
+    return query;
+  }
+
+
 
   updateDemographics(formData: DemographicsInterface, url: string) {
     this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);

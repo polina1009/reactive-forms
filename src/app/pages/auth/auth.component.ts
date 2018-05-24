@@ -51,23 +51,19 @@ export class AuthComponent implements OnInit {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value);
     }
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     this.formSubmitAttempt = true;
   }
 
   submitSignUpForm() {
-    console.log(this.loginForm.get('email').value, this.loginForm.get('password').value);
+    // console.log(this.loginForm.get('email').value, this.loginForm.get('password').value);
     if (this.loginForm.valid) {
-      // const patient: PatientsInterface = {
-      //   email: '',
-      //   password: ''
-      // };
       this.patient.email = this.loginForm.get('email').value;
       this.patient.password = this.loginForm.get('password').value;
-      console.log(this.patient);
+      // console.log(this.patient);
       this.loginService.signUp(this.patient);
     }
-    console.log(this.loginForm.get('email').value, this.loginForm.get('password').value);
+    // console.log(this.loginForm.get('email').value, this.loginForm.get('password').value);
     this.formSubmitAttempt = true;
   }
 
