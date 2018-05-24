@@ -9,12 +9,17 @@ export interface PatientsInterface {
   id?: string;
   email?: string;
   password?: string;
+  // demographics?: DemographicsInterface[];
+  // medicalHistory?: MedicalHistoryInterface[];
+  // ocularHistory?: OcularHistoryInterface[];
+  // medications?: MedicationsInterface[];
+  // familyHistory?: FamilyHistoryInterface;
 }
 
 export interface DefaultInterface {
-  demographics: DemographicsInterface[];
-  medicalHistory: MedicalHistoryInterface[];
-  ocularHistory: OcularHistoryInterface[];
-  medications: MedicationsInterface[];
-  familyHistory: FamilyHistoryInterface;
+  demographics?: DemographicsInterface[];
+  medicalHistory?: MedicalHistoryInterface[];
+  ocularHistory?: OcularHistoryInterface[];
+  medications?: MedicationsInterface[];
+  familyHistory?: FamilyHistoryInterface;
 }

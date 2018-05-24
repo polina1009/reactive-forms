@@ -63,7 +63,6 @@ export class LoginService {
     if (user.email !== '' && user.password !== '') {
       this.emailSignUp(user.email, user.password);
       this.patientService.addPatient(user);
-      console.log(user);
       this._loggedIn.next(true);
       this.router.navigate(['/']);
       user.email = '';
@@ -72,8 +71,10 @@ export class LoginService {
   }
 
   logout() {
-    this._loggedIn.next(false);
-    this.router.navigate(['/login'], { relativeTo: this.route });
+    this.afAuth.auth.signOut().then(() => {
+      this._loggedIn.next(false);
+      this.router.navigate(['/login'], { relativeTo: this.route });
+    });
   }
 
 }

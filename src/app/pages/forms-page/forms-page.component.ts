@@ -33,10 +33,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public raceList: SelectsListInterface[];
   public ethnicityList: SelectsListInterface[];
   private navNextSubscribe: Subscription;
-  private getDataSubscription: Subscription;
 
   private pat: DemographicsInterface;
   public pageData: DemographicsInterface[];
+  private defaultData: DemographicsInterface[];
 
   patientGroup: FormGroup;
 

@@ -27,7 +27,12 @@ export class AuthComponent implements OnInit {
   public createForm () {
     this.loginForm = this.fB.group({
       email: [null, Validators.compose([Validators.required, Validators.email])],
-      password: [null, Validators.required]
+      password: [null, Validators.compose([
+        Validators.required,
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
+        Validators.minLength(6),
+        Validators.maxLength(25),
+      ])]
     });
   }
 
@@ -49,7 +54,9 @@ export class AuthComponent implements OnInit {
 
   submitLoginForm() {
     if (this.loginForm.valid) {
-      this.loginService.login(this.loginForm.value);
+      this.patient.email = this.loginForm.get('email').value;
+      this.patient.password = this.loginForm.get('password').value;
+      this.loginService.login(this.patient);
     }
     // console.log(this.loginForm.value);
     this.formSubmitAttempt = true;

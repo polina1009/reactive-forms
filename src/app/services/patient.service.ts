@@ -53,10 +53,6 @@ export class PatientService {
     return this.apiService.getPatientColl();
   }
 
-  getPatientId(id) {
-    // return this.apiService.getPatId(id);
-  }
-
   addPatient(patient) {
     return this.apiService.addPatient(patient);
   }
@@ -89,10 +85,6 @@ export class PatientService {
           });
         })
       );
-  }
-
-  getDefaultDemographics(url) {
-    return this.apiService.getDefaultPage(url, this.demographics$);
   }
 
   getDemographics(url) {
