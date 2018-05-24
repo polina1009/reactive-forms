@@ -31,7 +31,6 @@ export class ApiService {
   patient$: Observable<PatientsInterface[]>;
 
   defaultCollection: AngularFirestoreCollection<DefaultInterface>;
-  default$: Observable<DefaultInterface[]>;
   defaultDoc: AngularFirestoreDocument<DefaultInterface>;
 
   selectionCollection: AngularFirestoreCollection<ApiOptionInterface>;
@@ -50,7 +49,7 @@ export class ApiService {
   defaultMedicalHistoryData: MedicalHistoryInterface;
   defaultOcularHistoryData: OcularHistoryInterface;
   defaultMedicationsData: MedicationsInterface;
-  defaultFamilyHistoryData: FamilyHistoryInterface;
+  defaultFamilyHistoryData: FamilyHistoryInterface[];
 
   patientDoc: AngularFirestoreDocument<PatientsInterface>;
   pagesDemogDoc: AngularFirestoreDocument<DemographicsInterface>;
@@ -86,6 +85,23 @@ export class ApiService {
       });
   }
 
+  getLoggedUserWithCurrentData(searchFields) {
+    const ref: any = this.afs.collection('patients').ref;
+
+    ref.where('email', '==', searchFields)
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.get()
+            .then(userRef => {
+              const userData = userRef.data();
+              userData.id = userRef.id;
+              this.setPatId(userData.id);
+              return userData;
+            });
+        });
+      });
+  }
+
   setPatId(id) {
     this.patientId = id;
     console.log(this.patientId);
@@ -97,6 +113,8 @@ export class ApiService {
         return actions.map(action => {
           const patient = action.payload.doc.data();
           patient.id = action.payload.doc.id;
+          this.patientId = patient.id;
+          console.log(patient.id);
           return patient;
         });
       });
@@ -104,6 +122,7 @@ export class ApiService {
   }
 
   get patient() {
+    console.log(this.patientId);
     return this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
   }
 
@@ -122,41 +141,13 @@ export class ApiService {
   }
 
   addCollection() {
-    this.patient.collection('demographics').add(this.defaultDemographicsData)
-      .then(() => {
-        console.log('add collection!!!');
-      })
-      .catch(() => {
-        console.log('collection doesn\'t add');
-      });
-    this.patient.collection('medical-history').add(this.defaultMedicalHistoryData)
-      .then(() => {
-        console.log('add collection!!!');
-      })
-      .catch(() => {
-        console.log('collection doesn\'t add');
-      });
-    this.patient.collection('ocular-history').add(this.defaultOcularHistoryData)
-      .then(() => {
-        console.log('add collection!!!');
-      })
-      .catch(() => {
-        console.log('collection doesn\'t add');
-      });
-    this.patient.collection('medications').add(this.defaultMedicationsData)
-      .then(() => {
-        console.log('add collection!!!');
-      })
-      .catch(() => {
-        console.log('collection doesn\'t add');
-      });
-    this.patient.collection('family-history').add(this.defaultFamilyHistoryData)
-      .then(() => {
-        console.log('add collection!!!');
-      })
-      .catch(() => {
-        console.log('collection doesn\'t add');
-      });
+    this.patient.collection('demographics').add(this.defaultDemographicsData);
+    this.patient.collection('medical-history').add(this.defaultMedicalHistoryData);
+    this.patient.collection('ocular-history').add(this.defaultOcularHistoryData);
+    this.patient.collection('medications').add(this.defaultMedicationsData);
+    this.defaultFamilyHistoryData.map(data => {
+      this.patient.collection('family-history').add(data);
+    });
   }
 
   getSelectCollection(url: string) {
@@ -178,6 +169,7 @@ export class ApiService {
           const data = action.payload.doc.data();
           data.id = action.payload.doc.id;
           this.pageId = data.id;
+          console.log(this.pageId);
           return data;
         });
       });
@@ -185,7 +177,7 @@ export class ApiService {
   }
 
   getDefPageData(url: string, query?) {
-    query = this.defaultPage.collection(url, ref => ref.orderBy('index', 'asc')).valueChanges()
+    query = this.defaultPage.collection(url, ref => ref.orderBy('index', 'asc')).valueChanges();
     return query;
   }
 
@@ -211,9 +203,7 @@ export class ApiService {
       });
     });
     this.getDefPageData(GET_FAMILY_HISTORY, this.defaultFamilyHistory$).subscribe(data => {
-      data.map(d => {
-        this.defaultFamilyHistoryData = d;
-      });
+      this.defaultFamilyHistoryData = data;
     });
   }
 
@@ -221,7 +211,6 @@ export class ApiService {
 
   updateDemographics(formData: DemographicsInterface, url: string) {
     this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    console.log(formData);
     this.pagesDemogDoc.update(formData);
   }
 
