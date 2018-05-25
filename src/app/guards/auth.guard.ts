@@ -6,7 +6,6 @@ import {
   Router,
   ActivatedRoute
 } from '@angular/router';
-import { LoginService } from '../services/login.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
@@ -27,8 +26,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    // return Observable.of(true);
-
     return this.apiService.isLoggedIn
       .take(1)
       .map((isLoggedIn: boolean) => {

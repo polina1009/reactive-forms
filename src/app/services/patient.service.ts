@@ -15,31 +15,6 @@ import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 
 @Injectable()
 export class PatientService {
-  public defaultPatient = {
-    title: '',
-    firstName: '',
-    lastName: '',
-    cellPhone: '',
-    home: '',
-    work: '',
-    email: '',
-    preferredContact: '',
-    address: '',
-    address2: '',
-    zip: '',
-    city: '',
-    state: '',
-    dateOfBirth: '',
-    ssn: '',
-    referralSource: '',
-    language: '',
-    workStatus: '',
-    employer: '',
-    race: '',
-    ethnicity: '',
-    gender: '',
-  };
-
   demographics$: Observable<DemographicsInterface[]>;
   medicalHistory$: Observable<MedicalHistoryInterface[]>;
   ocularHistory$: Observable<OcularHistoryInterface[]>;

@@ -68,7 +68,7 @@ export class ApiService {
     return this._loggedIn.asObservable();
   }
 
-  constructor(private afs: AngularFirestore, private router: Router,) {
+  constructor(private afs: AngularFirestore, private router: Router) {
     this.patientCollection = this.afs.collection(GET_PATIENT);
     this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
     this.defaultCollection = this.afs.collection(GET_DEFAULT_PAGE);

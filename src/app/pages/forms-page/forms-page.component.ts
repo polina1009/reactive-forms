@@ -36,7 +36,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
 
   private pat: DemographicsInterface;
   public pageData: DemographicsInterface[];
-  private defaultData: DemographicsInterface[];
 
   patientGroup: FormGroup;
 
@@ -63,7 +62,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.workStatusList = [];
     this.raceList = [];
     this.ethnicityList = [];
-    this.pat = this.patientService.defaultPatient;
   }
 
   get controls() {
@@ -72,8 +70,8 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
 
   ngOnInit() {
     this.createForm();
-    this.getSelectOptions();
     this.getDemographicsData();
+    this.getSelectOptions();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
@@ -115,6 +113,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.patientService.getDemographics(GET_DEMOGRAPHICS).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
+        this.pat = p;
         this.setFormData(p);
       });
     });
@@ -199,7 +198,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    // this.getDataSubscription.unsubscribe();
     this.navNextSubscribe.unsubscribe();
   }
 

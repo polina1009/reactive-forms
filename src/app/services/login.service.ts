@@ -1,26 +1,15 @@
 import { Injectable } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {PatientService} from './patient.service';
 import {PatientsInterface} from '../interfaces/patient.interface';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {ApiService} from './api.service';
-import {DemographicsInterface} from '../interfaces/demographics.interface';
-import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
-import {MedicationsInterface} from '../interfaces/medications.interface';
-import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
-import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 
 @Injectable()
 export class LoginService {
   patient: Observable<PatientsInterface | null>;
-  // private _loggedIn = new BehaviorSubject<boolean>(false);
-  //
-  // get isLoggedIn() {
-  //   return this._loggedIn.asObservable();
-  // }
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -54,7 +43,6 @@ export class LoginService {
     this.patientService.getPatient().subscribe(patientData => {
       patientData.map(pat => {
         if (user.email === pat.email && user.password === pat.password) {
-          // this._loggedIn.next(true);
           this.emailLogin(user.email, user.password).then();
         }
       });
