@@ -8,7 +8,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MedicalHistoryComponent } from './pages/medical-history';
 import { OcularHistoryComponent } from './pages/ocular-history';
-import {MedicationsComponent} from './pages/medications';
+import { MedicationsComponent } from './pages/medications';
 
 const appRoutes: Routes = [
   {

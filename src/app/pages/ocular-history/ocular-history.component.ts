@@ -38,7 +38,6 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     private patientService: PatientService
   ) {
     this.toggleOcularList = [];
-    this.createForm();
   }
 
   get controls() {
@@ -110,6 +109,7 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.createForm();
     this.getToggle();
     this.getOcularHistoryData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
@@ -118,7 +118,7 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
         return;
       }
       this.patientService.updateOcularHistory(this.ocularHistoryForms.value, GET_OCULAR_HISTORY);
-      this.navService.preparationAndDisplayFormData(navUrl, this.ocularHistoryForms.value);
+      this.navService.preparationAndDisplayFormData(navUrl);
     });
   }
 

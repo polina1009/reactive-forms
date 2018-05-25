@@ -65,7 +65,7 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
       if (!(currentUrl.match(/family-history/))) {
         return;
       }
-      this.navService.preparationAndDisplayFormData(navUrl, this.illnessList);
+      this.navService.preparationAndDisplayFormData(navUrl);
     });
   }
 

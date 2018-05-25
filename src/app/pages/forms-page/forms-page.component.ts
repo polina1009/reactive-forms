@@ -78,7 +78,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
         return;
       }
       this.patientService.updateDemographicsData(this.patientGroup.value, GET_DEMOGRAPHICS);
-      this.navService.preparationAndDisplayFormData(navUrl, this.patientGroup.value);
+      this.navService.preparationAndDisplayFormData(navUrl);
     });
   }
 

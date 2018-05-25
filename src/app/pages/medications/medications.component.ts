@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import {FormGroup, FormBuilder, FormArray} from '@angular/forms';
-import {Subscription} from 'rxjs/Subscription';
-import {NavigationService} from '../../services/navigation.service';
-import {PatientService} from '../../services/patient.service';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+import { NavigationService } from '../../services/navigation.service';
+import { PatientService } from '../../services/patient.service';
 import { GET_MEDICATIONS } from '../../services/api.constants';
-import {MedicationsInterface} from '../../interfaces/medications.interface';
+import { MedicationsInterface } from '../../interfaces/medications.interface';
 
 @Component({
   selector: 'app-medications',
@@ -31,7 +31,6 @@ export class MedicationsComponent implements OnInit, OnDestroy {
     private ref: ChangeDetectorRef,
     private patientService: PatientService
   ) {
-    this.createForm();
   }
 
   get controls() {
@@ -87,6 +86,7 @@ export class MedicationsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.createForm();
     this.getMedicationsData();
     this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
@@ -94,7 +94,7 @@ export class MedicationsComponent implements OnInit, OnDestroy {
         return;
       }
       this.patientService.updateMedications(this.medicationsForm.value, GET_MEDICATIONS);
-      this.navService.preparationAndDisplayFormData(navUrl, this.medicationsForm.value);
+      this.navService.preparationAndDisplayFormData(navUrl);
     });
   }
 

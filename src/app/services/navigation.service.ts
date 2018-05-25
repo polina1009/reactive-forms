@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs/';
-import {ClickedNavButtonInterface} from '../form.interface';
-import {MatSnackBar} from '@angular/material';
+import { ClickedNavButtonInterface } from '../interfaces/nav.interface';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class NavigationService {
@@ -22,10 +22,9 @@ export class NavigationService {
     });
   }
 
-  preparationAndDisplayFormData (url, formControlValue) {
+  preparationAndDisplayFormData (url) {
     setTimeout(() => {
-      const formData = formControlValue;
-      if ((this.validate(formData))) {
+      if ((this.validate())) {
         this.goTo(url);
       } else {
         this.openSnackBar('Form is not full!', 'Сontinue filling');
@@ -43,9 +42,9 @@ export class NavigationService {
     this.router.navigate([url]);
   }
 
-  private validate(formData): boolean {
-    return true;
-    // return Math.random() > 0.5;
+  private validate(): boolean {
+    // return true;
+    return Math.random() > 0.5;
   }
 
 }

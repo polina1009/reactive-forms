@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { ToggleIllnessInterface } from './medical-history.interface';
 import { NavigationService } from '../../services/navigation.service';
 import { Subscription } from 'rxjs/Subscription';
-import {PatientService} from '../../services/patient.service';
+import { PatientService} from '../../services/patient.service';
 import { GET_MEDICAL_HISTORY, GET_MEDICAL_TOGGLE_LIST } from '../../services/api.constants';
-import {MedicalHistoryInterface} from '../../interfaces/medical-history.interface';
-import {ToggleInterface} from '../../interfaces/toggle.interface';
+import { MedicalHistoryInterface } from '../../interfaces/medical-history.interface';
+import { ToggleInterface } from '../../interfaces/toggle.interface';
 
 @Component({
   selector: 'app-medical-history',
@@ -93,35 +92,6 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   }
 
   private setFormData(pageData) {
-    // console.log(this.controls.surgeries.value.length);
-    // const cloneS = JSON.stringify(pageData.surgeries);
-    // console.log(JSON.parse(cloneS));
-    //
-    // this.controls.surgeries.value.splice(0, (this.controls.surgeries.value.length), JSON.parse(cloneS));
-    // this.controls.surgeries.value.map(pD => {
-    //   if (!!(pD.length > 1)) {
-    //     console.log(pD.length);
-    //     this.addSurgeries();
-    //   }
-    // });
-
-
-    // console.log(this.controls.injuries.value.length);
-    // this.controls.injuries.value.splice(0, this.controls.injuries.value.length, ...pageData.injuries);
-    // console.log(this.controls.injuries.value.length);
-    // if ((this.controls.injuries.value.length) > 1) {
-    //   this.controls.injuries.value.forEach(c => {
-    //     this.addInjuries();
-    //   });
-    //   // this.addInjuries();
-    // }
-    // this.controls.injuries.value.splice(0, this.controls.injuries.value.length, ...pageData.injuries);
-    // if ((this.controls.injuries.value.length) > 1) {
-    //   this.controls.injuries.value.forEach(c => {
-    //     this.addInjuries();
-    //   });
-    //   this.addInjuries();
-    // }
     const surgeries = this.medicalHistoryForms.get('surgeries') as FormArray;
     const injuries = this.medicalHistoryForms.get('injuries') as FormArray;
     surgeries.removeAt(0);
@@ -186,12 +156,11 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
         return;
       }
       this.patientService.updateMedicalHistory(this.medicalHistoryForms.value, GET_MEDICAL_HISTORY);
-      this.navService.preparationAndDisplayFormData(navUrl, this.medicalHistoryForms.value);
+      this.navService.preparationAndDisplayFormData(navUrl);
       });
   }
 
   ngOnDestroy () {
-    // this.getDataSubscription.unsubscribe();
     this.navNextSubscribe.unsubscribe();
   }
 }
