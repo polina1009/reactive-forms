@@ -17,11 +17,13 @@ export class AuthComponent implements OnInit {
     email: '',
     password: ''
   };
+  protected logError: string;
 
   constructor(
     private fB: FormBuilder,
     private loginService: LoginService
   ) {
+    this.logError = '';
   }
 
   public createForm () {
@@ -58,20 +60,22 @@ export class AuthComponent implements OnInit {
       this.patient.password = this.loginForm.get('password').value;
       this.loginService.login(this.patient);
     }
-    // console.log(this.loginForm.value);
-    this.formSubmitAttempt = true;
   }
 
   submitSignUpForm() {
-    // console.log(this.loginForm.get('email').value, this.loginForm.get('password').value);
     if (this.loginForm.valid) {
       this.patient.email = this.loginForm.get('email').value;
       this.patient.password = this.loginForm.get('password').value;
-      // console.log(this.patient);
-      this.loginService.signUp(this.patient);
+      this.loginService.signUp(this.patient)
+        .then(success => {
+          if (success === false) {
+            this.newPatient = true;
+            this.logError = 'The email address is already in use by another account.';
+          } else {
+            this.newPatient = false;
+          }
+        });
     }
-    // console.log(this.loginForm.get('email').value, this.loginForm.get('password').value);
-    this.formSubmitAttempt = true;
   }
 
 }

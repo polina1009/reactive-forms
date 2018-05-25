@@ -68,7 +68,7 @@ export class ApiService {
   }
 
   updateJustLoggedUserWithDefaults(searchFields) {
-    const ref: any = this.afs.collection('patients').ref;
+    const ref: any = this.patientCollection.ref;
 
     ref.where('email', '==', searchFields)
       .onSnapshot((querySnapshot) => {
@@ -77,7 +77,7 @@ export class ApiService {
             .then(userRef => {
               const userData = userRef.data();
               userData.id = userRef.id;
-              this.setPatId(userData.id);
+              this.patientId = userData.id;
               this.addCollection();
               return userData;
             });
@@ -86,7 +86,7 @@ export class ApiService {
   }
 
   getLoggedUserWithCurrentData(searchFields) {
-    const ref: any = this.afs.collection('patients').ref;
+    const ref: any = this.patientCollection.ref;
 
     ref.where('email', '==', searchFields)
       .onSnapshot((querySnapshot) => {
@@ -95,16 +95,12 @@ export class ApiService {
             .then(userRef => {
               const userData = userRef.data();
               userData.id = userRef.id;
-              this.setPatId(userData.id);
+              this.patientId = userData.id;
+              console.log(this.patientId);
               return userData;
             });
         });
       });
-  }
-
-  setPatId(id) {
-    this.patientId = id;
-    console.log(this.patientId);
   }
 
   getPatientColl() {
@@ -112,9 +108,7 @@ export class ApiService {
       .map((actions) => {
         return actions.map(action => {
           const patient = action.payload.doc.data();
-          patient.id = action.payload.doc.id;
-          this.patientId = patient.id;
-          console.log(patient.id);
+          // patient.id = action.payload.doc.id;
           return patient;
         });
       });
@@ -131,22 +125,16 @@ export class ApiService {
   }
 
   addPatient(patient: PatientsInterface) {
-    this.patientCollection.add(patient)
-      .then(function () {
-        console.log('Patient Added ');
-      })
-      .catch(function (error) {
-        console.error('Error adding patient: ', error);
-      });
+    this.patientCollection.add(patient).then();
   }
 
   addCollection() {
-    this.patient.collection('demographics').add(this.defaultDemographicsData);
-    this.patient.collection('medical-history').add(this.defaultMedicalHistoryData);
-    this.patient.collection('ocular-history').add(this.defaultOcularHistoryData);
-    this.patient.collection('medications').add(this.defaultMedicationsData);
+    this.patient.collection('demographics').add(this.defaultDemographicsData).then();
+    this.patient.collection('medical-history').add(this.defaultMedicalHistoryData).then();
+    this.patient.collection('ocular-history').add(this.defaultOcularHistoryData).then();
+    this.patient.collection('medications').add(this.defaultMedicationsData).then();
     this.defaultFamilyHistoryData.map(data => {
-      this.patient.collection('family-history').add(data);
+      this.patient.collection('family-history').add(data).then();
     });
   }
 
@@ -169,7 +157,6 @@ export class ApiService {
           const data = action.payload.doc.data();
           data.id = action.payload.doc.id;
           this.pageId = data.id;
-          console.log(this.pageId);
           return data;
         });
       });
@@ -206,8 +193,6 @@ export class ApiService {
       this.defaultFamilyHistoryData = data;
     });
   }
-
-
 
   updateDemographics(formData: DemographicsInterface, url: string) {
     this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);

@@ -116,13 +116,12 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
       console.log('page', page);
       this.pageData = page;
       this.pageData.map(p => {
-        console.log('p', p);
-        this.getFormData(p);
+        this.setFormData(p);
       });
     });
   }
 
-  private getFormData(pageData) {
+  private setFormData(pageData) {
     this.controls.title.setValue(pageData.title);
     this.controls.firstName.setValue(pageData.firstName);
     this.controls.lastName.setValue(pageData.lastName);

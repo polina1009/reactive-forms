@@ -3,11 +3,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {PatientService} from './patient.service';
 import {PatientsInterface} from '../interfaces/patient.interface';
-import { firebase } from '@firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {ApiService} from './api.service';
+import {DemographicsInterface} from '../interfaces/demographics.interface';
+import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
+import {MedicationsInterface} from '../interfaces/medications.interface';
+import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
+import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 
 @Injectable()
 export class LoginService {
@@ -24,27 +28,24 @@ export class LoginService {
     private route: ActivatedRoute,
     private patientService: PatientService,
     private apiService: ApiService
-  ) { }
+  ) {
+  }
 
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(success => {
-        console.log('success', success);
-        this.apiService.getLoggedUserWithCurrentData(email);
-      })
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        return this.apiService.getLoggedUserWithCurrentData(email);
       });
   }
 
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then(success => {
-        console.log('success', success);
+      .then(() => {
         this.apiService.updateJustLoggedUserWithDefaults(email);
+        return true;
       })
-      .catch(error => {
-        console.log(error);
+      .catch(() => {
+        return false;
       });
   }
 
@@ -53,8 +54,10 @@ export class LoginService {
       patientData.map(pat => {
         if (user.email === pat.email && user.password === pat.password) {
           this._loggedIn.next(true);
-          this.emailLogin(user.email, user.password);
-          this.router.navigate(['/']);
+          this.emailLogin(user.email, user.password)
+            .then(() => {
+              this.router.navigate(['/']).then();
+            });
         }
       });
     });
@@ -62,19 +65,23 @@ export class LoginService {
 
   signUp(user: PatientsInterface) {
     if (user.email !== '' && user.password !== '') {
-      this.emailSignUp(user.email, user.password);
-      this.patientService.addPatient(user);
-      this._loggedIn.next(true);
-      this.router.navigate(['/']);
-      user.email = '';
-      user.password = '';
+      return this.emailSignUp(user.email, user.password)
+        .then((success) => {
+          if (success === true) {
+            this._loggedIn.next(false);
+            this.router.navigate(['/login']).then();
+            return this.patientService.addPatient(user);
+          } else {
+            return false;
+          }
+        });
     }
   }
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
       this._loggedIn.next(false);
-      this.router.navigate(['/login'], { relativeTo: this.route });
+      this.router.navigate(['/login'], { relativeTo: this.route }).then();
     });
   }
 

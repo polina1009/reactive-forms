@@ -1,8 +1,8 @@
 <div class="login-wrapper">
   <form
     [formGroup]="loginForm"
-    *ngIf="newPatient"
-    (ngSubmit)="submitLoginForm(loginForm.value)"
+    *ngIf="!newPatient"
+    (ngSubmit)="submitLoginForm()"
     class="example-form"
     fxLayout="column wrap"
     fxLayoutAlign="center center" >
@@ -30,8 +30,8 @@
 
   <form
     [formGroup]="loginForm"
-    *ngIf="!newPatient"
-    (ngSubmit)="submitSignUpForm(loginForm.value)"
+    *ngIf="newPatient"
+    (ngSubmit)="submitSignUpForm()"
     class="example-form"
     fxLayout="column wrap"
     fxLayoutAlign="center center" >
@@ -55,5 +55,8 @@
             routerLinkActive="active"
             [disabled]="!loginForm.valid"
     >Create</button>
+    <br>
+    <br>
+    <h4 style="color: red">{{logError}}</h4>
   </form>
 </div>
