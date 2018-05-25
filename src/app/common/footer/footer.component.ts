@@ -10,6 +10,7 @@ import {select, Store} from '@ngrx/store';
 import {LoginService} from '../../services/login.service';
 import {Subscription} from 'rxjs/Subscription';
 import {NavigationService} from '../../services/navigation.service';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-footer',
@@ -47,7 +48,8 @@ export class FooterComponent implements OnInit, OnDestroy {
     private routerService: RoutingService,
     private store: Store<RouterStateInterface>,
     private loginService: LoginService,
-    private navService: NavigationService
+    private navService: NavigationService,
+    private apiService: ApiService
   ) {
     this.changeFooterData();
     this.page$ = store.pipe(select('page'));
@@ -72,7 +74,7 @@ export class FooterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._isLoggedIn$ = this.loginService.isLoggedIn;
+    this._isLoggedIn$ = this.apiService.isLoggedIn;
 
     this._nextPageSubscribe = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {

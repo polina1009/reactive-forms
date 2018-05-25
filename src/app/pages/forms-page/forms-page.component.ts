@@ -113,7 +113,6 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
 
   getDemographicsData() {
     this.patientService.getDemographics(GET_DEMOGRAPHICS).subscribe((page) => {
-      console.log('page', page);
       this.pageData = page;
       this.pageData.map(p => {
         this.setFormData(p);

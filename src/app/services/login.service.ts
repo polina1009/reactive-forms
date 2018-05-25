@@ -16,11 +16,11 @@ import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
 @Injectable()
 export class LoginService {
   patient: Observable<PatientsInterface | null>;
-  private _loggedIn = new BehaviorSubject<boolean>(false);
-
-  get isLoggedIn() {
-    return this._loggedIn.asObservable();
-  }
+  // private _loggedIn = new BehaviorSubject<boolean>(false);
+  //
+  // get isLoggedIn() {
+  //   return this._loggedIn.asObservable();
+  // }
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -34,7 +34,8 @@ export class LoginService {
   emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        return this.apiService.getLoggedUserWithCurrentData(email);
+        this.apiService.getLoggedUserWithCurrentData(email);
+        return;
       });
   }
 
@@ -53,11 +54,8 @@ export class LoginService {
     this.patientService.getPatient().subscribe(patientData => {
       patientData.map(pat => {
         if (user.email === pat.email && user.password === pat.password) {
-          this._loggedIn.next(true);
-          this.emailLogin(user.email, user.password)
-            .then(() => {
-              this.router.navigate(['/']).then();
-            });
+          // this._loggedIn.next(true);
+          this.emailLogin(user.email, user.password).then();
         }
       });
     });
@@ -68,7 +66,6 @@ export class LoginService {
       return this.emailSignUp(user.email, user.password)
         .then((success) => {
           if (success === true) {
-            this._loggedIn.next(false);
             this.router.navigate(['/login']).then();
             return this.patientService.addPatient(user);
           } else {
@@ -80,7 +77,7 @@ export class LoginService {
 
   logout() {
     this.afAuth.auth.signOut().then(() => {
-      this._loggedIn.next(false);
+      this.apiService._loggedIn.next(false);
       this.router.navigate(['/login'], { relativeTo: this.route }).then();
     });
   }

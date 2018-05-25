@@ -22,6 +22,8 @@ import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
 import {ApiToggleInterface} from '../interfaces/toggle.interface';
 import {MedicationsInterface} from '../interfaces/medications.interface';
 import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
@@ -60,7 +62,13 @@ export class ApiService {
   patientId: string;
   pageId: string;
 
-  constructor(private afs: AngularFirestore) {
+  public _loggedIn = new BehaviorSubject<boolean>(false);
+
+  get isLoggedIn() {
+    return this._loggedIn.asObservable();
+  }
+
+  constructor(private afs: AngularFirestore, private router: Router,) {
     this.patientCollection = this.afs.collection(GET_PATIENT);
     this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
     this.defaultCollection = this.afs.collection(GET_DEFAULT_PAGE);
@@ -96,7 +104,8 @@ export class ApiService {
               const userData = userRef.data();
               userData.id = userRef.id;
               this.patientId = userData.id;
-              console.log(this.patientId);
+              this.router.navigate(['/']).then();
+              this._loggedIn.next(true);
               return userData;
             });
         });
@@ -108,7 +117,7 @@ export class ApiService {
       .map((actions) => {
         return actions.map(action => {
           const patient = action.payload.doc.data();
-          // patient.id = action.payload.doc.id;
+          patient.id = action.payload.doc.id;
           return patient;
         });
       });
@@ -116,7 +125,6 @@ export class ApiService {
   }
 
   get patient() {
-    console.log(this.patientId);
     return this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
   }
 

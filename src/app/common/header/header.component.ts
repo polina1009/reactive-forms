@@ -8,6 +8,7 @@ import {RouterStateInterface} from '../../store/router.interface';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Observable';
 import { LoginService } from '../../services/login.service';
+import {ApiService} from '../../services/api.service';
 
 @Component({
   selector: 'app-header',
@@ -22,13 +23,14 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private routerService: RoutingService,
     private store: Store<RouterStateInterface>,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private apiService: ApiService
   ) {
     this.page$ = store.pipe(select('page'));
   }
 
   ngOnInit() {
-    this._isLoggedIn$ = this.loginService.isLoggedIn;
+    this._isLoggedIn$ = this.apiService.isLoggedIn;
   }
 
   onLogout() {

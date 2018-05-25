@@ -11,13 +11,14 @@ import { LoginService } from '../services/login.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
+import {ApiService} from '../services/api.service';
 
 
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
-    private loginService: LoginService,
+    private apiService: ApiService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -28,7 +29,7 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> {
     // return Observable.of(true);
 
-    return this.loginService.isLoggedIn
+    return this.apiService.isLoggedIn
       .take(1)
       .map((isLoggedIn: boolean) => {
         if (!isLoggedIn) {
