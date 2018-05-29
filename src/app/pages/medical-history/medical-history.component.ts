@@ -11,6 +11,8 @@ import { GET_MEDICAL_HISTORY, GET_MEDICAL_TOGGLE_LIST } from '../../services/api
 import { MedicalHistoryInterface } from '../../interfaces/medical-history.interface';
 import { ToggleInterface } from '../../interfaces/toggle.interface';
 
+import { maskDate } from '../../configes/text-mask.conf';
+
 @Component({
   selector: 'app-medical-history',
   templateUrl: './medical-history.component.html',
@@ -23,11 +25,7 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   injuries: FormArray;
 
   public toggleList: ToggleInterface[];
-  public maskDate = {
-    guide: true,
-    showMask : false,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
-  };
+  public maskDate = maskDate;
   private navNextSubscribe: Subscription;
 
   public pageData: MedicalHistoryInterface[];

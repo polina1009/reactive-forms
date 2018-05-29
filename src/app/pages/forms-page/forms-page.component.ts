@@ -18,7 +18,9 @@ import {
 import {Subscription} from 'rxjs/Subscription';
 
 import { SelectsListInterface } from '../../interfaces/selects.interface';
-import {DemographicsInterface} from '../../interfaces/demographics.interface';
+import { DemographicsInterface } from '../../interfaces/demographics.interface';
+
+import { maskPhone, maskDate } from '../../configes/text-mask.conf';
 
 @Component({
   selector: 'app-forms-page',
@@ -42,16 +44,8 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
 
   patientGroup: FormGroup;
 
-  public maskPhone = {
-    guide: true,
-    showMask: false,
-    mask: ['(', /[0-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
-  };
-  public maskDate = {
-    guide: true,
-    showMask : false,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
-  };
+  public maskPhone = maskPhone;
+  public maskDate = maskDate;
 
   constructor(
     private fb: FormBuilder,

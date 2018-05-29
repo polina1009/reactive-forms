@@ -15,6 +15,8 @@ import 'rxjs/add/operator/mergeMap';
 import { RouterStateInterface } from '../../store/router.interface';
 import { select, Store } from '@ngrx/store';
 
+import { nextUrl, prevUrl } from '../../configes/nav.conf';
+
 
 @Component({
   selector: 'app-footer',
@@ -24,18 +26,9 @@ import { select, Store } from '@ngrx/store';
 export class FooterComponent implements OnInit, OnDestroy {
 
   public page$: Observable<RouterStateInterface>;
-  private nextUrl = {
-    '/': '/medical-history',
-    '/medical-history': '/ocular-history',
-    '/ocular-history': '/medications',
-    '/medications': '/family-history'
-  };
-  private prevUrl = {
-    '/family-history': '/medications',
-    '/medications': '/ocular-history',
-    '/ocular-history': '/medical-history',
-    '/medical-history': '/'
-  };
+  private nextUrl = nextUrl;
+  private prevUrl = prevUrl;
+
   public previousPage: string;
   public currentPage: string;
   public nextPage: string;

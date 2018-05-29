@@ -12,6 +12,8 @@ import { GET_TOGGLE_OCULAR_LIST } from '../../services/api.constants';
 import { OcularHistoryInterface } from '../../interfaces/ocular-history.inteface';
 import { ToggleInterface } from '../../interfaces/toggle.interface';
 
+import { maskDate } from '../../configes/text-mask.conf';
+
 @Component({
   selector: 'app-ocular-history',
   templateUrl: './ocular-history.component.html',
@@ -24,11 +26,7 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
 
   public toggleOcularList: ToggleInterface[];
 
-  public maskDate = {
-    guide: true,
-    showMask : false,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
-  };
+  public maskDate = maskDate;
 
   private navNextSubscribe: Subscription;
   private getDataSubscription: Subscription;

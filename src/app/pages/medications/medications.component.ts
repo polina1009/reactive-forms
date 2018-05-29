@@ -9,6 +9,7 @@ import { PatientService } from '../../services/patient.service';
 import { GET_MEDICATIONS } from '../../services/api.constants';
 
 import { MedicationsInterface } from '../../interfaces/medications.interface';
+import { maskDate } from '../../configes/text-mask.conf';
 
 @Component({
   selector: 'app-medications',
@@ -22,11 +23,7 @@ export class MedicationsComponent implements OnInit, OnDestroy {
   medications: FormArray;
   private navNextSubscribe: Subscription;
 
-  public maskDate = {
-    guide: true,
-    showMask : false,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
-  };
+  public maskDate = maskDate;
   public pageData: MedicationsInterface[];
 
   constructor(
