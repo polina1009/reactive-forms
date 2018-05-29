@@ -59,13 +59,6 @@ export class LoginComponent implements OnInit {
       this.patient.password = this.loginForm.get('password').value;
       this.loginService.login(this.patient);
       this.newPatient = false;
-      this.errorHandler();
-    }
-  }
-
-  private errorHandler() {
-    if (this.loginService.signUpError === false) {
-      return this.errorString = 'Account with such email not found!';
     }
   }
 

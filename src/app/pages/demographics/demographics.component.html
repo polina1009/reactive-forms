@@ -59,7 +59,7 @@
     </mat-form-field>
     <mat-form-field fxFlex.xl="24" fxFlex.lg="32" fxFlex.md="32" fxFlex.sm="48" fxFlex.xs="100">
       <mat-select placeholder="Referral Source" formControlName="referralSource">
-        <mat-option *ngFor="let sources of referrelSourceList" [value]="sources.value">
+        <mat-option *ngFor="let sources of referralSourceList" [value]="sources.value">
           {{sources.viewValue}}
         </mat-option>
       </mat-select>
