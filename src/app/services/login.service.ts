@@ -14,7 +14,7 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class LoginService {
   patient: Observable<PatientsInterface | null>;
-  public signUpError: string;
+  public signUpError: boolean;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -23,6 +23,7 @@ export class LoginService {
     private patientService: PatientService,
     private apiService: ApiService
   ) {
+    this.signUpError = false;
   }
 
   private emailLogin(email: string, password: string) {
@@ -53,7 +54,7 @@ export class LoginService {
         if (user.email === pat.email && user.password === pat.password) {
           return this.emailLogin(user.email, user.password).then();
         } else {
-          this.signUpError = 'Account with such email not found!';
+          this.signUpError = true;
           return false;
         }
       });

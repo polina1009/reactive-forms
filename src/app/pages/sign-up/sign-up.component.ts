@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  public loginForm: FormGroup;
+  public signUpForm: FormGroup;
   public formSubmitAttempt: boolean;
   public newPatient: boolean;
   public logError: string;
@@ -32,7 +32,7 @@ export class SignUpComponent implements OnInit {
   }
 
   public createForm () {
-    this.loginForm = this.fB.group({
+    this.signUpForm = this.fB.group({
       email: [null, Validators.compose([Validators.required, Validators.email])],
       password: [null, Validators.compose([
         Validators.required,
@@ -50,15 +50,15 @@ export class SignUpComponent implements OnInit {
 
   public isFieldInvalid(field: string) {
     return (
-      (!this.loginForm.get(field).valid && this.loginForm.get(field).touched) ||
-      (this.loginForm.get(field).untouched && this.formSubmitAttempt)
+      (!this.signUpForm.get(field).valid && this.signUpForm.get(field).touched) ||
+      (this.signUpForm.get(field).untouched && this.formSubmitAttempt)
     );
   }
 
   public submitSignUpForm() {
-    if (this.loginForm.valid) {
-      this.patient.email = this.loginForm.get('email').value;
-      this.patient.password = this.loginForm.get('password').value;
+    if (this.signUpForm.valid) {
+      this.patient.email = this.signUpForm.get('email').value;
+      this.patient.password = this.signUpForm.get('password').value;
       this.newPatient = true;
       this.loginService.signUp(this.patient)
         .then(success => {

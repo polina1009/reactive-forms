@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { LoginService } from '../../services/login.service';
 import { PatientsInterface } from '../../interfaces/patient.interface';
-import {Router} from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
-  selector: 'app-auth',
-  templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class AuthComponent implements OnInit {
-
+export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public formSubmitAttempt: boolean;
   public newPatient: boolean;
-  public logError: string;
+  public errorString: string;
   private patient: PatientsInterface = {
     email: '',
     password: ''
@@ -26,7 +25,7 @@ export class AuthComponent implements OnInit {
     protected loginService: LoginService,
     private router: Router
   ) {
-    this.logError = '';
+    this.errorString = '';
   }
 
   ngOnInit() {
@@ -60,6 +59,14 @@ export class AuthComponent implements OnInit {
       this.patient.password = this.loginForm.get('password').value;
       this.loginService.login(this.patient);
       this.newPatient = false;
+      this.errorHandler();
     }
   }
+
+  private errorHandler() {
+    if (this.loginService.signUpError === false) {
+      return this.errorString = 'Account with such email not found!';
+    }
+  }
+
 }

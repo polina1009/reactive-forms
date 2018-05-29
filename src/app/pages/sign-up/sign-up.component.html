@@ -1,6 +1,6 @@
 <div class="signup-wrapper">
   <form
-    [formGroup]="loginForm"
+    [formGroup]="signUpForm"
     (ngSubmit)="submitSignUpForm()"
     class="example-form"
     fxLayout="column wrap"
@@ -23,7 +23,7 @@
             type="submit"
             routerLink="/demographics"
             routerLinkActive="active"
-            [disabled]="!loginForm.valid"
+            [disabled]="!signUpForm.valid"
     >Create</button>
     <br>
     <br>

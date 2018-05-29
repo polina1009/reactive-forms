@@ -18,7 +18,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FormModule } from './pages/forms-page';
 import { FamilyHistoryModule } from './pages/family-history';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthModule } from './pages/auth/auth.module';
+import {LoginModule} from './pages/login/login.module';
 import {SignUpModule} from './pages/sign-up/sign-up.module';
 import { MedicalHistoryModule } from './pages/medical-history/medical-history.module';
 import { OcularHistoryModule } from './pages/ocular-history';
@@ -61,7 +61,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppRoutingModule,
     FamilyHistoryModule,
     MedicalHistoryModule,
-    AuthModule,
+    LoginModule,
     SignUpModule,
     OcularHistoryModule,
     MedicationsModule,
