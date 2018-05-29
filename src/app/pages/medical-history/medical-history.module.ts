@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MedicalHistoryComponent} from './medical-history.component';
-import {MedicalHistoryService} from './medical-history.service';
+import { MedicalHistoryComponent } from './medical-history.component';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -31,7 +30,7 @@ import {
     MatInputModule,
     MatNativeDateModule
   ],
-  providers: [MedicalHistoryService],
+  providers: [],
   exports: [MedicalHistoryComponent]
 })
 export class MedicalHistoryModule { }

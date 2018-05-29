@@ -1,16 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
+
+import { RoutingService } from '../../services/routing.service';
+import { LoginService } from '../../services/login.service';
+import { NavigationService } from '../../services/navigation.service';
+import { ApiService } from '../../services/api.service';
+
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
-import {RoutingService} from '../../services/routing.service';
-import {Observable} from 'rxjs/Observable';
-import {RouterStateInterface} from '../../store/router.interface';
-import {select, Store} from '@ngrx/store';
-import {LoginService} from '../../services/login.service';
-import {Subscription} from 'rxjs/Subscription';
-import {NavigationService} from '../../services/navigation.service';
-import {ApiService} from '../../services/api.service';
+
+import { RouterStateInterface } from '../../store/router.interface';
+import { select, Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-footer',

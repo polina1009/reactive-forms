@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
+
 import { ApiService } from './api.service';
-import {Observable} from 'rxjs/Observable';
+
+import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/finally';
-import {ApiOptionInterface, SelectsListInterface} from '../interfaces/selects.interface';
-import {DemographicsInterface} from '../interfaces/demographics.interface';
-import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
-import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
-import {ApiToggleInterface, ToggleInterface} from '../interfaces/toggle.interface';
-import {MedicationsInterface} from '../interfaces/medications.interface';
-import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
+
+import { ApiOptionInterface, SelectsListInterface } from '../interfaces/selects.interface';
+import { DemographicsInterface } from '../interfaces/demographics.interface';
+import { MedicalHistoryInterface } from '../interfaces/medical-history.interface';
+import { OcularHistoryInterface } from '../interfaces/ocular-history.inteface';
+import { ApiToggleInterface, ToggleInterface } from '../interfaces/toggle.interface';
+import { MedicationsInterface } from '../interfaces/medications.interface';
+import { FamilyHistoryInterface } from '../interfaces/family-history.interface';
 
 
 @Injectable()

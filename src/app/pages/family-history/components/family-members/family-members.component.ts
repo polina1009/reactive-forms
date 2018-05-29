@@ -1,6 +1,7 @@
-import {Component, OnInit, Inject, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {PatientService} from '../../../../services/patient.service';
+
+import { PatientService } from '../../../../services/patient.service';
 
 @Component({
   selector: 'app-family-members',

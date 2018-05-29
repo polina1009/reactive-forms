@@ -1,11 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material';
-import {FamilyMembersComponent} from './components';
-import {NavigationService} from '../../services/navigation.service';
-import {Subscription} from 'rxjs/Subscription';
-import {FamilyHistoryInterface} from '../../interfaces/family-history.interface';
-import {ApiToggleInterface} from '../../interfaces/toggle.interface';
-import {PatientService} from '../../services/patient.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+
+import { FamilyMembersComponent } from './components';
+
+import { NavigationService } from '../../services/navigation.service';
+import { PatientService } from '../../services/patient.service';
+
+import { Subscription } from 'rxjs/Subscription';
+
+import { FamilyHistoryInterface } from '../../interfaces/family-history.interface';
+import { ApiToggleInterface } from '../../interfaces/toggle.interface';
+
 import { GET_FAMILY_HISTORY } from '../../services/api.constants';
 
 

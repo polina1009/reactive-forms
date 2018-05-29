@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { RoutingService } from '../../services/routing.service';
+import { LoginService } from '../../services/login.service';
+import { ApiService } from '../../services/api.service';
+
+import { RouterStateInterface } from '../../store/router.interface';
+import { select, Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
-import {RoutingService} from '../../services/routing.service';
-import {RouterStateInterface} from '../../store/router.interface';
-import {select, Store} from '@ngrx/store';
-import {Observable} from 'rxjs/Observable';
-import { LoginService } from '../../services/login.service';
-import {ApiService} from '../../services/api.service';
+
 
 @Component({
   selector: 'app-header',

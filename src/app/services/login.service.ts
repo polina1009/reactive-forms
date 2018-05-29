@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {PatientService} from './patient.service';
-import {PatientsInterface} from '../interfaces/patient.interface';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { ApiService } from './api.service';
+import { PatientService } from './patient.service';
+
+import { PatientsInterface } from '../interfaces/patient.interface';
+
 import { AngularFireAuth } from 'angularfire2/auth';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {ApiService} from './api.service';
 
 @Injectable()
 export class LoginService {

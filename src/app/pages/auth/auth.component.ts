@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {LoginService} from '../../services/login.service';
-import {PatientsInterface} from '../../interfaces/patient.interface';
+
+import { LoginService } from '../../services/login.service';
+import { PatientsInterface } from '../../interfaces/patient.interface';
 
 @Component({
   selector: 'app-auth',

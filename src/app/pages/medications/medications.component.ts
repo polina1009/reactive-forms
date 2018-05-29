@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+
 import { Subscription } from 'rxjs/Subscription';
+
 import { NavigationService } from '../../services/navigation.service';
 import { PatientService } from '../../services/patient.service';
+
 import { GET_MEDICATIONS } from '../../services/api.constants';
+
 import { MedicationsInterface } from '../../interfaces/medications.interface';
 
 @Component({

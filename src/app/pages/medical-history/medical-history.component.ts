@@ -1,9 +1,13 @@
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+
 import { NavigationService } from '../../services/navigation.service';
-import { Subscription } from 'rxjs/Subscription';
 import { PatientService} from '../../services/patient.service';
+
+import { Subscription } from 'rxjs/Subscription';
+
 import { GET_MEDICAL_HISTORY, GET_MEDICAL_TOGGLE_LIST } from '../../services/api.constants';
+
 import { MedicalHistoryInterface } from '../../interfaces/medical-history.interface';
 import { ToggleInterface } from '../../interfaces/toggle.interface';
 

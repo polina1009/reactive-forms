@@ -1,13 +1,16 @@
 import {Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
-
 import { FormBuilder, FormGroup } from '@angular/forms';
-import {NavigationService} from '../../services/navigation.service';
-import {Subscription} from 'rxjs/Subscription';
-import {PatientService} from '../../services/patient.service';
+
+import { NavigationService } from '../../services/navigation.service';
+import { PatientService } from '../../services/patient.service';
+
+import { Subscription } from 'rxjs/Subscription';
+
 import { GET_OCULAR_HISTORY } from '../../services/api.constants';
-import {OcularHistoryInterface} from '../../interfaces/ocular-history.inteface';
-import {ToggleInterface} from '../../interfaces/toggle.interface';
 import { GET_TOGGLE_OCULAR_LIST } from '../../services/api.constants';
+
+import { OcularHistoryInterface } from '../../interfaces/ocular-history.inteface';
+import { ToggleInterface } from '../../interfaces/toggle.interface';
 
 @Component({
   selector: 'app-ocular-history',
@@ -123,7 +126,6 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy () {
-    // this.getDataSubscription.unsubscribe();
     this.navNextSubscribe.unsubscribe();
   }
 

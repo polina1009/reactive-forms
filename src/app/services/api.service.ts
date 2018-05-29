@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
 import { map } from 'rxjs/operators';
 import { pipe } from 'rxjs/util/pipe';
 import 'rxjs/add/operator/delay';
+
 import {
   GET_PATIENT,
   GET_DEFAULT_PAGE,
@@ -14,16 +18,16 @@ import {
   GET_FAMILY_HISTORY} from './api.constants';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+
 import { ApiOptionInterface} from '../interfaces/selects.interface';
-import {DefaultInterface, PatientsInterface} from '../interfaces/patient.interface';
-import {DemographicsInterface} from '../interfaces/demographics.interface';
-import {MedicalHistoryInterface} from '../interfaces/medical-history.interface';
-import {OcularHistoryInterface} from '../interfaces/ocular-history.inteface';
-import {ApiToggleInterface} from '../interfaces/toggle.interface';
-import {MedicationsInterface} from '../interfaces/medications.interface';
-import {FamilyHistoryInterface} from '../interfaces/family-history.interface';
-import {Router} from '@angular/router';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { DefaultInterface, PatientsInterface } from '../interfaces/patient.interface';
+import { DemographicsInterface } from '../interfaces/demographics.interface';
+import { MedicalHistoryInterface } from '../interfaces/medical-history.interface';
+import { OcularHistoryInterface } from '../interfaces/ocular-history.inteface';
+import { ApiToggleInterface } from '../interfaces/toggle.interface';
+import { MedicationsInterface } from '../interfaces/medications.interface';
+import { FamilyHistoryInterface } from '../interfaces/family-history.interface';
+
 
 
 @Injectable()

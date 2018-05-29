@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MedicationsComponent } from './medications.component';
 
@@ -14,7 +15,6 @@ import {
   MatNativeDateModule,
   MatCardModule
 } from '@angular/material';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 

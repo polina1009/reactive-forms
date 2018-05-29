@@ -1,6 +1,9 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
 import { PatientService } from '../../services/patient.service';
+import { NavigationService } from '../../services/navigation.service';
+
 import {
   GET_PREFERRED_CONTACT_LIST,
   GET_REFERRAL_SOURCE,
@@ -11,9 +14,9 @@ import {
   GET_ETHNICITY,
   GET_DEMOGRAPHICS
 } from '../../services/api.constants';
-import {map} from 'rxjs/operator/map';
-import {NavigationService} from '../../services/navigation.service';
+
 import {Subscription} from 'rxjs/Subscription';
+
 import { SelectsListInterface } from '../../interfaces/selects.interface';
 import {DemographicsInterface} from '../../interfaces/demographics.interface';
 
