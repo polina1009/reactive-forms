@@ -101,6 +101,8 @@ export class ApiService {
               userData.id = userRef.id;
               this.patientId = userData.id;
               this.addCollection();
+              this._loggedIn.next(true);
+              this.router.navigate(['/']).then();
               return userData;
             });
         });
@@ -118,8 +120,8 @@ export class ApiService {
               const userData = userRef.data();
               userData.id = userRef.id;
               this.patientId = userData.id;
-              this.router.navigate(['/']).then();
               this._loggedIn.next(true);
+              this.router.navigate(['/']).then();
               return userData;
             });
         });

@@ -61,6 +61,7 @@ export class AuthComponent implements OnInit {
       this.patient.email = this.loginForm.get('email').value;
       this.patient.password = this.loginForm.get('password').value;
       this.loginService.login(this.patient);
+      this.newPatient = false;
     }
   }
 
@@ -71,10 +72,7 @@ export class AuthComponent implements OnInit {
       this.loginService.signUp(this.patient)
         .then(success => {
           if (success === false) {
-            this.newPatient = true;
             this.logError = 'The email address is already in use by another account.';
-          } else {
-            this.newPatient = false;
           }
         });
     }

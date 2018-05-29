@@ -58,7 +58,6 @@ export class LoginService {
       return this.emailSignUp(user.email, user.password)
         .then((success) => {
           if (success === true) {
-            this.router.navigate(['/login']).then();
             return this.patientService.addPatient(user);
           } else {
             return false;
