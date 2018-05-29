@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { PatientService } from '../../services/patient.service';
@@ -23,13 +23,13 @@ import { DemographicsInterface } from '../../interfaces/demographics.interface';
 import { maskPhone, maskDate } from '../../configes/text-mask.conf';
 
 @Component({
-  selector: 'app-forms-page',
-  templateUrl: './forms-page.component.html',
-  styleUrls: ['./forms-page.component.scss'],
+  selector: 'app-demographics',
+  templateUrl: './demographics.component.html',
+  styleUrls: ['./demographics.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class FormsPageComponent implements  OnInit, OnDestroy {
+export class DemographicsComponent implements  OnInit, OnDestroy {
   public preferredContactList: SelectsListInterface[];
   public referralSourceList: SelectsListInterface[];
   public languageList: SelectsListInterface[];
@@ -71,6 +71,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.getDemographicsData();
     this.getSelectOptions();
     this.navToNextSubscription();
+  }
+
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
   }
 
   private setFormData(pageData) {
@@ -152,14 +156,14 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
         this.ref.markForCheck();
         this.preferredContactList = optionList;
         this.controls.preferredContact.setValue(this.pat.preferredContact);
-    });
+      });
 
     this.patientService.getOptionList(GET_REFERRAL_SOURCE)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.referralSourceList = optionList;
         this.controls.referralSource.setValue(this.pat.referralSource);
-    });
+      });
 
     this.patientService.getOptionList(GET_LANGUAGE)
       .subscribe(optionList => {
@@ -173,7 +177,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
         this.ref.markForCheck();
         this.workStatusList = optionList;
         this.controls.workStatus.setValue(this.pat.workStatus);
-    });
+      });
 
     this.patientService.getOptionList(GET_EMPLOYER)
       .subscribe(optionList => {
@@ -187,20 +191,14 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
         this.ref.markForCheck();
         this.raceList = optionList;
         this.controls.race.setValue(this.pat.race);
-    });
+      });
 
     this.patientService.getOptionList(GET_ETHNICITY)
       .subscribe(optionList => {
         this.ref.markForCheck();
         this.ethnicityList = optionList;
         this.controls.ethnicity.setValue(this.pat.ethnicity);
-    });
-  }
-
-
-
-  ngOnDestroy() {
-    this.navNextSubscribe.unsubscribe();
+      });
   }
 
 }

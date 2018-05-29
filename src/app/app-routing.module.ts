@@ -1,21 +1,20 @@
 import {RouterModule, Routes} from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { FormsPageComponent } from './pages/forms-page';
 import { FamilyHistoryComponent } from './pages/family-history';
 import { PageNotFoundComponent } from './pages/page-not-found';
-import { AuthComponent } from './pages/auth/auth.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MedicalHistoryComponent } from './pages/medical-history';
 import { OcularHistoryComponent } from './pages/ocular-history';
 import { MedicationsComponent } from './pages/medications';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
-import {LoginComponent} from './pages/login/login.component';
+import { LoginComponent } from './pages/login/login.component';
+import { DemographicsComponent } from './pages/demographics';
 
 const appRoutes: Routes = [
   {
     path: 'demographics',
-    component: FormsPageComponent,
+    component: DemographicsComponent,
     canActivate: [AuthGuard],
     data: { title: 'Demographics', pageNumber: 1 }
   },

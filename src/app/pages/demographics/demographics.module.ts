@@ -17,14 +17,14 @@ import {
 
 import { TextMaskModule } from 'angular2-text-mask';
 
-import { FormsPageComponent } from './forms-page.component';
+import {DemographicsComponent} from './demographics.component';
 
 
 
 
 @NgModule({
   declarations: [
-    FormsPageComponent,
+    DemographicsComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +44,7 @@ import { FormsPageComponent } from './forms-page.component';
   ],
   providers: [],
   exports: [
-    FormsPageComponent,
+    DemographicsComponent,
   ],
 })
-export class FormModule { }
+export class DemographicsModule { }

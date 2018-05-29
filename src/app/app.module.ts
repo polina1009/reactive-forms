@@ -15,11 +15,10 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 // modules
-import { FormModule } from './pages/forms-page';
 import { FamilyHistoryModule } from './pages/family-history';
 import { AppRoutingModule } from './app-routing.module';
-import {LoginModule} from './pages/login/login.module';
-import {SignUpModule} from './pages/sign-up/sign-up.module';
+import { LoginModule } from './pages/login/login.module';
+import { SignUpModule } from './pages/sign-up/sign-up.module';
 import { MedicalHistoryModule } from './pages/medical-history/medical-history.module';
 import { OcularHistoryModule } from './pages/ocular-history';
 import { MedicationsModule } from './pages/medications/';
@@ -43,6 +42,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {DemographicsModule} from './pages/demographics/';
 
 
 
@@ -57,12 +57,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   imports: [
     BrowserModule,
-    FormModule,
     AppRoutingModule,
     FamilyHistoryModule,
     MedicalHistoryModule,
     LoginModule,
     SignUpModule,
+    DemographicsModule,
     OcularHistoryModule,
     MedicationsModule,
     MatToolbarModule,
