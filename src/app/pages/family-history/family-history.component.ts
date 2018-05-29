@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { FamilyHistoryInterface } from '../../interfaces/family-history.interface';
 import { ApiToggleInterface } from '../../interfaces/toggle.interface';
 
-import { GET_FAMILY_HISTORY } from '../../services/api.constants';
+import { GET_FAMILY_HISTORY } from '../../constants/api.constants';
 
 
 @Component({

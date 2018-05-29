@@ -6,7 +6,7 @@ import { PatientService} from '../../services/patient.service';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { GET_MEDICAL_HISTORY, GET_MEDICAL_TOGGLE_LIST } from '../../services/api.constants';
+import { GET_MEDICAL_HISTORY, GET_MEDICAL_TOGGLE_LIST } from '../../constants/api.constants';
 
 import { MedicalHistoryInterface } from '../../interfaces/medical-history.interface';
 import { ToggleInterface } from '../../interfaces/toggle.interface';

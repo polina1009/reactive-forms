@@ -6,8 +6,8 @@ import { PatientService } from '../../services/patient.service';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { GET_OCULAR_HISTORY } from '../../services/api.constants';
-import { GET_TOGGLE_OCULAR_LIST } from '../../services/api.constants';
+import { GET_OCULAR_HISTORY } from '../../constants/api.constants';
+import { GET_TOGGLE_OCULAR_LIST } from '../../constants/api.constants';
 
 import { OcularHistoryInterface } from '../../interfaces/ocular-history.inteface';
 import { ToggleInterface } from '../../interfaces/toggle.interface';

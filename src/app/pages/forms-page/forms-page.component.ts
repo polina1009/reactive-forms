@@ -13,7 +13,7 @@ import {
   GET_RACE,
   GET_ETHNICITY,
   GET_DEMOGRAPHICS
-} from '../../services/api.constants';
+} from '../../constants/api.constants';
 
 import {Subscription} from 'rxjs/Subscription';
 

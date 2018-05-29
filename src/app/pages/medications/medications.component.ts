@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { NavigationService } from '../../services/navigation.service';
 import { PatientService } from '../../services/patient.service';
 
-import { GET_MEDICATIONS } from '../../services/api.constants';
+import { GET_MEDICATIONS } from '../../constants/api.constants';
 
 import { MedicationsInterface } from '../../interfaces/medications.interface';
 import { maskDate } from '../../configes/text-mask.conf';

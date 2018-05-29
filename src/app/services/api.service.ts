@@ -11,11 +11,13 @@ import 'rxjs/add/operator/delay';
 import {
   GET_PATIENT,
   GET_DEFAULT_PAGE,
+  GET_DEFAULT_PAGE_ID,
   GET_DEMOGRAPHICS,
   GET_MEDICAL_HISTORY,
   GET_OCULAR_HISTORY,
   GET_MEDICATIONS,
-  GET_FAMILY_HISTORY} from './api.constants';
+  GET_FAMILY_HISTORY} from '../constants/api.constants';
+import { FIELD_PATH_ID, FIELD_PATH_INDEX, DISPLAY_ORDER } from '../constants/field.constants';
 
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 
@@ -74,7 +76,7 @@ export class ApiService {
 
   constructor(private afs: AngularFirestore, private router: Router) {
     this.patientCollection = this.afs.collection(GET_PATIENT);
-    this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
+    this.patientDoc = this.afs.doc<PatientsInterface>(`${GET_PATIENT}/${this.patientId}`);
     this.defaultCollection = this.afs.collection(GET_DEFAULT_PAGE);
     this.getDefaultPage();
   }
@@ -120,20 +122,18 @@ export class ApiService {
     this.patient$ = this.patientCollection.snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
-          const patient = action.payload.doc.data();
-          patient.id = action.payload.doc.id;
-          return patient;
+          return action.payload.doc.data();
         });
       });
     return this.patient$;
   }
 
   get patient() {
-    return this.patientDoc = this.afs.doc<PatientsInterface>(`patients/${this.patientId}`);
+    return this.patientDoc = this.afs.doc<PatientsInterface>(`${GET_PATIENT}/${this.patientId}`);
   }
 
   get defaultPage() {
-    return this.defaultDoc = this.afs.doc<DefaultInterface>(`default-pages/DmCautdEVB5KGunW8C7C`);
+    return this.defaultDoc = this.afs.doc<DefaultInterface>(`${GET_DEFAULT_PAGE_ID}`);
   }
 
   addPatient(patient: PatientsInterface) {
@@ -141,29 +141,29 @@ export class ApiService {
   }
 
   addCollection() {
-    this.patient.collection('demographics').add(this.defaultDemographicsData).then();
-    this.patient.collection('medical-history').add(this.defaultMedicalHistoryData).then();
-    this.patient.collection('ocular-history').add(this.defaultOcularHistoryData).then();
-    this.patient.collection('medications').add(this.defaultMedicationsData).then();
+    this.patient.collection(GET_DEMOGRAPHICS).add(this.defaultDemographicsData).then();
+    this.patient.collection(GET_MEDICAL_HISTORY).add(this.defaultMedicalHistoryData).then();
+    this.patient.collection(GET_OCULAR_HISTORY).add(this.defaultOcularHistoryData).then();
+    this.patient.collection(GET_MEDICATIONS).add(this.defaultMedicationsData).then();
     this.defaultFamilyHistoryData.map(data => {
-      this.patient.collection('family-history').add(data).then();
+      this.patient.collection(GET_FAMILY_HISTORY).add(data).then();
     });
   }
 
   getSelectCollection(url: string) {
-    this.selectionCollection = this.afs.collection(url, ref => ref.orderBy('id', 'asc'));
+    this.selectionCollection = this.afs.collection(url, ref => ref.orderBy(FIELD_PATH_ID, DISPLAY_ORDER));
     this.select$ = this.selectionCollection.valueChanges();
     return this.select$;
   }
 
   getToggleList(url: string) {
-    this.toggleCollection = this.afs.collection(url, ref => ref.orderBy('index', 'asc'));
+    this.toggleCollection = this.afs.collection(url, ref => ref.orderBy(FIELD_PATH_INDEX, DISPLAY_ORDER));
     this.toggle$ = this.toggleCollection.valueChanges();
     return this.toggle$;
   }
 
   getPageData(url: string, query?) {
-    query = this.patient.collection(url, ref => ref.orderBy('index', 'asc')).snapshotChanges()
+    query = this.patient.collection(url, ref => ref.orderBy(FIELD_PATH_INDEX, DISPLAY_ORDER)).snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
           const data = action.payload.doc.data();
@@ -176,7 +176,7 @@ export class ApiService {
   }
 
   getDefPageData(url: string, query?) {
-    query = this.defaultPage.collection(url, ref => ref.orderBy('index', 'asc')).valueChanges();
+    query = this.defaultPage.collection(url, ref => ref.orderBy(FIELD_PATH_INDEX, DISPLAY_ORDER)).valueChanges();
     return query;
   }
 

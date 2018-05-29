@@ -12,6 +12,7 @@ export const GET_TOGGLE_OCULAR_LIST = 'ocularToggleList';
 export const GET_MEDICAL_TOGGLE_LIST = 'medicalHistoryToggleList';
 
 export const GET_DEFAULT_PAGE = 'default-pages';
+export const GET_DEFAULT_PAGE_ID = 'default-pages/DmCautdEVB5KGunW8C7C';
 
 export const GET_DEMOGRAPHICS = 'demographics';
 export const GET_MEDICAL_HISTORY = 'medical-history';
