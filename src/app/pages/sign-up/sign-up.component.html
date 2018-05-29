@@ -1,3 +1,32 @@
-<p>
-  sign-up works!
-</p>
+<div class="signup-wrapper">
+  <form
+    [formGroup]="loginForm"
+    (ngSubmit)="submitSignUpForm()"
+    class="example-form"
+    fxLayout="column wrap"
+    fxLayoutAlign="center center" >
+    <h1>Create Patient</h1>
+    <p class="button is-small" (click)="toggleForm()">Log Patient?</p>
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Email" type="text" formControlName="email">
+      <mat-error *ngIf="isFieldInvalid('email')">
+        Please inform your email
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field">
+      <input matInput placeholder="Password" type="password" formControlName="password">
+      <mat-error *ngIf="isFieldInvalid('email')">
+        Please inform your password
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary"
+            type="submit"
+            routerLink="/demographics"
+            routerLinkActive="active"
+            [disabled]="!loginForm.valid"
+    >Create</button>
+    <br>
+    <br>
+    <h4 style="color: red">{{logError}}</h4>
+  </form>
+</div>

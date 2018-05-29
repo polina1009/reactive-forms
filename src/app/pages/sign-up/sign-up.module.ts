@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AuthComponent } from './auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SignUpComponent } from './sign-up.component';
 
 
 @NgModule({
   declarations: [
-    AuthComponent
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -21,8 +21,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   providers: [],
   exports: [
-    AuthComponent
+    SignUpComponent
   ],
 })
 
-export class AuthModule { }
+export class SignUpModule { }

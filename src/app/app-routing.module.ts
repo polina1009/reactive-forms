@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MedicalHistoryComponent } from './pages/medical-history';
 import { OcularHistoryComponent } from './pages/ocular-history';
 import { MedicationsComponent } from './pages/medications';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   {
@@ -40,6 +41,10 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: AuthComponent
+  },
+  {
+    path: 'sign-up',
+    component: SignUpComponent
   },
   { path: '',   redirectTo: '/demographics', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

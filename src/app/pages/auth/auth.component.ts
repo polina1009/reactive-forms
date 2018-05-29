@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { LoginService } from '../../services/login.service';
 import { PatientsInterface } from '../../interfaces/patient.interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -22,7 +23,8 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private fB: FormBuilder,
-    protected loginService: LoginService
+    protected loginService: LoginService,
+    private router: Router
   ) {
     this.logError = '';
   }
@@ -34,18 +36,14 @@ export class AuthComponent implements OnInit {
   public createForm () {
     this.loginForm = this.fB.group({
       email: [null, Validators.compose([Validators.required, Validators.email])],
-      password: [null, Validators.compose([
-        Validators.required,
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(6),
-        Validators.maxLength(25),
-      ])]
+      password: [null, Validators.compose([Validators.required])]
     });
   }
 
 
   public toggleForm() {
     this.newPatient = !this.newPatient;
+    this.router.navigate(['/sign-up']).then();
   }
 
   public isFieldInvalid(field: string) {
@@ -64,18 +62,4 @@ export class AuthComponent implements OnInit {
       this.newPatient = false;
     }
   }
-
-  public submitSignUpForm() {
-    if (this.loginForm.valid) {
-      this.patient.email = this.loginForm.get('email').value;
-      this.patient.password = this.loginForm.get('password').value;
-      this.loginService.signUp(this.patient)
-        .then(success => {
-          if (success === false) {
-            this.logError = 'The email address is already in use by another account.';
-          }
-        });
-    }
-  }
-
 }

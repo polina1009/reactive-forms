@@ -19,6 +19,7 @@ import { FormModule } from './pages/forms-page';
 import { FamilyHistoryModule } from './pages/family-history';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './pages/auth/auth.module';
+import {SignUpModule} from './pages/sign-up/sign-up.module';
 import { MedicalHistoryModule } from './pages/medical-history/medical-history.module';
 import { OcularHistoryModule } from './pages/ocular-history';
 import { MedicationsModule } from './pages/medications/';
@@ -42,7 +43,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 
 
@@ -53,8 +53,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent,
-    SignUpComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +62,7 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     FamilyHistoryModule,
     MedicalHistoryModule,
     AuthModule,
+    SignUpModule,
     OcularHistoryModule,
     MedicationsModule,
     MatToolbarModule,
