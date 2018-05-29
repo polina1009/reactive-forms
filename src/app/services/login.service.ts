@@ -14,6 +14,7 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class LoginService {
   patient: Observable<PatientsInterface | null>;
+  public signUpError: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -28,7 +29,10 @@ export class LoginService {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
         this.apiService.getLoggedUserWithCurrentData(email);
-        return;
+        return true;
+      })
+      .catch(() => {
+        return false;
       });
   }
 
@@ -47,7 +51,10 @@ export class LoginService {
     this.patientService.getPatient().subscribe(patientData => {
       patientData.map(pat => {
         if (user.email === pat.email && user.password === pat.password) {
-          this.emailLogin(user.email, user.password).then();
+          return this.emailLogin(user.email, user.password).then();
+        } else {
+          this.signUpError = 'Account with such email not found!';
+          return false;
         }
       });
     });

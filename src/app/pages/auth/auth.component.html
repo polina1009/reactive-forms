@@ -26,6 +26,9 @@
             routerLinkActive="active"
             [disabled]="!loginForm.valid"
     >Login</button>
+    <br>
+    <br>
+    <h4 style="color: red">{{loginService.signUpError}}</h4>
   </form>
 
   <form

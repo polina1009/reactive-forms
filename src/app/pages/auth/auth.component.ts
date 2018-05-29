@@ -22,7 +22,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private fB: FormBuilder,
-    private loginService: LoginService
+    protected loginService: LoginService
   ) {
     this.logError = '';
   }

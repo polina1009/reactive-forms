@@ -42,6 +42,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 
 
@@ -52,7 +53,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
