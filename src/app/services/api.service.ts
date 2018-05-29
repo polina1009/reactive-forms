@@ -129,7 +129,7 @@ export class ApiService {
   }
 
   get defaultPage() {
-    return this.defaultDoc = this.afs.doc<DefaultInterface>(`default-pages/DmCautdEVB5KGunW8C7C`);
+    return this.defaultDoc = this.afs.doc<DefaultInterface>(`default-pages/DmCautdEVB5KGunW8C7C`); // TODO Should not be magic strings. Move all to constants
   }
 
   addPatient(patient: PatientsInterface) {
@@ -147,7 +147,7 @@ export class ApiService {
   }
 
   getSelectCollection(url: string) {
-    this.selectionCollection = this.afs.collection(url, ref => ref.orderBy('id', 'asc'));
+    this.selectionCollection = this.afs.collection(url, ref => ref.orderBy('id', 'asc')); // TODO Should not be magic strings
     this.select$ = this.selectionCollection.valueChanges();
     return this.select$;
   }
