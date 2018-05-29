@@ -39,7 +39,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
   public toggleForm() {
     this.newPatient = !this.newPatient;
     this.router.navigate(['/sign-up']).then();
@@ -61,5 +60,4 @@ export class LoginComponent implements OnInit {
       this.newPatient = false;
     }
   }
-
 }
