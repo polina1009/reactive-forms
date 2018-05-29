@@ -7,22 +7,22 @@ import { MatSnackBar } from '@angular/material';
 @Injectable()
 export class NavigationService {
 
+  private navButtonClick$ = new Subject<ClickedNavButtonInterface>();
+  navButtonClick = this.navButtonClick$.asObservable();
+
   constructor(
     private router: Router,
     public snackBar: MatSnackBar,
   ) { }
 
-  private navButtonClick$ = new Subject<ClickedNavButtonInterface>();
-  navButtonClick = this.navButtonClick$.asObservable();
-
-  clickedNavButton(navUrl, currentUrl) {
+  public clickedNavButton(navUrl, currentUrl) {
     this.navButtonClick$.next({
       navUrl,
       currentUrl
     });
   }
 
-  preparationAndDisplayFormData (url) {
+  public preparationAndDisplayFormData (url) {
     setTimeout(() => {
       if ((this.validate())) {
         this.goTo(url);
@@ -32,13 +32,13 @@ export class NavigationService {
     }, 1000);
   }
 
-  openSnackBar(message: string, action: string) {
+  private openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 10000,
     });
   }
 
-  goTo(url) {
+  private goTo(url) {
     this.router.navigate([url]);
   }
 

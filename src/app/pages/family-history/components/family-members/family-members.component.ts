@@ -20,14 +20,15 @@ export class FamilyMembersComponent implements OnInit {
     this.title = data.title;
     this.selectedMembers = data.selectedMembers;
   }
+
   ngOnInit() {
   }
 
-  getFilteredMembers() {
+  public getFilteredMembers() {
     return this.selectedMembers;
   }
 
-  save() {
+  public save() {
     this.dialogRef.close(this.getFilteredMembers());
   }
 

@@ -30,6 +30,10 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
 
   public pageData: MedicalHistoryInterface[];
 
+  get controls() {
+    return this.medicalHistoryForms.controls;
+  }
+
 
   constructor(
     private fb: FormBuilder,
@@ -41,11 +45,17 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     this.createForm();
   }
 
-  get controls() {
-    return this.medicalHistoryForms.controls;
+  ngOnInit() {
+    this.getToggleList();
+    this.getMedicalHistoryData();
+    this.navToNextSubscription();
   }
 
-  createForm() {
+  ngOnDestroy () {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  public createForm() {
     this.surgeries = this.fb.array([this.createSurgeries()]);
     this.injuries = this.fb.array([this.createInjuries()]);
 
@@ -72,25 +82,17 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  getToggleList() {
-    this.patientService.getToggleList(GET_MEDICAL_TOGGLE_LIST).subscribe(toggleList => {
-      this.ref.markForCheck();
-      this.toggleList = toggleList;
-    });
+  public addSurgeries(): void {
+    this.onPushFormGroup(this.createSurgeries(), 'surgeries', );
   }
 
-  createSurgeries(): FormGroup {
-    return this.fb.group({
-      surgeriesType: this.fb.control(''),
-      dateOfSurgery: this.fb.control(''),
-    });
+  public addInjuries(): void {
+    this.onPushFormGroup(this.createInjuries(), 'injuries');
   }
 
-  createInjuries(): FormGroup {
-    return this.fb.group({
-      typeOfInjury: this.fb.control(''),
-      dateOfInjury: this.fb.control(''),
-    });
+  public deleteGroup(index: number, arr: string) {
+    const control = this.medicalHistoryForms.get(arr) as FormArray;
+    control.removeAt(index);
   }
 
   private setFormData(pageData) {
@@ -122,7 +124,7 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     this.controls.otherMedicalConditions.setValue(pageData.otherMedicalConditions);
   }
 
-  getMedicalHistoryData() {
+  private getMedicalHistoryData() {
     this.patientService.getMedicalHistory(GET_MEDICAL_HISTORY).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
@@ -131,32 +133,9 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  onPushFormGroup(formGroup: FormGroup, control?: string) {
+  private onPushFormGroup(formGroup: FormGroup, control?: string) {
     const arrayControl = this.medicalHistoryForms.get(control) as FormArray;
     arrayControl.push(formGroup);
-  }
-
-  addSurgeries(): void {
-    this.onPushFormGroup(this.createSurgeries(), 'surgeries', );
-  }
-
-  addInjuries(): void {
-    this.onPushFormGroup(this.createInjuries(), 'injuries');
-  }
-
-  deleteGroup(index: number, arr: string) {
-    const control = this.medicalHistoryForms.get(arr) as FormArray;
-    control.removeAt(index);
-  }
-
-  ngOnInit() {
-    this.getToggleList();
-    this.getMedicalHistoryData();
-    this.navToNextSubscription();
-  }
-
-  ngOnDestroy () {
-    this.navNextSubscribe.unsubscribe();
   }
 
   private navToNextSubscription() {
@@ -167,6 +146,27 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
       }
       this.patientService.updateMedicalHistory(this.medicalHistoryForms.value, GET_MEDICAL_HISTORY);
       this.navService.preparationAndDisplayFormData(navUrl);
+    });
+  }
+
+  private getToggleList() {
+    this.patientService.getToggleList(GET_MEDICAL_TOGGLE_LIST).subscribe(toggleList => {
+      this.ref.markForCheck();
+      this.toggleList = toggleList;
+    });
+  }
+
+  private createSurgeries(): FormGroup {
+    return this.fb.group({
+      surgeriesType: this.fb.control(''),
+      dateOfSurgery: this.fb.control(''),
+    });
+  }
+
+  private createInjuries(): FormGroup {
+    return this.fb.group({
+      typeOfInjury: this.fb.control(''),
+      dateOfInjury: this.fb.control(''),
     });
   }
 }

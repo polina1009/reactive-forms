@@ -24,7 +24,7 @@ export class LoginService {
   ) {
   }
 
-  emailLogin(email: string, password: string) {
+  private emailLogin(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
         this.apiService.getLoggedUserWithCurrentData(email);
@@ -32,7 +32,7 @@ export class LoginService {
       });
   }
 
-  emailSignUp(email: string, password: string) {
+  private emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(() => {
         this.apiService.updateJustSignUpUserWithDefaults(email);
@@ -43,7 +43,7 @@ export class LoginService {
       });
   }
 
-  login(user: PatientsInterface) {
+  public login(user: PatientsInterface) {
     this.patientService.getPatient().subscribe(patientData => {
       patientData.map(pat => {
         if (user.email === pat.email && user.password === pat.password) {
@@ -53,7 +53,7 @@ export class LoginService {
     });
   }
 
-  signUp(user: PatientsInterface) {
+  public signUp(user: PatientsInterface) {
     if (user.email !== '' && user.password !== '') {
       return this.emailSignUp(user.email, user.password)
         .then((success) => {
@@ -67,9 +67,8 @@ export class LoginService {
     }
   }
 
-  logout() {
+  public logout() {
     this.afAuth.auth.signOut().then(() => {
-      this.apiService._loggedIn.next(false);
       this.router.navigate(['/login'], { relativeTo: this.route }).then();
     });
   }

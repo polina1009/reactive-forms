@@ -23,7 +23,7 @@ export class RoutingService {
     this.getRoutingDataProperty();
   }
 
-  getRoutingDataProperty() {
+  private getRoutingDataProperty() {
     this.router.events
       .filter((event) => event instanceof NavigationEnd)
       .map(() => this.activatedRoute)

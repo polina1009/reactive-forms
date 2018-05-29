@@ -19,12 +19,16 @@ import { maskDate } from '../../configes/text-mask.conf';
 })
 export class MedicationsComponent implements OnInit, OnDestroy {
 
-  medicationsForm: FormGroup;
-  medications: FormArray;
+  public medicationsForm: FormGroup;
+  public medications: FormArray;
   private navNextSubscribe: Subscription;
 
   public maskDate = maskDate;
   public pageData: MedicationsInterface[];
+
+  get controls() {
+    return this.medicationsForm.controls;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -34,11 +38,17 @@ export class MedicationsComponent implements OnInit, OnDestroy {
   ) {
   }
 
-  get controls() {
-    return this.medicationsForm.controls;
+  ngOnInit() {
+    this.createForm();
+    this.getMedicationsData();
+    this.navToNextSubscription();
   }
 
-  createForm() {
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  public createForm() {
     this.medications = this.fb.array([this.createMedications()]);
 
     this.medicationsForm = this.fb.group({
@@ -48,7 +58,17 @@ export class MedicationsComponent implements OnInit, OnDestroy {
     });
   }
 
-  createMedications(): FormGroup {
+  public addMedications() {
+    const arrayControl = this.medicationsForm.get('medications') as FormArray;
+    arrayControl.push(this.createMedications());
+  }
+
+  public deleteMedications(index: number) {
+    const control = this.medicationsForm.get('medications') as FormArray;
+    control.removeAt(index);
+  }
+
+  private createMedications(): FormGroup {
     return this.fb.group({
       name: this.fb.control(''),
       startDate: this.fb.control(''),
@@ -67,33 +87,13 @@ export class MedicationsComponent implements OnInit, OnDestroy {
     pageData.medications.forEach(m => medications.push(this.fb.group(m)));
   }
 
-  getMedicationsData() {
+  private getMedicationsData() {
     this.patientService.getMedications(GET_MEDICATIONS).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
         this.setFormData(p);
       });
     });
-  }
-
-  addMedications() {
-    const arrayControl = this.medicationsForm.get('medications') as FormArray;
-    arrayControl.push(this.createMedications());
-  }
-
-  deleteMedications(index: number) {
-    const control = this.medicationsForm.get('medications') as FormArray;
-    control.removeAt(index);
-  }
-
-  ngOnInit() {
-    this.createForm();
-    this.getMedicationsData();
-    this.navToNextSubscription();
-  }
-
-  ngOnDestroy() {
-    this.navNextSubscribe.unsubscribe();
   }
 
   private navToNextSubscription() {

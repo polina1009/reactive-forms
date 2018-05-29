@@ -53,6 +53,16 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.showPage = true;
   }
 
+  ngOnInit() {
+    this.apiIsLogged();
+    this.nextPageSubscription();
+  }
+
+  ngOnDestroy() {
+    this._routerEventSubscribe.unsubscribe();
+    this._nextPageSubscribe.unsubscribe();
+  }
+
   changeFooterData () {
     this._routerEventSubscribe = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
@@ -70,10 +80,12 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.navService.clickedNavButton(this.previousPage, this.currentPage);
   }
 
-  ngOnInit() {
-    this._isLoggedIn$ = this.apiService.isLoggedIn;
+  private apiIsLogged() {
+    return this._isLoggedIn$ = this.apiService.isLoggedIn;
+  }
 
-    this._nextPageSubscribe = this.router.events.subscribe((e) => {
+  private nextPageSubscription() {
+    return this._nextPageSubscribe = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.currentPage = e.url;
         if (Object.keys(this.nextUrl).includes(e.url) === true) {
@@ -84,10 +96,5 @@ export class FooterComponent implements OnInit, OnDestroy {
         }
       }
     });
-  }
-
-  ngOnDestroy() {
-    this._routerEventSubscribe.unsubscribe();
-    this._nextPageSubscribe.unsubscribe();
   }
 }

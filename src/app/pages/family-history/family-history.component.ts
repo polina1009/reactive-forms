@@ -30,13 +30,32 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
     private patientService: PatientService
   ) {}
 
-  getPageData() {
+  ngOnInit() {
+    this.getPageData();
+    this.navToNextSubscription();
+  }
+
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  public openDialog(illness: FamilyHistoryInterface) {
+    const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPreparedDialogConfig(illness));
+
+    dialogRef.afterClosed().subscribe((results: ApiToggleInterface[]) => {
+      illness.members = results;
+      this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
+      this.patientService.updateFamilyHistory(illness, GET_FAMILY_HISTORY);
+    });
+  }
+
+  private getPageData() {
     this.patientService.getFamilyHistory(GET_FAMILY_HISTORY).subscribe(pageData => {
       this.illnessList = pageData;
     });
   }
 
-  getPreparedDialogConfig (illness: FamilyHistoryInterface) {
+  private getPreparedDialogConfig (illness: FamilyHistoryInterface) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -53,21 +72,6 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
     return dialogConfig;
   }
 
-  openDialog(illness: FamilyHistoryInterface) {
-    const dialogRef = this.dialog.open(FamilyMembersComponent, this.getPreparedDialogConfig(illness));
-
-    dialogRef.afterClosed().subscribe((results: ApiToggleInterface[]) => {
-      illness.members = results;
-      this.illnessList = JSON.parse(JSON.stringify(this.illnessList));
-      this.patientService.updateFamilyHistory(illness, GET_FAMILY_HISTORY);
-    });
-  }
-
-  ngOnInit() {
-    this.getPageData();
-    this.navToNextSubscription();
-  }
-
   private navToNextSubscription() {
     return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
@@ -76,9 +80,5 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
       }
       this.navService.preparationAndDisplayFormData(navUrl);
     });
-  }
-
-  ngOnDestroy() {
-    this.navNextSubscribe.unsubscribe();
   }
 }

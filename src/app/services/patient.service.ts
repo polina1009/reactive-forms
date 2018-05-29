@@ -27,11 +27,11 @@ export class PatientService {
   constructor(private apiService: ApiService) {
   }
 
-  getPatient() {
+  public getPatient() {
     return this.apiService.getPatientColl();
   }
 
-  addPatient(patient) {
+  public addPatient(patient) {
     return this.apiService.addPatient(patient);
   }
 
@@ -65,43 +65,43 @@ export class PatientService {
       );
   }
 
-  getDemographics(url) {
+  public getDemographics(url) {
     return this.apiService.getPageData(url, this.demographics$);
   }
 
-  getMedicalHistory(url) {
+  public getMedicalHistory(url) {
     return this.apiService.getPageData(url, this.medicalHistory$);
   }
 
-  getOcularHistory(url) {
+  public getOcularHistory(url) {
     return this.apiService.getPageData(url, this.ocularHistory$);
   }
 
-  getMedications(url) {
+  public getMedications(url) {
     return this.apiService.getPageData(url, this.medications$);
   }
 
-  getFamilyHistory(url) {
+  public getFamilyHistory(url) {
     return this.apiService.getPageData(url, this.familyHistory$);
   }
 
-  updateDemographicsData(formData, url) {
+  public updateDemographicsData(formData, url) {
     return this.apiService.updateDemographics(formData, url);
   }
 
-  updateMedicalHistory(formData, url) {
+  public updateMedicalHistory(formData, url) {
     return this.apiService.updateMedicalHistory(formData, url);
   }
 
-  updateOcularHistory(formData, url) {
+  public updateOcularHistory(formData, url) {
     return this.apiService.updateOcularHistory(formData, url);
   }
 
-  updateMedications(formData, url) {
+  public updateMedications(formData, url) {
     return this.apiService.updateMedications(formData, url);
   }
 
-  updateFamilyHistory(formData, url) {
+  public updateFamilyHistory(formData, url) {
     return this.apiService.updateFamilyHistory(formData, url);
   }
 }

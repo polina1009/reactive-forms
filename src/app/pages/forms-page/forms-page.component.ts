@@ -31,12 +31,13 @@ import { maskPhone, maskDate } from '../../configes/text-mask.conf';
 
 export class FormsPageComponent implements  OnInit, OnDestroy {
   public preferredContactList: SelectsListInterface[];
-  public referrelSourceList: SelectsListInterface[];
+  public referralSourceList: SelectsListInterface[];
   public languageList: SelectsListInterface[];
   public workStatusList: SelectsListInterface[];
   public employer: SelectsListInterface[];
   public raceList: SelectsListInterface[];
   public ethnicityList: SelectsListInterface[];
+
   private navNextSubscribe: Subscription;
 
   private pat: DemographicsInterface;
@@ -47,6 +48,10 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
   public maskPhone = maskPhone;
   public maskDate = maskDate;
 
+  get controls() {
+    return this.patientGroup.controls;
+  }
+
   constructor(
     private fb: FormBuilder,
     private patientService: PatientService,
@@ -54,15 +59,11 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     private navService: NavigationService,
   ) {
     this.preferredContactList = [];
-    this.referrelSourceList = [];
+    this.referralSourceList = [];
     this.languageList = [];
     this.workStatusList = [];
     this.raceList = [];
     this.ethnicityList = [];
-  }
-
-  get controls() {
-    return this.patientGroup.controls;
   }
 
   ngOnInit() {
@@ -72,15 +73,29 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.navToNextSubscription();
   }
 
-  private navToNextSubscription() {
-    return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
-      const { navUrl, currentUrl } = eventData;
-      if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
-        return;
-      }
-      this.patientService.updateDemographicsData(this.patientGroup.value, GET_DEMOGRAPHICS);
-      this.navService.preparationAndDisplayFormData(navUrl);
-    });
+  private setFormData(pageData) {
+    this.controls.title.setValue(pageData.title);
+    this.controls.firstName.setValue(pageData.firstName);
+    this.controls.lastName.setValue(pageData.lastName);
+    this.controls.cellPhone.setValue(pageData.cellPhone);
+    this.controls.home.setValue(pageData.home);
+    this.controls.work.setValue(pageData.work);
+    this.controls.email.setValue(pageData.email);
+    this.controls.preferredContact.setValue(pageData.preferredContact);
+    this.controls.address.setValue(pageData.address);
+    this.controls.address2.setValue(pageData.address2);
+    this.controls.zip.setValue(pageData.zip);
+    this.controls.city.setValue(pageData.city);
+    this.controls.state.setValue(pageData.state);
+    this.controls.dateOfBirth.setValue(pageData.dateOfBirth);
+    this.controls.ssn.setValue(pageData.ssn);
+    this.controls.referralSource.setValue(pageData.referralSource);
+    this.controls.language.setValue(pageData.language);
+    this.controls.workStatus.setValue(pageData.workStatus);
+    this.controls.employer.setValue(pageData.employer);
+    this.controls.race.setValue(pageData.race);
+    this.controls.ethnicity.setValue(pageData.ethnicity);
+    this.controls.gender.setValue(pageData.gender);
   }
 
   public createForm() {
@@ -110,7 +125,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
   }
 
-  getDemographicsData() {
+  private getDemographicsData() {
     this.patientService.getDemographics(GET_DEMOGRAPHICS).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
@@ -120,29 +135,15 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     });
   }
 
-  private setFormData(pageData) {
-    this.controls.title.setValue(pageData.title);
-    this.controls.firstName.setValue(pageData.firstName);
-    this.controls.lastName.setValue(pageData.lastName);
-    this.controls.cellPhone.setValue(pageData.cellPhone);
-    this.controls.home.setValue(pageData.home);
-    this.controls.work.setValue(pageData.work);
-    this.controls.email.setValue(pageData.email);
-    this.controls.preferredContact.setValue(pageData.preferredContact);
-    this.controls.address.setValue(pageData.address);
-    this.controls.address2.setValue(pageData.address2);
-    this.controls.zip.setValue(pageData.zip);
-    this.controls.city.setValue(pageData.city);
-    this.controls.state.setValue(pageData.state);
-    this.controls.dateOfBirth.setValue(pageData.dateOfBirth);
-    this.controls.ssn.setValue(pageData.ssn);
-    this.controls.referralSource.setValue(pageData.referralSource);
-    this.controls.language.setValue(pageData.language);
-    this.controls.workStatus.setValue(pageData.workStatus);
-    this.controls.employer.setValue(pageData.employer);
-    this.controls.race.setValue(pageData.race);
-    this.controls.ethnicity.setValue(pageData.ethnicity);
-    this.controls.gender.setValue(pageData.gender);
+  private navToNextSubscription() {
+    return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+      const { navUrl, currentUrl } = eventData;
+      if (!(currentUrl === '/' || currentUrl.match(/demographics/))) {
+        return;
+      }
+      this.patientService.updateDemographicsData(this.patientGroup.value, GET_DEMOGRAPHICS);
+      this.navService.preparationAndDisplayFormData(navUrl);
+    });
   }
 
   private getSelectOptions() {
@@ -156,7 +157,7 @@ export class FormsPageComponent implements  OnInit, OnDestroy {
     this.patientService.getOptionList(GET_REFERRAL_SOURCE)
       .subscribe(optionList => {
         this.ref.markForCheck();
-        this.referrelSourceList = optionList;
+        this.referralSourceList = optionList;
         this.controls.referralSource.setValue(this.pat.referralSource);
     });
 

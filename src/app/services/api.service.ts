@@ -74,6 +74,14 @@ export class ApiService {
     return this._loggedIn.asObservable();
   }
 
+  get patient() {
+    return this.patientDoc = this.afs.doc<PatientsInterface>(`${GET_PATIENT}/${this.patientId}`);
+  }
+
+  get defaultPage() {
+    return this.defaultDoc = this.afs.doc<DefaultInterface>(`${GET_DEFAULT_PAGE_ID}`);
+  }
+
   constructor(private afs: AngularFirestore, private router: Router) {
     this.patientCollection = this.afs.collection(GET_PATIENT);
     this.patientDoc = this.afs.doc<PatientsInterface>(`${GET_PATIENT}/${this.patientId}`);
@@ -81,7 +89,7 @@ export class ApiService {
     this.getDefaultPage();
   }
 
-  updateJustSignUpUserWithDefaults(searchFields) {
+  public updateJustSignUpUserWithDefaults(searchFields) {
     const ref: any = this.patientCollection.ref;
 
     ref.where('email', '==', searchFields)
@@ -99,7 +107,7 @@ export class ApiService {
       });
   }
 
-  getLoggedUserWithCurrentData(searchFields) {
+  public getLoggedUserWithCurrentData(searchFields) {
     const ref: any = this.patientCollection.ref;
 
     ref.where('email', '==', searchFields)
@@ -118,7 +126,7 @@ export class ApiService {
       });
   }
 
-  getPatientColl() {
+  public getPatientColl() {
     this.patient$ = this.patientCollection.snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
@@ -128,41 +136,23 @@ export class ApiService {
     return this.patient$;
   }
 
-  get patient() {
-    return this.patientDoc = this.afs.doc<PatientsInterface>(`${GET_PATIENT}/${this.patientId}`);
-  }
-
-  get defaultPage() {
-    return this.defaultDoc = this.afs.doc<DefaultInterface>(`${GET_DEFAULT_PAGE_ID}`);
-  }
-
-  addPatient(patient: PatientsInterface) {
+  public addPatient(patient: PatientsInterface) {
     this.patientCollection.add(patient).then();
   }
 
-  addCollection() {
-    this.patient.collection(GET_DEMOGRAPHICS).add(this.defaultDemographicsData).then();
-    this.patient.collection(GET_MEDICAL_HISTORY).add(this.defaultMedicalHistoryData).then();
-    this.patient.collection(GET_OCULAR_HISTORY).add(this.defaultOcularHistoryData).then();
-    this.patient.collection(GET_MEDICATIONS).add(this.defaultMedicationsData).then();
-    this.defaultFamilyHistoryData.map(data => {
-      this.patient.collection(GET_FAMILY_HISTORY).add(data).then();
-    });
-  }
-
-  getSelectCollection(url: string) {
+  public getSelectCollection(url: string) {
     this.selectionCollection = this.afs.collection(url, ref => ref.orderBy(FIELD_PATH_ID, DISPLAY_ORDER));
     this.select$ = this.selectionCollection.valueChanges();
     return this.select$;
   }
 
-  getToggleList(url: string) {
+  public getToggleList(url: string) {
     this.toggleCollection = this.afs.collection(url, ref => ref.orderBy(FIELD_PATH_INDEX, DISPLAY_ORDER));
     this.toggle$ = this.toggleCollection.valueChanges();
     return this.toggle$;
   }
 
-  getPageData(url: string, query?) {
+  public getPageData(url: string, query?) {
     query = this.patient.collection(url, ref => ref.orderBy(FIELD_PATH_INDEX, DISPLAY_ORDER)).snapshotChanges()
       .map((actions) => {
         return actions.map(action => {
@@ -175,12 +165,47 @@ export class ApiService {
     return query;
   }
 
-  getDefPageData(url: string, query?) {
+  public updateDemographics(formData: DemographicsInterface, url: string) {
+    this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesDemogDoc.update(formData);
+  }
+
+  public updateMedicalHistory(formData: MedicalHistoryInterface, url: string) {
+    this.pagesMedHistDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesMedHistDoc.update(formData);
+  }
+
+  public updateOcularHistory(formData: OcularHistoryInterface, url: string) {
+    this.pagesOculHistgDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesOculHistgDoc.update(formData);
+  }
+
+  public updateMedications(formData: MedicationsInterface, url: string) {
+    this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
+    this.pagesMedDoc.update(formData);
+  }
+
+  public updateFamilyHistory(formData: FamilyHistoryInterface, url: string) {
+    this.pageFamilyHist = this.patientDoc.collection(url);
+    this.pageFamilyHist.doc(`${formData.id}`).update(formData);
+  }
+
+  private addCollection() {
+    this.patient.collection(GET_DEMOGRAPHICS).add(this.defaultDemographicsData).then();
+    this.patient.collection(GET_MEDICAL_HISTORY).add(this.defaultMedicalHistoryData).then();
+    this.patient.collection(GET_OCULAR_HISTORY).add(this.defaultOcularHistoryData).then();
+    this.patient.collection(GET_MEDICATIONS).add(this.defaultMedicationsData).then();
+    this.defaultFamilyHistoryData.map(data => {
+      this.patient.collection(GET_FAMILY_HISTORY).add(data).then();
+    });
+  }
+
+  private getDefPageData(url: string, query?) {
     query = this.defaultPage.collection(url, ref => ref.orderBy(FIELD_PATH_INDEX, DISPLAY_ORDER)).valueChanges();
     return query;
   }
 
-  getDefaultPage() {
+  private getDefaultPage() {
     this.getDefPageData(GET_DEMOGRAPHICS, this.defaultDemographics$).subscribe(data => {
       data.map(d => {
         this.defaultDemographicsData = d;
@@ -206,28 +231,4 @@ export class ApiService {
     });
   }
 
-  updateDemographics(formData: DemographicsInterface, url: string) {
-    this.pagesDemogDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesDemogDoc.update(formData);
-  }
-
-  updateMedicalHistory(formData: MedicalHistoryInterface, url: string) {
-    this.pagesMedHistDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesMedHistDoc.update(formData);
-  }
-
-  updateOcularHistory(formData: OcularHistoryInterface, url: string) {
-    this.pagesOculHistgDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesOculHistgDoc.update(formData);
-  }
-
-  updateMedications(formData: MedicationsInterface, url: string) {
-    this.pagesMedDoc = this.patientDoc.collection(url).doc(`${this.pageId}`);
-    this.pagesMedDoc.update(formData);
-  }
-
-  updateFamilyHistory(formData: FamilyHistoryInterface, url: string) {
-    this.pageFamilyHist = this.patientDoc.collection(url);
-    this.pageFamilyHist.doc(`${formData.id}`).update(formData);
-  }
 }

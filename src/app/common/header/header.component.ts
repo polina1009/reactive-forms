@@ -38,6 +38,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
+    this.apiService._loggedIn.next(false);
     this.loginService.logout();
   }
 }

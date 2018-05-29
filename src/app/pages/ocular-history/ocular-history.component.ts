@@ -32,6 +32,10 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
   private getDataSubscription: Subscription;
   public pageData: OcularHistoryInterface[];
 
+  get controls() {
+    return this.ocularHistoryForms.controls;
+  }
+
   constructor(
     private fb: FormBuilder,
     private ref: ChangeDetectorRef,
@@ -41,11 +45,18 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     this.toggleOcularList = [];
   }
 
-  get controls() {
-    return this.ocularHistoryForms.controls;
+  ngOnInit() {
+    this.createForm();
+    this.getToggle();
+    this.getOcularHistoryData();
+    this.navToNextSubscription();
   }
 
-  createForm() {
+  ngOnDestroy () {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  public createForm() {
     this.ocularHistoryForms = this.fb.group({
       lastVisionExam: this.fb.control(''),
       cataracts: this.fb.control(''),
@@ -70,7 +81,8 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     });
   }
 
-  setFormData(pageData) {
+
+  private setFormData(pageData) {
     this.controls.lastVisionExam.setValue(pageData.lastVisionExam);
     this.controls.cataracts.setValue(pageData.cataracts);
     this.controls.contactLenses.setValue(pageData.contactLenses);
@@ -93,7 +105,7 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     this.controls.otherEyeConditions.setValue(pageData.otherEyeConditions);
   }
 
-  getOcularHistoryData() {
+  private getOcularHistoryData() {
     this.getDataSubscription = this.patientService.getOcularHistory(GET_OCULAR_HISTORY).subscribe((page) => {
       this.pageData = page;
       this.pageData.map(p => {
@@ -107,17 +119,6 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
       this.ref.markForCheck();
       this.toggleOcularList = toggleList;
     });
-  }
-
-  ngOnInit() {
-    this.createForm();
-    this.getToggle();
-    this.getOcularHistoryData();
-    this.navToNextSubscription();
-  }
-
-  ngOnDestroy () {
-    this.navNextSubscribe.unsubscribe();
   }
 
   private navToNextSubscription() {

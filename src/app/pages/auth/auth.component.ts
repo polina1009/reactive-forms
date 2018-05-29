@@ -11,20 +11,24 @@ import { PatientsInterface } from '../../interfaces/patient.interface';
 })
 export class AuthComponent implements OnInit {
 
-  loginForm: FormGroup;
+  public loginForm: FormGroup;
   public formSubmitAttempt: boolean;
-  newPatient: boolean;
-  patient: PatientsInterface = {
+  public newPatient: boolean;
+  public logError: string;
+  private patient: PatientsInterface = {
     email: '',
     password: ''
   };
-  protected logError: string;
 
   constructor(
     private fB: FormBuilder,
     private loginService: LoginService
   ) {
     this.logError = '';
+  }
+
+  ngOnInit() {
+    this.createForm();
   }
 
   public createForm () {
@@ -39,15 +43,12 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.createForm();
-  }
 
-  toggleForm() {
+  public toggleForm() {
     this.newPatient = !this.newPatient;
   }
 
-  isFieldInvalid(field: string) {
+  public isFieldInvalid(field: string) {
     return (
       (!this.loginForm.get(field).valid && this.loginForm.get(field).touched) ||
       (this.loginForm.get(field).untouched && this.formSubmitAttempt)
@@ -55,7 +56,7 @@ export class AuthComponent implements OnInit {
   }
 
 
-  submitLoginForm() {
+  public submitLoginForm() {
     if (this.loginForm.valid) {
       this.patient.email = this.loginForm.get('email').value;
       this.patient.password = this.loginForm.get('password').value;
@@ -63,7 +64,7 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  submitSignUpForm() {
+  public submitSignUpForm() {
     if (this.loginForm.valid) {
       this.patient.email = this.loginForm.get('email').value;
       this.patient.password = this.loginForm.get('password').value;
