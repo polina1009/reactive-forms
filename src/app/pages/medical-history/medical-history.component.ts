@@ -23,7 +23,7 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   public maskDate = {
     guide: true,
     showMask : false,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]
+    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/] // TODO Move to config file
   };
   private navNextSubscribe: Subscription;
 
@@ -177,10 +177,11 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
     control.removeAt(index);
   }
 
+  // TODO Should be after constructor. Check all orderings. Private static -> getters/setters -> constructor -> hooks -> public -> private
   ngOnInit() {
     this.getToggleList();
     this.getMedicalHistoryData();
-    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => { // TODO Should not be any logic inside ngOnInit. Just method calls
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
