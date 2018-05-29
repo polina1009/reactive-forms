@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { FamilyHistoryComponent } from './family-history.component';
 import { FamilyMembersComponent } from './components';
-import {FamilyHistoryService} from './family-history.service';
+
 import { FamilyHistoryPipe } from './family-history.pipe';
 
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatCardModule} from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatButtonModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material';
 
 
 
@@ -33,7 +33,7 @@ import {MatButtonModule} from '@angular/material';
   entryComponents: [
     FamilyMembersComponent
   ],
-  providers: [FamilyHistoryService],
+  providers: [],
   exports: [
     FamilyHistoryComponent,
     FamilyMembersComponent

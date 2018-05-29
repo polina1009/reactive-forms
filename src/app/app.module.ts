@@ -29,6 +29,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ApiService } from './services/api.service';
 import { RoutingService } from './services/routing.service';
 import { NavigationService } from './services/navigation.service';
+import { PatientService } from './services/patient.service';
 
 // ngrx
 import { StoreModule } from '@ngrx/store';
@@ -75,7 +76,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [ApiService, RoutingService, LoginService, AuthGuard, NavigationService],
+  providers: [ApiService, RoutingService, LoginService, AuthGuard, NavigationService, PatientService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

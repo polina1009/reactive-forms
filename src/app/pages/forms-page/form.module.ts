@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatDatepickerModule,
@@ -13,12 +12,12 @@ import {
   MatNativeDateModule,
   MatRadioModule,
   MatSelectModule,
+  MatAutocompleteModule
 } from '@angular/material';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 import { TextMaskModule } from 'angular2-text-mask';
 
 import { FormsPageComponent } from './forms-page.component';
-import {PatientService} from '../../services/patient.service';
 
 
 
@@ -43,7 +42,7 @@ import {PatientService} from '../../services/patient.service';
     TextMaskModule,
     FormsModule
   ],
-  providers: [PatientService],
+  providers: [],
   exports: [
     FormsPageComponent,
   ],

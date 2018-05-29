@@ -31,7 +31,7 @@ export class LoginService {
   emailSignUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(() => {
-        this.apiService.updateJustLoggedUserWithDefaults(email);
+        this.apiService.updateJustSignUpUserWithDefaults(email);
         return true;
       })
       .catch(() => {

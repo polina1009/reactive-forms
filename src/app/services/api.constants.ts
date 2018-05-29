@@ -5,11 +5,11 @@ export const GET_WORK_STATUS = 'workStatus';
 export const GET_EMPLOYER = 'employer';
 export const GET_RACE = 'race';
 export const GET_ETHNICITY = 'ethnicity';
-export const GET_PATIENT_DOC = 'patients/1';
+
 export const GET_PATIENT = 'patients';
+
 export const GET_TOGGLE_OCULAR_LIST = 'ocularToggleList';
 export const GET_MEDICAL_TOGGLE_LIST = 'medicalHistoryToggleList';
-
 
 export const GET_DEFAULT_PAGE = 'default-pages';
 

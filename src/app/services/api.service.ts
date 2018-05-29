@@ -75,7 +75,7 @@ export class ApiService {
     this.getDefaultPage();
   }
 
-  updateJustLoggedUserWithDefaults(searchFields) {
+  updateJustSignUpUserWithDefaults(searchFields) {
     const ref: any = this.patientCollection.ref;
 
     ref.where('email', '==', searchFields)
