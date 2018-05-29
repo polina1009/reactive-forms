@@ -89,7 +89,15 @@ export class MedicationsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createForm();
     this.getMedicationsData();
-    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+    this.navToNextSubscription();
+  }
+
+  ngOnDestroy() {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  private navToNextSubscription() {
+    return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medications/))) {
         return;
@@ -97,10 +105,6 @@ export class MedicationsComponent implements OnInit, OnDestroy {
       this.patientService.updateMedications(this.medicationsForm.value, GET_MEDICATIONS);
       this.navService.preparationAndDisplayFormData(navUrl);
     });
-  }
-
-  ngOnDestroy() {
-    this.navNextSubscribe.unsubscribe();
   }
 
 }

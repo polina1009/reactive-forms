@@ -152,17 +152,21 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getToggleList();
     this.getMedicalHistoryData();
-    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+    this.navToNextSubscription();
+  }
+
+  ngOnDestroy () {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  private navToNextSubscription() {
+    return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
       }
       this.patientService.updateMedicalHistory(this.medicalHistoryForms.value, GET_MEDICAL_HISTORY);
       this.navService.preparationAndDisplayFormData(navUrl);
-      });
-  }
-
-  ngOnDestroy () {
-    this.navNextSubscribe.unsubscribe();
+    });
   }
 }

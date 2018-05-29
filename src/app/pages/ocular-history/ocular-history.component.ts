@@ -113,7 +113,15 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
     this.createForm();
     this.getToggle();
     this.getOcularHistoryData();
-    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+    this.navToNextSubscription();
+  }
+
+  ngOnDestroy () {
+    this.navNextSubscribe.unsubscribe();
+  }
+
+  private navToNextSubscription() {
+    return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/ocular-history/))) {
         return;
@@ -121,10 +129,6 @@ export class OcularHistoryComponent implements OnInit, OnDestroy {
       this.patientService.updateOcularHistory(this.ocularHistoryForms.value, GET_OCULAR_HISTORY);
       this.navService.preparationAndDisplayFormData(navUrl);
     });
-  }
-
-  ngOnDestroy () {
-    this.navNextSubscribe.unsubscribe();
   }
 
 }

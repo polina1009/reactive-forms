@@ -65,7 +65,11 @@ export class FamilyHistoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPageData();
-    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
+    this.navToNextSubscription();
+  }
+
+  private navToNextSubscription() {
+    return this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/family-history/))) {
         return;
