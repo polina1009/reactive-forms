@@ -181,7 +181,8 @@ export class MedicalHistoryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getToggleList();
     this.getMedicalHistoryData();
-    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => { // TODO Should not be any logic inside ngOnInit. Just method calls
+    // TODO Should not be any logic inside ngOnInit.// Just method calls
+    this.navNextSubscribe = this.navService.navButtonClick.subscribe((eventData) => {
       const { navUrl, currentUrl } = eventData;
       if (!(currentUrl.match(/medical-history/))) {
         return;
